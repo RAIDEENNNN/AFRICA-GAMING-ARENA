@@ -3,20 +3,17 @@ import Image from "next/image";
 import { challenges, clans, clips, games, matches, tournaments } from "./data";
 
 const navItems = [
-  ["Home", "/"],
-  ["Dashboard", "/dashboard"],
-  ["Games", "/games"],
-  ["Clans", "/clans"],
-  ["Find Clans", "/find-clans"],
-  ["Matches", "/matches"],
-  ["Tournaments", "/tournaments"],
-  ["Clips", "/clips"],
-  ["Leaderboard", "/leaderboard"],
-  ["Messages", "/messages"],
-  ["Marketplace", "/marketplace"],
-  ["Wallet", "/wallet"],
-  ["Admin", "/admin"],
-  ["Support", "/support"],
+  ["ARENA", "/"],
+  ["FIND MATCH", "/matches"],
+  ["CREATE", "/matches/request"],
+  ["GAME WORLDS", "/games"],
+  ["CLANS", "/clans"],
+  ["TOURNAMENTS", "/tournaments"],
+  ["CLIPS", "/clips"],
+  ["LEADERBOARDS", "/leaderboard"],
+  ["MARKET", "/marketplace"],
+  ["WALLET", "/wallet"],
+  ["MESSAGES", "/messages"],
 ];
 
 export function AppShell({ children }: { children: React.ReactNode }) {
@@ -28,9 +25,14 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <strong>Clan Arena</strong>
           <small>United. Compete. Dominate.</small>
         </Link>
+        <section className="side-profile">
+          <b>PlayerOne</b>
+          <small>LEGENDARY / XCL / Online</small>
+          <div><span>LVL 72</span><span>6W streak</span></div>
+        </section>
         <nav aria-label="Main navigation">
-          {navItems.map(([label, href]) => (
-            <Link href={href} key={href}>{label}</Link>
+          {navItems.map(([label, href], index) => (
+            <Link href={href} key={href}><span>{String(index + 1).padStart(2, "0")}</span>{label}<em /></Link>
           ))}
         </nav>
         <Link className="btn primary full" href="/matches/request">Request match</Link>
@@ -53,6 +55,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             <input placeholder="Search clans, players, tournaments..." />
           </label>
           <nav>
+            <Link href="/matches">Live 128</Link>
+            <Link href="/matches">Wagers 12</Link>
             <Link href="/notifications">Notifications</Link>
             <Link href="/messages">Messages</Link>
             <Link href="/wallet">Wallet</Link>
@@ -100,6 +104,11 @@ export function PageHero({
         <span className="eyebrow">{eyebrow}</span>
         <h1>{title}</h1>
         <p>{copy}</p>
+        <div className="hero-status-rail">
+          <span>2,914 online</span>
+          <span>128 active matches</span>
+          <span>12 open wagers</span>
+        </div>
         <div className="button-row">
           {primary ? <Link className="btn primary" href={primary[1]}>{primary[0]}</Link> : null}
           {secondary ? <Link className="btn secondary" href={secondary[1]}>{secondary[0]}</Link> : null}
@@ -108,6 +117,7 @@ export function PageHero({
       <div className="hero-art" aria-hidden="true">
         <span />
         <b />
+        <i />
       </div>
     </section>
   );
@@ -172,9 +182,12 @@ export function GamePortalCard({ game = games[0] }) {
         <span className="eyebrow">{game.short} arena</span>
         <h3>{game.name}</h3>
         <p>{game.accent}</p>
-        <ul>
-          {game.stats.map((stat) => <li key={stat}>{stat}</li>)}
-        </ul>
+        <ul>{game.stats.map((stat) => <li key={stat}>{stat}</li>)}</ul>
+        <dl className="portal-intel">
+          <div><dt>Top clan</dt><dd>Xclusive</dd></div>
+          <div><dt>Trending</dt><dd>{game.weapons[0]}</dd></div>
+          <div><dt>Wagers</dt><dd>12 live</dd></div>
+        </dl>
         <Link className="btn primary small" href={`/games/${game.slug}`}>View {game.short} arena</Link>
       </div>
     </article>

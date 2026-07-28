@@ -18,14 +18,20 @@ export default function ClanProfilePage() {
         <article className="product-card metric-card"><span>Members</span><strong>28/30</strong></article>
       </section>
       <section className="page-section two-column">
-        <article className="product-card">
+        <article className="product-card clan-war-banner">
           <h2>Recruitment</h2>
           <p>Open roles: entry fragger, support, IGL, sniper, content creator. Applications require mic, Discord and recent gameplay evidence.</p>
+          <div className="achievement-rack"><span>Clan Champion</span><span>12 trophies</span><span>Recruiting</span><span>EU prime time</span></div>
         </article>
         <div className="stack">
-          <h2>Recent matches</h2>
+          <h2>Recent wars</h2>
           {matches.map((match) => <MatchRow match={match} key={match.id} />)}
         </div>
+      </section>
+      <section className="card-grid four roster-grid">
+        {["Venom / Leader / IGL", "Shadow / Officer / Sniper", "Blaze / Entry / SMG", "Frost / Support / AR"].map((member) => (
+          <article className="product-card" key={member}><span className="avatar-ring">{member.slice(0, 2)}</span><h3>{member}</h3><p>Ready for clan wars and tournament check-in.</p></article>
+        ))}
       </section>
     </AppShell>
   );

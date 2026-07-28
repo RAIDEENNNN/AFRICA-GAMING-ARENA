@@ -6,6 +6,7 @@ const require = createRequire(import.meta.url);
 const { chromium } = require("/Users/raiden./.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright");
 
 const outDir = path.resolve("validation-screenshots");
+const baseUrl = process.env.BASE_URL ?? "http://localhost:3002";
 await mkdir(outDir, { recursive: true });
 
 const browser = await chromium.launch({
@@ -14,7 +15,7 @@ const browser = await chromium.launch({
 });
 
 const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
-await page.goto("http://localhost:3002/", { waitUntil: "networkidle" });
+await page.goto(`${baseUrl}/`, { waitUntil: "networkidle" });
 await page.evaluate(() => fetch("/api/arena", {
   method: "POST",
   headers: { "content-type": "application/json" },
@@ -25,7 +26,7 @@ async function shot(name) {
   await page.screenshot({ path: path.join(outDir, name), fullPage: true });
 }
 
-await page.goto("http://localhost:3002/matches/request", { waitUntil: "networkidle" });
+await page.goto(`${baseUrl}/matches/request`, { waitUntil: "networkidle" });
 const selects = page.locator(".flow-grid select");
 await selects.nth(0).selectOption("CODM");
 await selects.nth(1).selectOption("Player vs player");
@@ -43,7 +44,7 @@ await page.getByLabel("Wager amount").fill("20");
 await page.getByLabel("Match rules").fill("No scorestreaks, no operator skills, screenshots required.");
 await shot("proof-01-create-codm-1v1.png");
 await shot("proof-02-wager-visible.png");
-await page.getByRole("button", { name: "Publish challenge" }).click();
+await page.getByRole("button", { name: "Publish Battle Contract" }).click();
 await page.waitForURL("**/matches?created=1");
 await shot("proof-03-find-match-published.png");
 await page.getByRole("button", { name: "Accept" }).first().click();
@@ -64,9 +65,9 @@ await shot("proof-08-check-in.png");
 await page.getByRole("button", { name: "Submit as PlayerOne" }).click();
 await page.getByRole("button", { name: "Submit as NovaAce" }).click();
 await shot("proof-09-result-submission.png");
-await page.goto("http://localhost:3002/leaderboard", { waitUntil: "networkidle" });
+await page.goto(`${baseUrl}/leaderboard`, { waitUntil: "networkidle" });
 await shot("proof-10-updated-leaderboard.png");
-await page.goto("http://localhost:3002/marketplace", { waitUntil: "networkidle" });
+await page.goto(`${baseUrl}/marketplace`, { waitUntil: "networkidle" });
 await shot("proof-11-cod-points-vendor.png");
 
 for (const [route, width, name] of [
@@ -75,7 +76,7 @@ for (const [route, width, name] of [
   ["/dashboard", 1440, "proof-14-desktop-dashboard.png"],
 ]) {
   await page.setViewportSize({ width, height: 1000 });
-  await page.goto(`http://localhost:3002${route}`, { waitUntil: "networkidle" });
+  await page.goto(`${baseUrl}${route}`, { waitUntil: "networkidle" });
   await shot(name);
 }
 

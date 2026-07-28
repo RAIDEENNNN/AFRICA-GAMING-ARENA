@@ -60,6 +60,12 @@ export function CreateChallengeFlow() {
 
   return (
     <section className="product-form flow-form">
+      <div className="battle-setup-header">
+        <span className="eyebrow">Battle setup</span>
+        <h2>Configure the contract</h2>
+        <p>Choose the arena, weapons, map, rules, schedule and demo wager before publishing.</p>
+      </div>
+      <div className="step-progress"><span>01 Game</span><span>02 Format</span><span>03 Weapon</span><span>04 Map</span><span>05 Rules</span><span>06 Server</span><span>07 Wager</span><span>08 Contract</span></div>
       <div className="flow-grid">
         <label>Game<select className="field" value={form.game} onChange={(e) => patch({ game: e.target.value as GameName })}>{Object.keys(gameConfig).map((name) => <option key={name}>{name}</option>)}</select></label>
         <label>Match type<select className="field" value={form.matchKind} onChange={(e) => patch({ matchKind: e.target.value as MatchKind })}>{["Player vs player", "Team vs team", "Clan vs clan"].map((item) => <option key={item}>{item}</option>)}</select></label>
@@ -78,12 +84,13 @@ export function CreateChallengeFlow() {
       </div>
       <label>Match rules<textarea className="field" value={form.rules} onChange={(e) => patch({ rules: e.target.value })} /></label>
       <article className="review-panel">
-        <h2>Review challenge</h2>
+        <span className="tag">Battle contract</span>
+        <h2>{form.teamSize} {form.game} / {form.weaponClass}</h2>
         <p>{form.game} / {config.accent} / {form.teamSize} / {form.weapon} / {form.map} / {form.mode}</p>
         <p>{form.region} {form.server} / {form.date} at {form.time} / {form.prizeType}</p>
         {form.prizeType === "Wager" ? <p>Player One stake ${math.stakePerSide} / Player Two stake ${math.stakePerSide} / Pool ${math.totalPrizePool} / Fee ${math.feeAmount} / Winner payout ${math.winnerPayout}</p> : null}
       </article>
-      <button className="btn primary" onClick={publish}>Publish challenge</button>
+      <button className="btn primary publish-battle" onClick={publish}>Publish Battle Contract</button>
     </section>
   );
 }
@@ -116,6 +123,10 @@ export function ChallengeDiscovery({ gameFilter }: { gameFilter?: GameName }) {
 
   return (
     <section className="page-section">
+      <div className="lobby-ticker">
+        <span>LIVE LOBBY</span>
+        <p>{visible.length} open invites / 12 high stakes / 36 ranked rooms / next start in 04:22</p>
+      </div>
       <div className="filter-bar deep-filter">
         <select className="field" value={filters.game} onChange={(e) => setFilters({ ...filters, game: e.target.value })}><option>All</option>{Object.keys(gameConfig).map((item) => <option key={item}>{item}</option>)}</select>
         <select className="field" value={filters.size} onChange={(e) => setFilters({ ...filters, size: e.target.value })}><option>All</option>{["1v1", "2v2", "3v3", "4v4", "5v5"].map((item) => <option key={item}>{item}</option>)}</select>
@@ -129,9 +140,10 @@ export function ChallengeDiscovery({ gameFilter }: { gameFilter?: GameName }) {
       <div className="card-grid three">
         {visible.map((challenge) => (
           <article className="product-card challenge-card live-challenge" key={challenge.id}>
-            <span className="tag">{challenge.status}</span>
-            <h3>{challenge.teamSize} {challenge.game} {challenge.weaponClass}</h3>
-            <p>{challenge.creator} / {challenge.matchKind} / {challenge.skill}</p>
+            <div className="challenge-topline"><span className="tag">{challenge.status}</span><span className="tag danger">{challenge.prizeType === "Wager" ? "HIGH STAKES" : challenge.prizeType}</span><span className="tag">{challenge.teamSize}</span></div>
+            <h3>{challenge.game} {challenge.weaponClass}</h3>
+            <p><b>{challenge.creator}</b> / {challenge.matchKind} / {challenge.skill} rank</p>
+            {challenge.prizeType === "Wager" ? <strong className="wager-callout">${challenge.stakePerSide} ENTRY / ${challenge.winnerPayout} WINNER PAYOUT</strong> : null}
             <dl>
               <div><dt>Weapon</dt><dd>{challenge.weapon}</dd></div><div><dt>Map</dt><dd>{challenge.map}</dd></div>
               <div><dt>Mode</dt><dd>{challenge.mode}</dd></div><div><dt>Region</dt><dd>{challenge.region}</dd></div>
@@ -166,9 +178,16 @@ export function MatchRoomClient({ roomId }: { roomId?: string }) {
   }
 
   return (
-    <section className="flow-columns">
+    <>
+      <section className={`versus-lobby status-${room.status.toLowerCase().replace(" ", "-")}`}>
+        <article><span className="avatar-ring">P1</span><h2>PlayerOne</h2><p>XCL / Legendary / 1v1 {challenge.checkIns.creator ? "READY" : "WAITING"}</p></article>
+        <div className="vs-core"><strong>VS</strong><span>{room.status}</span><b>${challenge.totalPrizePool} POOL</b></div>
+        <article><span className="avatar-ring">NA</span><h2>NovaAce</h2><p>NVA / Master / 1v1 {challenge.checkIns.opponent ? "READY" : "WAITING"}</p></article>
+      </section>
+      <section className="flow-columns">
       <article className="product-card agreement-panel">
-        <h2>Agreement Panel</h2>
+        <span className="contract-seal">LOCKED SHIELD / VERSION 01</span>
+        <h2>Battle Contract</h2>
         <dl>
           <div><dt>Game</dt><dd>{challenge.game}</dd></div><div><dt>Size</dt><dd>{challenge.teamSize}</dd></div>
           <div><dt>Weapon</dt><dd>{challenge.weaponClass} / {challenge.weapon}</dd></div><div><dt>Map</dt><dd>{challenge.map}</dd></div>
@@ -176,6 +195,7 @@ export function MatchRoomClient({ roomId }: { roomId?: string }) {
           <div><dt>Region</dt><dd>{challenge.region} / {challenge.server}</dd></div><div><dt>Date</dt><dd>{challenge.date} {challenge.time}</dd></div>
           <div><dt>Stake</dt><dd>${challenge.stakePerSide} per side</dd></div><div><dt>Payout</dt><dd>Pool ${challenge.totalPrizePool} / Fee ${challenge.feeAmount} / Winner ${challenge.winnerPayout}</dd></div>
         </dl>
+        {room.status === "Ready" || room.status === "Verified" ? <strong className="locked-banner">BATTLE TERMS LOCKED</strong> : null}
         <div className="approval-grid">
           <button className="btn primary small" disabled={challenge.approvals.creator} onClick={() => act("PlayerOne", "approveTerms")}>PlayerOne accept terms</button>
           <button className="btn primary small" disabled={challenge.approvals.opponent} onClick={() => act("NovaAce", "approveTerms")}>NovaAce accept terms</button>
@@ -187,8 +207,8 @@ export function MatchRoomClient({ roomId }: { roomId?: string }) {
       </article>
       <article className="product-card chat-window">
         <h2>Match chat</h2>
-        <p className="presence">NovaAce online / polling live every 2s / moderator visible on dispute</p>
-        <div className="message-list">{room.messages.map((item) => <div className={item.system ? "message system" : "message"} key={item.id}><strong>{item.pinned ? "Pinned / " : ""}{item.author}</strong><span>{item.body}</span>{item.attachment ? <small>Attachment: {item.attachment}</small> : null}<em>{item.at} / {item.read ? "read" : "sent"}</em></div>)}</div>
+        <p className="presence">NovaAce online / typing... / moderator visible on dispute</p>
+        <div className="message-list">{room.messages.map((item) => <div className={item.system ? "message system" : "message"} key={item.id}><strong>{item.system ? "SYSTEM" : `[XCL] ${item.author} / Legendary`}</strong><span>{item.body}</span>{item.attachment ? <small>Attachment: {item.attachment}</small> : null}<em>{item.at} / {item.read ? "read" : "sent"} / + react</em></div>)}</div>
         <input className="field" value={message} onChange={(e) => setMessage(e.target.value)} placeholder="Send match-room message" />
         <div className="button-row">
           <button className="btn primary small" onClick={() => act("PlayerOne", "sendMessage", { message })}>Send</button>
@@ -212,27 +232,28 @@ export function MatchRoomClient({ roomId }: { roomId?: string }) {
         <div className="button-row"><button className="btn primary small" onClick={() => act("PlayerOne", "submitResult", { result })}>Submit as PlayerOne</button><button className="btn primary small" onClick={() => act("NovaAce", "submitResult", { result })}>Submit as NovaAce</button></div>
         <p>Status: {room.status}</p>
       </article>
-    </section>
+      </section>
+    </>
   );
 }
 
 export function DashboardLive() {
   const { state } = useArenaState();
   const verified = state?.rooms.filter((room) => room.status === "Verified").length ?? 0;
-  return <><section className="card-grid four">{[["My challenges", state?.challenges.length ?? 0], ["Open", state?.challenges.filter((item) => item.status === "Open").length ?? 0], ["Match rooms", state?.rooms.length ?? 0], ["Verified results", verified]].map(([label, value]) => <article className="product-card metric-card" key={label}><span>{label}</span><strong>{value}</strong></article>)}</section><ChallengeDiscovery /></>;
+  return <><section className="player-command-banner"><div><span className="avatar-ring">P1</span><h2>PlayerOne</h2><p>Legendary / Xclusive / CODM assault rifle main</p></div><div><strong>{verified ? "100%" : "0%"}</strong><span>Win rate</span></div><div><strong>$100</strong><span>Demo balance</span></div><div><strong>6W</strong><span>Current streak</span></div></section><section className="card-grid four">{[["My challenges", state?.challenges.length ?? 0], ["Open", state?.challenges.filter((item) => item.status === "Open").length ?? 0], ["Match rooms", state?.rooms.length ?? 0], ["Verified results", verified]].map(([label, value]) => <article className="product-card metric-card" key={label}><span>{label}</span><strong>{value}</strong></article>)}</section><ChallengeDiscovery /></>;
 }
 
 export function LeaderboardLive() {
   const { state } = useArenaState();
   const verified = state?.rooms.filter((room) => room.status === "Verified").length ?? 0;
   const rows = [{ name: "PlayerOne", game: "CODM", region: "Europe", one: verified ? "1-0" : "0-0", wins: verified, points: 10250 + verified * 120 }, { name: "NovaAce", game: "CODM", region: "Europe", one: verified ? "0-1" : "0-0", wins: 0, points: 9980 }, { name: "GhostKing", game: "PUBG Mobile", region: "MENA", one: "0-0", wins: 0, points: 9720 }];
-  return <section className="leaderboard-page"><div className="chip-row">{["Overall players", "1v1", "2v2", "3v3", "Clans", "CODM", "PUBG Mobile", "Free Fire", "Assault Rifle", "SMG", "Sniper", "Shotgun", "Region", "Season"].map((item) => <span key={item}>{item}</span>)}</div>{rows.map((row, index) => <article className="leaderboard-row mobile-card-row" key={row.name}><span>#{index + 1}</span><strong>{row.name}</strong><small>{row.game} / {row.region} / 1v1 {row.one}</small><b>{row.wins} wins</b><em>{row.points}</em></article>)}</section>;
+  return <section className="leaderboard-page podium-board"><div className="chip-row">{["Overall", "1v1", "2v2", "3v3", "CODM", "PUBG Mobile", "Free Fire", "Weapons", "Regions", "Seasons"].map((item) => <span key={item}>{item}</span>)}</div>{rows.map((row, index) => <article className={`leaderboard-row mobile-card-row podium-${index + 1}`} key={row.name}><span>#{index + 1}</span><strong>{row.name}</strong><small>XCL / {row.game} / {row.region} / DR-H / Streak {row.wins}</small><b>{row.wins} wins</b><em>{row.points}</em></article>)}</section>;
 }
 
 export function ProfileLive() {
   const { state } = useArenaState();
   const verified = state?.rooms.filter((room) => room.status === "Verified").length ?? 0;
-  return <section className="page-section"><section className="card-grid four">{[["Total matches", verified], ["Wins", verified], ["Losses", 0], ["Win rate", verified ? "100%" : "0%"], ["Current streak", verified], ["Best streak", verified], ["1v1 record", `${verified}-0`], ["Ranking", verified ? "#1" : "#12"]].map(([label, value]) => <article className="product-card metric-card" key={label}><span>{label}</span><strong>{value}</strong></article>)}</section><section className="card-grid three"><article className="product-card"><h2>Favorites</h2><p>Game CODM / Weapon DR-H / Map Shipment / Mode Gunfight</p></article><article className="product-card"><h2>Current clan</h2><p>Xclusive officer / Europe / Legendary</p></article><article className="product-card"><h2>Demo wallet</h2><p>Demo balance - no real money. PlayerOne balance ${state?.wallets.PlayerOne.balance ?? 0}, locked ${state?.wallets.PlayerOne.locked ?? 0}.</p></article></section><ChallengeDiscovery /></section>;
+  return <section className="page-section profile-arena"><section className="profile-cover"><span className="avatar-ring">P1</span><div><h2>PlayerOne</h2><p>XCL / Legendary / CODM / Europe / DR-H main</p></div><strong>{verified ? "#1" : "#12"}</strong></section><section className="card-grid four">{[["Total matches", verified], ["Wins", verified], ["Losses", 0], ["Win rate", verified ? "100%" : "0%"], ["Current streak", verified], ["Best streak", verified], ["1v1 record", `${verified}-0`], ["Ranking", verified ? "#1" : "#12"]].map(([label, value]) => <article className="product-card metric-card" key={label}><span>{label}</span><strong>{value}</strong></article>)}</section><section className="achievement-rack">{["First Blood", "10 Win Streak", "Sniper Elite", "Clan Champion", "Undefeated", "Tournament Winner", "High Stakes Winner"].map((item) => <span key={item}>{item}</span>)}</section><section className="card-grid three"><article className="product-card"><h2>Favorites</h2><p>Game CODM / Weapon DR-H / Map Shipment / Mode Gunfight</p></article><article className="product-card"><h2>Current clan</h2><p>Xclusive officer / Europe / Legendary</p></article><article className="product-card"><h2>Demo wallet</h2><p>Demo balance - no real money. PlayerOne balance ${state?.wallets.PlayerOne.balance ?? 0}, locked ${state?.wallets.PlayerOne.locked ?? 0}.</p></article></section><ChallengeDiscovery /></section>;
 }
 
 export function GameHubLive({ game }: { game: GameName }) {

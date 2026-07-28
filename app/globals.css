@@ -15,6 +15,533 @@
   --muted: #94a3b8;
 }
 
+/* Competitive arena visual system */
+:root {
+  --arena-black: #02030a;
+  --arena-navy: #070b1d;
+  --gunmetal: #151923;
+  --metal: #252b38;
+  --neon-blue: #22d3ee;
+  --neon-purple: #9f4cff;
+  --ember: #ff6b1a;
+}
+
+body {
+  background:
+    radial-gradient(circle at 50% -10%, rgba(34, 211, 238, 0.18), transparent 22rem),
+    radial-gradient(circle at 85% 8%, rgba(159, 76, 255, 0.28), transparent 30rem),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+    linear-gradient(135deg, #02030a 0%, #070b1d 52%, #05050b 100%);
+  background-size: auto, auto, 54px 54px, 54px 54px, auto;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+.product-shell::before,
+.product-shell::after {
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: fixed;
+  z-index: 0;
+}
+
+.product-shell::before {
+  background:
+    radial-gradient(circle at 16% 24%, rgba(34, 211, 238, 0.14), transparent 16rem),
+    radial-gradient(circle at 76% 64%, rgba(255, 107, 26, 0.12), transparent 18rem);
+  animation: arena-pulse 8s ease-in-out infinite alternate;
+}
+
+.product-shell::after {
+  background-image:
+    linear-gradient(115deg, transparent 0 42%, rgba(34, 211, 238, 0.12) 42.2% 42.6%, transparent 42.8%),
+    radial-gradient(circle, rgba(255, 255, 255, 0.32) 0 1px, transparent 1.8px);
+  background-size: 100% 100%, 120px 120px;
+  opacity: 0.28;
+}
+
+.product-sidebar,
+.product-main {
+  position: relative;
+  z-index: 1;
+}
+
+.product-sidebar {
+  background:
+    linear-gradient(180deg, rgba(12, 16, 28, 0.96), rgba(3, 4, 10, 0.98)),
+    linear-gradient(90deg, rgba(34, 211, 238, 0.12), transparent);
+  border-right: 1px solid rgba(34, 211, 238, 0.18);
+  box-shadow: 18px 0 70px rgba(0, 0, 0, 0.48);
+}
+
+.brand span,
+.avatar-ring,
+.crest {
+  clip-path: polygon(18% 0, 82% 0, 100% 50%, 82% 100%, 18% 100%, 0 50%);
+}
+
+.brand span {
+  background: linear-gradient(135deg, var(--neon-purple), var(--neon-blue));
+  box-shadow: 0 0 34px rgba(34, 211, 238, 0.36);
+}
+
+.brand strong,
+.page-hero h1,
+.section-heading h2,
+.game-portal h3,
+.product-card h2,
+.product-card h3,
+.leaderboard-row strong,
+.vs-core strong {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  letter-spacing: 0;
+}
+
+.side-profile {
+  background:
+    linear-gradient(135deg, rgba(159, 76, 255, 0.14), rgba(34, 211, 238, 0.06)),
+    rgba(10, 12, 22, 0.88);
+  border: 1px solid rgba(34, 211, 238, 0.22);
+  box-shadow: inset 0 0 22px rgba(159, 76, 255, 0.12);
+  clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
+  display: grid;
+  gap: 8px;
+  padding: 16px;
+}
+
+.side-profile b {
+  text-transform: uppercase;
+}
+
+.side-profile div {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.side-profile span,
+.hero-status-rail span,
+.portal-intel div,
+.achievement-rack span {
+  border: 1px solid rgba(34, 211, 238, 0.24);
+  color: #cffafe;
+  font-size: 0.72rem;
+  font-weight: 900;
+  padding: 7px 9px;
+  text-transform: uppercase;
+}
+
+.product-sidebar nav a {
+  border: 1px solid transparent;
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 0 100%);
+  font-weight: 900;
+  position: relative;
+}
+
+.product-sidebar nav a:hover {
+  background: linear-gradient(90deg, rgba(159, 76, 255, 0.34), rgba(34, 211, 238, 0.08));
+  border-color: rgba(34, 211, 238, 0.34);
+  box-shadow: 0 0 22px rgba(159, 76, 255, 0.24);
+}
+
+.product-sidebar nav a em {
+  background: var(--neon-blue);
+  box-shadow: 0 0 12px var(--neon-blue);
+  height: 6px;
+  margin-left: auto;
+  width: 6px;
+}
+
+.product-card,
+.cta-panel,
+.product-form,
+.auth-card,
+.page-hero,
+.match-row,
+.leaderboard-row,
+.game-portal {
+  background:
+    linear-gradient(145deg, rgba(21, 25, 35, 0.92), rgba(5, 7, 15, 0.94)),
+    linear-gradient(90deg, rgba(34, 211, 238, 0.08), transparent);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 0;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.025), 0 26px 80px rgba(0, 0, 0, 0.38);
+  clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+  position: relative;
+}
+
+.product-card::before,
+.game-portal::before,
+.page-hero::before {
+  background: linear-gradient(90deg, var(--neon-purple), var(--neon-blue), transparent);
+  content: "";
+  height: 1px;
+  left: 18px;
+  opacity: 0.7;
+  position: absolute;
+  right: 18px;
+  top: 0;
+}
+
+.product-card:hover,
+.game-portal:hover,
+.match-row:hover {
+  border-color: rgba(34, 211, 238, 0.38);
+  box-shadow: inset 0 0 0 1px rgba(34, 211, 238, 0.12), 0 30px 90px rgba(34, 211, 238, 0.08);
+  transform: translateY(-2px);
+}
+
+.btn {
+  border-radius: 0;
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 0 100%, 12px 50%);
+  letter-spacing: 0;
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+}
+
+.btn.primary {
+  background: linear-gradient(135deg, var(--neon-purple), #5b21b6 48%, var(--neon-blue));
+  box-shadow: 0 0 24px rgba(159, 76, 255, 0.28);
+}
+
+.btn:hover {
+  box-shadow: 0 0 28px rgba(34, 211, 238, 0.28);
+  transform: translateY(-1px) scale(1.01);
+}
+
+.page-hero {
+  background:
+    linear-gradient(90deg, rgba(2, 3, 10, 0.98), rgba(7, 11, 29, 0.78) 48%, rgba(2, 3, 10, 0.34)),
+    radial-gradient(circle at 80% 34%, rgba(34, 211, 238, 0.24), transparent 22rem),
+    radial-gradient(circle at 58% 72%, rgba(255, 107, 26, 0.12), transparent 20rem);
+  min-height: clamp(500px, 70vh, 760px);
+}
+
+.page-hero h1 {
+  font-size: clamp(3.8rem, 8.6vw, 9rem);
+  line-height: 0.86;
+  text-shadow: 0 0 34px rgba(159, 76, 255, 0.22);
+}
+
+.hero-status-rail,
+.live-ticker,
+.lobby-ticker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.live-ticker,
+.lobby-ticker {
+  align-items: center;
+  background: linear-gradient(90deg, rgba(255, 107, 26, 0.16), rgba(34, 211, 238, 0.08));
+  border: 1px solid rgba(34, 211, 238, 0.22);
+  clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 50%, calc(100% - 18px) 100%, 0 100%);
+  margin: 0;
+  padding: 14px 18px;
+}
+
+.live-ticker span,
+.lobby-ticker span,
+.tag.live {
+  color: #fed7aa;
+  text-shadow: 0 0 14px var(--ember);
+}
+
+.live-ticker p,
+.lobby-ticker p {
+  margin: 0;
+}
+
+.hero-art {
+  min-height: 420px;
+}
+
+.hero-art span {
+  background:
+    radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.22), transparent 13%),
+    linear-gradient(145deg, #2d3545, #070811 55%, #151923);
+  border-color: rgba(34, 211, 238, 0.34);
+  box-shadow: 0 0 110px rgba(34, 211, 238, 0.18), 0 0 60px rgba(159, 76, 255, 0.2);
+  clip-path: polygon(38% 0, 64% 0, 82% 22%, 92% 76%, 66% 100%, 24% 100%, 8% 76%, 18% 20%);
+  height: 330px;
+  width: 210px;
+}
+
+.hero-art i {
+  background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+  height: 2px;
+  position: absolute;
+  right: 5%;
+  top: 28%;
+  width: 80%;
+  animation: scanline 2.8s linear infinite;
+}
+
+.stat-grid-wide article strong,
+.metric-card strong {
+  color: white;
+  text-shadow: 0 0 18px rgba(34, 211, 238, 0.22);
+}
+
+.game-portal {
+  min-height: 470px;
+  transform-style: preserve-3d;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.game-portal:hover img {
+  transform: scale(1.05) translateY(-4px);
+}
+
+.game-portal img {
+  transition: transform 300ms ease;
+}
+
+.game-portal > div {
+  background: linear-gradient(180deg, transparent, rgba(2, 3, 10, 0.94) 26%);
+  margin-top: -120px;
+  min-height: 280px;
+  position: relative;
+}
+
+.portal-intel,
+.challenge-card dl,
+.agreement-panel dl {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.portal-intel {
+  margin: 0;
+}
+
+.portal-intel dd,
+.portal-intel dt {
+  margin: 0;
+}
+
+.game-codm {
+  box-shadow: inset 0 0 0 1px rgba(250, 204, 21, 0.12), 0 28px 80px rgba(250, 204, 21, 0.06);
+}
+
+.game-pubg {
+  box-shadow: inset 0 0 0 1px rgba(34, 211, 238, 0.13), 0 28px 80px rgba(34, 211, 238, 0.08);
+}
+
+.game-free-fire {
+  box-shadow: inset 0 0 0 1px rgba(255, 107, 26, 0.14), 0 28px 80px rgba(255, 107, 26, 0.08);
+}
+
+.battle-setup-header,
+.review-panel {
+  border-left: 3px solid var(--neon-blue);
+}
+
+.step-progress span,
+.chip-row span,
+.tag {
+  border-radius: 0;
+  clip-path: polygon(0 0, calc(100% - 9px) 0, 100% 50%, calc(100% - 9px) 100%, 0 100%);
+}
+
+.flow-grid label {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  padding: 12px;
+}
+
+.field,
+.search input {
+  border-radius: 0;
+  border-color: rgba(34, 211, 238, 0.18);
+}
+
+.challenge-topline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.wager-callout {
+  color: #fde68a;
+  display: block;
+  font-size: 1.08rem;
+  text-shadow: 0 0 18px rgba(250, 204, 21, 0.28);
+}
+
+.versus-lobby,
+.player-command-banner,
+.profile-cover {
+  align-items: center;
+  background:
+    linear-gradient(135deg, rgba(159, 76, 255, 0.18), rgba(34, 211, 238, 0.08)),
+    rgba(5, 7, 15, 0.94);
+  border: 1px solid rgba(34, 211, 238, 0.24);
+  clip-path: polygon(0 0, calc(100% - 28px) 0, 100% 28px, 100% 100%, 28px 100%, 0 calc(100% - 28px));
+  display: grid;
+  gap: 20px;
+  padding: clamp(20px, 4vw, 42px);
+}
+
+.versus-lobby {
+  grid-template-columns: 1fr auto 1fr;
+  text-align: center;
+}
+
+.vs-core {
+  display: grid;
+  gap: 8px;
+}
+
+.vs-core strong {
+  color: white;
+  font-size: clamp(4rem, 8vw, 8rem);
+  line-height: 0.8;
+  text-shadow: 0 0 30px var(--neon-purple);
+}
+
+.avatar-ring {
+  align-items: center;
+  background: linear-gradient(135deg, var(--neon-purple), var(--neon-blue));
+  color: white;
+  display: inline-flex;
+  font-weight: 950;
+  height: 76px;
+  justify-content: center;
+  width: 76px;
+}
+
+.locked-banner {
+  animation: ready-glow 1.8s ease-in-out infinite alternate;
+  border: 1px solid rgba(34, 197, 94, 0.5);
+  color: #bbf7d0;
+  display: block;
+  padding: 14px;
+  text-align: center;
+}
+
+.contract-seal {
+  color: #cffafe;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.message {
+  border-radius: 0;
+}
+
+.message.system {
+  background: linear-gradient(90deg, rgba(250, 204, 21, 0.14), rgba(255, 107, 26, 0.06));
+  border-color: rgba(250, 204, 21, 0.32);
+}
+
+.player-command-banner,
+.profile-cover {
+  grid-template-columns: 1fr repeat(3, auto);
+}
+
+.player-command-banner > div:first-child,
+.profile-cover > div {
+  align-items: center;
+  display: flex;
+  gap: 18px;
+}
+
+.achievement-rack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.achievement-rack span {
+  background: rgba(250, 204, 21, 0.09);
+  border-color: rgba(250, 204, 21, 0.28);
+  color: #fde68a;
+}
+
+.podium-board .leaderboard-row:first-of-type {
+  background: linear-gradient(135deg, rgba(250, 204, 21, 0.2), rgba(7, 11, 29, 0.95));
+  min-height: 110px;
+}
+
+.podium-1 span { color: #fde68a; }
+.podium-2 span { color: #e5e7eb; }
+.podium-3 span { color: #fdba74; }
+
+.video-thumb {
+  background:
+    linear-gradient(135deg, rgba(34, 211, 238, 0.16), rgba(159, 76, 255, 0.16)),
+    radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.16), transparent 5rem);
+  min-height: 230px;
+}
+
+.clip-product-card {
+  min-height: 420px;
+}
+
+.vendor-card {
+  background:
+    linear-gradient(135deg, rgba(250, 204, 21, 0.1), rgba(34, 211, 238, 0.08)),
+    rgba(5, 7, 15, 0.94);
+}
+
+.tournament-card {
+  background:
+    linear-gradient(135deg, rgba(159, 76, 255, 0.16), rgba(255, 107, 26, 0.08)),
+    rgba(5, 7, 15, 0.94);
+}
+
+@keyframes arena-pulse {
+  from { opacity: 0.55; transform: translateY(0); }
+  to { opacity: 0.95; transform: translateY(-18px); }
+}
+
+@keyframes scanline {
+  from { transform: translateY(-90px); opacity: 0; }
+  20% { opacity: 1; }
+  to { transform: translateY(180px); opacity: 0; }
+}
+
+@keyframes ready-glow {
+  from { box-shadow: 0 0 10px rgba(34, 197, 94, 0.18); }
+  to { box-shadow: 0 0 32px rgba(34, 197, 94, 0.42); }
+}
+
+@media (max-width: 680px) {
+  .page-hero h1 {
+    font-size: 3.35rem;
+  }
+
+  .player-command-banner,
+  .profile-cover,
+  .versus-lobby,
+  .portal-intel,
+  .challenge-card dl,
+  .agreement-panel dl {
+    grid-template-columns: 1fr;
+  }
+
+  .game-portal {
+    min-height: 560px;
+  }
+
+  .clips-feed {
+    display: grid;
+    gap: 18px;
+  }
+
+  .clip-product-card {
+    min-height: calc(100vh - 110px);
+  }
+
+  .product-sidebar {
+    clip-path: none;
+  }
+}
+
 @theme inline {
   --color-background: var(--bg);
   --color-foreground: var(--text);
@@ -1900,5 +2427,126 @@ dd {
     align-items: start;
     display: grid;
     gap: 6px;
+  }
+}
+
+/* Final arena overrides */
+body {
+  background:
+    radial-gradient(circle at 50% -10%, rgba(34, 211, 238, 0.18), transparent 22rem),
+    radial-gradient(circle at 85% 8%, rgba(159, 76, 255, 0.28), transparent 30rem),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+    linear-gradient(135deg, #02030a 0%, #070b1d 52%, #05050b 100%);
+  background-size: auto, auto, 54px 54px, 54px 54px, auto;
+}
+
+.product-card,
+.cta-panel,
+.product-form,
+.auth-card,
+.page-hero,
+.match-row,
+.leaderboard-row,
+.game-portal {
+  border-radius: 0;
+  clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+}
+
+.product-sidebar nav a,
+.btn,
+.tag,
+.chip-row span,
+.step-progress span {
+  border-radius: 0;
+}
+
+.page-hero h1 {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  line-height: 0.86;
+}
+
+.clan-war-banner,
+.tournament-arena .product-card,
+.bracket-card,
+.roster-grid .product-card {
+  background:
+    linear-gradient(135deg, rgba(159, 76, 255, 0.18), rgba(34, 211, 238, 0.08)),
+    rgba(5, 7, 15, 0.94);
+}
+
+.tournament-arena {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.bracket-card {
+  display: grid;
+  gap: 14px;
+}
+
+.bracket-card div {
+  align-items: center;
+  border: 1px solid rgba(34, 211, 238, 0.18);
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr auto 1fr;
+  padding: 14px;
+}
+
+.bracket-card b {
+  color: #fde68a;
+}
+
+@media (max-width: 680px) {
+  .product-shell {
+    display: block;
+    max-width: 100vw;
+    overflow: hidden;
+  }
+
+  .product-main {
+    max-width: 100vw;
+    overflow: hidden;
+    padding: 16px;
+    width: 100%;
+  }
+
+  .search,
+  .search input,
+  .field,
+  .match-row,
+  .btn,
+  .button-row,
+  .product-card {
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .search input,
+  .field,
+  .match-row {
+    width: min(100%, calc(100vw - 32px));
+  }
+
+  .product-card .field,
+  .product-card .btn,
+  .product-card .match-row {
+    width: min(100%, calc(100vw - 64px));
+  }
+
+  .button-row .btn {
+    flex: 1 1 100%;
+  }
+
+  .tournament-arena,
+  .versus-lobby,
+  .player-command-banner,
+  .profile-cover,
+  .portal-intel,
+  .challenge-card dl,
+  .agreement-panel dl {
+    grid-template-columns: 1fr;
   }
 }

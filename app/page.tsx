@@ -6,11 +6,15 @@ export default function Home() {
     <AppShell>
       <PageHero
         eyebrow="Clan Arena"
-        title="Built for clans. Made to win."
-        copy="A professional esports platform for clan recruitment, match requests, tournaments, verified results, clips and rankings."
-        primary={["Find a clan", "/find-clans"]}
-        secondary={["Create account", "/register"]}
+        title="Enter the Arena. Challenge Anyone. Prove Your Rank."
+        copy="Create 1v1, 2v2, team and clan challenges across CODM, PUBG Mobile and Free Fire. Agree the rules, lock the wager and fight for the top position."
+        primary={["Join Arena", "/register"]}
+        secondary={["Create Challenge", "/matches/request"]}
       />
+      <section className="live-ticker">
+        <span>LIVE</span>
+        <p>Xclusive accepted a CODM 1V1 / NovaAce locked $20 entry / Free Fire Arena starts in 03:12:44 / PUBG squad room opened</p>
+      </section>
       <StatGrid />
       <section className="page-section two-column">
         <div className="section-heading">

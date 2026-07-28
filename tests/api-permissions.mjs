@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 
-const base = "http://localhost:3002/api/arena";
+const base = `${process.env.BASE_URL ?? "http://localhost:3002"}/api/arena`;
 
 async function api(action, actor, payload = {}) {
   const response = await fetch(base, {

@@ -9,7 +9,7 @@ test("keeps the Clan Arena homepage focused on the product", async () => {
   ]);
 
   assert.match(layout, /Clan Arena \| Competitive Clan Command Centre/);
-  assert.match(home, /Built for clans/i);
+  assert.match(home, /Enter the Arena/i);
   assert.match(home, /Featured clans/i);
   assert.match(home, /Recent matches/i);
   assert.match(home, /Create account/i);

@@ -6,6 +6,7 @@ const require = createRequire(import.meta.url);
 const { chromium } = require("/Users/raiden./.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright");
 
 const outDir = path.resolve("validation-screenshots");
+const baseUrl = process.env.BASE_URL ?? "http://localhost:3002";
 await mkdir(outDir, { recursive: true });
 
 const browser = await chromium.launch({
@@ -39,7 +40,7 @@ const failures = [];
 for (const width of widths) {
   const page = await browser.newPage({ viewport: { width, height: 900 } });
   for (const route of routes) {
-    await page.goto(`http://localhost:3002${route}`, { waitUntil: "networkidle" });
+    await page.goto(`${baseUrl}${route}`, { waitUntil: "networkidle" });
     const metrics = await page.evaluate(() => ({
       scrollWidth: document.documentElement.scrollWidth,
       clientWidth: document.documentElement.clientWidth,
@@ -71,7 +72,7 @@ const screenshots = [
 
 for (const [route, width, file] of screenshots) {
   const page = await browser.newPage({ viewport: { width, height: 1000 } });
-  await page.goto(`http://localhost:3002${route}`, { waitUntil: "networkidle" });
+  await page.goto(`${baseUrl}${route}`, { waitUntil: "networkidle" });
   await page.screenshot({ path: path.join(outDir, file), fullPage: true });
   await page.close();
 }
