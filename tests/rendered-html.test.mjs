@@ -23,7 +23,7 @@ async function render() {
   );
 }
 
-test("server-renders the Clan Arena prototype", async () => {
+test("server-renders the Clan Arena homepage", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
@@ -31,21 +31,21 @@ test("server-renders the Clan Arena prototype", async () => {
   const html = await response.text();
   assert.match(html, /<title>Clan Arena \| Competitive Clan Command Centre<\/title>/i);
   assert.match(html, /Built for clans/i);
-  assert.match(html, /Clan showcase/i);
-  assert.match(html, /Match request/i);
-  assert.match(html, /Clip upload/i);
-  assert.match(html, /Full-stack roadmap/i);
+  assert.match(html, /Featured clans/i);
+  assert.match(html, /Recent matches/i);
+  assert.match(html, /Create account/i);
+  assert.doesNotMatch(html, /Full-stack roadmap|Mobile and backend planning|Clip upload/i);
   assert.doesNotMatch(html, /codex-preview|SkeletonPreview|react-loading-skeleton/i);
 });
 
 test("keeps starter preview code removed", async () => {
   const [page, layout, packageJson] = await Promise.all([
-    readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/components.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../package.json", import.meta.url), "utf8"),
   ]);
 
-  assert.match(page, /Clan Arena/);
+  assert.match(page, /product-shell/);
   assert.match(layout, /Clan Arena \| Competitive Clan Command Centre/);
   assert.doesNotMatch(page + layout + packageJson, /codex-preview|SkeletonPreview|react-loading-skeleton/);
 });
