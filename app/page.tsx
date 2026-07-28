@@ -1,5 +1,5 @@
-import { AppShell, ClanCard, ClipCard, MatchRow, PageHero, StatGrid, TournamentCard } from "./components";
-import { clans, clips, matches, tournaments } from "./data";
+import { AppShell, ClanCard, ClipCard, GamePortalCard, MatchRow, PageHero, StatGrid, TournamentCard } from "./components";
+import { clans, clips, games, matches, tournaments } from "./data";
 
 export default function Home() {
   return (
@@ -12,6 +12,15 @@ export default function Home() {
         secondary={["Create account", "/register"]}
       />
       <StatGrid />
+      <section className="page-section two-column">
+        <div className="section-heading">
+          <span className="eyebrow">Game portals</span>
+          <h2>Enter CODM, PUBG Mobile or Free Fire with the right rules and atmosphere.</h2>
+        </div>
+      </section>
+      <section className="game-portal-grid">
+        {games.map((game) => <GamePortalCard game={game} key={game.slug} />)}
+      </section>
       <section className="page-section two-column">
         <div>
           <div className="section-heading">

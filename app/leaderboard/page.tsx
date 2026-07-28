@@ -7,7 +7,7 @@ export default function LeaderboardPage() {
       <PageHero eyebrow="Leaderboard" title="Verified ranking, not manually edited points." copy="Rankings consider wins, losses, opponent strength, tournaments, forfeits, disputes and activity." />
       <section className="leaderboard-page">
         {clans.map((clan) => (
-          <article className="leaderboard-row" key={clan.name}>
+          <article className="leaderboard-row mobile-card-row" key={clan.name}>
             <span>#{clan.rank}</span>
             <strong>{clan.name}</strong>
             <small>{clan.game} / {clan.region}</small>

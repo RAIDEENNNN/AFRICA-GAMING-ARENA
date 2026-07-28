@@ -1,0 +1,32 @@
+<svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="720" fill="#08090A"/>
+  <path d="M0 0H1200V720H0V0Z" fill="url(#bg)"/>
+  <path d="M850 0L1200 0V720H620L850 0Z" fill="#16191B" opacity=".8"/>
+  <path d="M0 612H1200" stroke="#F6C813" stroke-width="6" opacity=".45"/>
+  <path d="M120 570H1080" stroke="#394044" stroke-width="2" opacity=".55"/>
+  <g opacity=".55">
+    <path d="M120 126H490V398H120V126Z" stroke="#444C51"/>
+    <path d="M166 126V398M212 126V398M258 126V398M304 126V398M350 126V398M396 126V398M442 126V398" stroke="#252B2E"/>
+    <path d="M120 172H490M120 218H490M120 264H490M120 310H490M120 356H490" stroke="#252B2E"/>
+  </g>
+  <g transform="translate(650 112)">
+    <path d="M150 0L220 30V106L150 146L80 106V30L150 0Z" fill="#2B3032"/>
+    <path d="M105 70H195" stroke="#F6C813" stroke-width="14"/>
+    <path d="M105 92H195" stroke="#0D0F10" stroke-width="18"/>
+    <path d="M58 172H242L292 500H8L58 172Z" fill="#242A2C"/>
+    <path d="M82 205H218L238 364H62L82 205Z" fill="#111415"/>
+    <path d="M18 256L282 202" stroke="#D9DEE1" stroke-width="18"/>
+    <path d="M240 208L392 176" stroke="#D9DEE1" stroke-width="10"/>
+    <path d="M96 500L70 608H136L150 500H96Z" fill="#111415"/>
+    <path d="M204 500L220 608H286L252 500H204Z" fill="#111415"/>
+  </g>
+  <text x="84" y="540" fill="#F8FAFC" font-size="54" font-family="Arial" font-weight="800">TACTICAL MULTIPLAYER</text>
+  <text x="84" y="596" fill="#F6C813" font-size="28" font-family="Arial" font-weight="700">1v1 • 2v2 • 5v5 • MAP VETO • WEAPON RULES</text>
+  <defs>
+    <radialGradient id="bg" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(880 270) rotate(143) scale(760 540)">
+      <stop stop-color="#F6C813" stop-opacity=".32"/>
+      <stop offset=".42" stop-color="#2B3032"/>
+      <stop offset="1" stop-color="#08090A"/>
+    </radialGradient>
+  </defs>
+</svg>

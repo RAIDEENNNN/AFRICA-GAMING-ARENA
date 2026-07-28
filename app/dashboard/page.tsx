@@ -13,13 +13,17 @@ export default function DashboardPage() {
       />
       <section className="card-grid four">
         {[
-          ["Profile", "72% complete"],
-          ["Clan", "Xclusive officer"],
-          ["Matches", "2 pending"],
-          ["Notifications", "6 unread"],
+          ["Wallet", "Wagers disabled"],
+          ["Upcoming", "1 match"],
+          ["Negotiations", "2 active"],
+          ["Messages", "6 unread"],
         ].map(([title, value]) => (
           <article className="product-card metric-card" key={title}><span>{title}</span><strong>{value}</strong></article>
         ))}
+      </section>
+      <section className="mobile-dashboard-actions">
+        <a className="btn primary" href="/matches/request">Create Challenge</a>
+        <a className="btn secondary" href="/matches">Find Match</a>
       </section>
       <section className="product-card">
         <h2>Challenge journey</h2>

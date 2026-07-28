@@ -1,0 +1,24 @@
+<svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="720" fill="#0B0D0B"/>
+  <path d="M0 0H1200V720H0V0Z" fill="url(#sky)"/>
+  <path d="M0 520C230 420 430 474 588 430C785 375 912 356 1200 436V720H0V520Z" fill="#75613B"/>
+  <path d="M0 604C220 560 438 612 650 564C850 518 1028 530 1200 586V720H0V604Z" fill="#283529"/>
+  <circle cx="1010" cy="170" r="170" stroke="#52A7FF" stroke-width="18" opacity=".35"/>
+  <circle cx="1010" cy="170" r="112" stroke="#52A7FF" stroke-width="8" opacity=".42"/>
+  <g transform="translate(494 144)">
+    <path d="M120 0L190 46V134L120 182L50 134V46L120 0Z" fill="#2A2F2A"/>
+    <path d="M72 84H168" stroke="#E8B13F" stroke-width="14"/>
+    <path d="M32 206H208L246 492H-6L32 206Z" fill="#1C241C"/>
+    <path d="M50 232H190L205 360H35L50 232Z" fill="#111611"/>
+    <path d="M-20 294L260 242" stroke="#D8D1BC" stroke-width="16"/>
+  </g>
+  <text x="80" y="548" fill="#F8FAFC" font-size="58" font-family="Arial" font-weight="800">SURVIVAL BATTLEFIELD</text>
+  <text x="80" y="604" fill="#E8B13F" font-size="28" font-family="Arial" font-weight="700">ARENA • SQUADS • BR ROOMS • BLUE ZONE PRESSURE</text>
+  <defs>
+    <radialGradient id="sky" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(894 126) rotate(144) scale(760 520)">
+      <stop stop-color="#52A7FF" stop-opacity=".26"/>
+      <stop offset=".52" stop-color="#151B16"/>
+      <stop offset="1" stop-color="#0B0D0B"/>
+    </radialGradient>
+  </defs>
+</svg>

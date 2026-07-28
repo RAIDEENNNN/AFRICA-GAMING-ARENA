@@ -1,0 +1,27 @@
+<svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="720" fill="#09070B"/>
+  <path d="M0 0H1200V720H0V0Z" fill="url(#neon)"/>
+  <path d="M0 570L1200 420V720H0V570Z" fill="#1B0B12" opacity=".82"/>
+  <path d="M126 140L1068 36" stroke="#FF6A00" stroke-width="6" opacity=".7"/>
+  <path d="M210 242L1094 176" stroke="#22D3EE" stroke-width="5" opacity=".45"/>
+  <path d="M78 404L836 286" stroke="#FACC15" stroke-width="8" opacity=".48"/>
+  <g transform="translate(690 110)">
+    <path d="M122 0L202 44V136L122 184L42 136V44L122 0Z" fill="#23111A"/>
+    <path d="M70 78H174" stroke="#22D3EE" stroke-width="12"/>
+    <path d="M26 210H218L260 502H-16L26 210Z" fill="#25111B"/>
+    <path d="M60 236H188L208 346H40L60 236Z" fill="#0E0B13"/>
+    <path d="M-32 292L270 226" stroke="#FF8A00" stroke-width="17"/>
+    <path d="M58 508L20 624H94L120 508H58Z" fill="#0B0810"/>
+    <path d="M184 508L220 624H294L244 508H184Z" fill="#0B0810"/>
+  </g>
+  <text x="82" y="536" fill="#F8FAFC" font-size="64" font-family="Arial" font-weight="800">BATTLE IN STYLE</text>
+  <text x="82" y="594" fill="#FF8A00" font-size="29" font-family="Arial" font-weight="700">CLASH SQUAD • GUILD VS GUILD • CUSTOM ROOMS</text>
+  <defs>
+    <radialGradient id="neon" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(790 250) rotate(145) scale(820 520)">
+      <stop stop-color="#FF6A00" stop-opacity=".42"/>
+      <stop offset=".36" stop-color="#4C1D95" stop-opacity=".58"/>
+      <stop offset=".7" stop-color="#111827"/>
+      <stop offset="1" stop-color="#09070B"/>
+    </radialGradient>
+  </defs>
+</svg>

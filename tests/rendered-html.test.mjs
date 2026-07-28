@@ -34,6 +34,11 @@ test("server-renders the Clan Arena homepage", async () => {
   assert.match(html, /Featured clans/i);
   assert.match(html, /Recent matches/i);
   assert.match(html, /Create account/i);
+  assert.match(html, /Game portals/i);
+  assert.match(html, /Call of Duty: Mobile/i);
+  assert.match(html, /PUBG Mobile/i);
+  assert.match(html, /Free Fire/i);
+  assert.match(html, /Wallet/i);
   assert.doesNotMatch(html, /Full-stack roadmap|Mobile and backend planning|Clip upload/i);
   assert.doesNotMatch(html, /codex-preview|SkeletonPreview|react-loading-skeleton/i);
 });

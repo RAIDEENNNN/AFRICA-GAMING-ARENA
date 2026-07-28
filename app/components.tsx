@@ -1,9 +1,11 @@
 import Link from "next/link";
-import { challenges, clans, clips, matches, tournaments } from "./data";
+import Image from "next/image";
+import { challenges, clans, clips, games, matches, tournaments } from "./data";
 
 const navItems = [
   ["Home", "/"],
   ["Dashboard", "/dashboard"],
+  ["Games", "/games"],
   ["Clans", "/clans"],
   ["Find Clans", "/find-clans"],
   ["Matches", "/matches"],
@@ -11,6 +13,9 @@ const navItems = [
   ["Clips", "/clips"],
   ["Leaderboard", "/leaderboard"],
   ["Messages", "/messages"],
+  ["Marketplace", "/marketplace"],
+  ["Wallet", "/wallet"],
+  ["Admin", "/admin"],
   ["Support", "/support"],
 ];
 
@@ -29,6 +34,17 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           ))}
         </nav>
         <Link className="btn primary full" href="/matches/request">Request match</Link>
+        <details className="mobile-create">
+          <summary>Create</summary>
+          <div>
+            <Link href="/matches/request">Create Challenge</Link>
+            <Link href="/matches/request">Create Wager Match</Link>
+            <Link href="/clans/create">Create Team</Link>
+            <Link href="/clans/create">Create Clan</Link>
+            <Link href="/clips/upload">Upload Clip</Link>
+            <Link href="/tournaments">Create Tournament</Link>
+          </div>
+        </details>
       </aside>
       <section className="product-main">
         <header className="product-topbar">
@@ -38,12 +54,29 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           </label>
           <nav>
             <Link href="/notifications">Notifications</Link>
+            <Link href="/messages">Messages</Link>
+            <Link href="/wallet">Wallet</Link>
             <Link href="/settings">Settings</Link>
             <Link href="/profile">PlayerOne</Link>
           </nav>
         </header>
         {children}
       </section>
+      <nav className="mobile-bottom-nav" aria-label="Mobile navigation">
+        <Link href="/">Home</Link>
+        <Link href="/matches">Find Match</Link>
+        <details>
+          <summary>Create</summary>
+          <div>
+            <Link href="/matches/request">Challenge</Link>
+            <Link href="/clans/create">Clan</Link>
+            <Link href="/clips/upload">Clip</Link>
+            <Link href="/tournaments">Tournament</Link>
+          </div>
+        </details>
+        <Link href="/clips">Clips</Link>
+        <Link href="/profile">Profile</Link>
+      </nav>
     </main>
   );
 }
@@ -128,6 +161,34 @@ export function ClipCard({ clip = clips[0] }) {
       <p>by {clip.creator} / {clip.game}</p>
       <small>{clip.views} views / {clip.likes} likes</small>
     </article>
+  );
+}
+
+export function GamePortalCard({ game = games[0] }) {
+  return (
+    <article className={`game-portal game-${game.theme}`}>
+      <Image src={game.art} alt={`${game.name} inspired original Clan Arena artwork`} width={1200} height={720} />
+      <div>
+        <span className="eyebrow">{game.short} arena</span>
+        <h3>{game.name}</h3>
+        <p>{game.accent}</p>
+        <ul>
+          {game.stats.map((stat) => <li key={stat}>{stat}</li>)}
+        </ul>
+        <Link className="btn primary small" href={`/games/${game.slug}`}>View {game.short} arena</Link>
+      </div>
+    </article>
+  );
+}
+
+export function GameConfigPanel({ game = games[0] }) {
+  return (
+    <section className="game-config-grid">
+      <article className="product-card"><h2>Weapon classes</h2><p>{game.weapons.join(" / ")}</p></article>
+      <article className="product-card"><h2>Maps</h2><p>{game.maps.join(" / ")}</p></article>
+      <article className="product-card"><h2>Modes</h2><p>{game.modes.join(" / ")}</p></article>
+      <article className="product-card"><h2>Marketplace</h2><p>{game.vendor} and verified vendor links only. No account selling.</p></article>
+    </section>
   );
 }
 

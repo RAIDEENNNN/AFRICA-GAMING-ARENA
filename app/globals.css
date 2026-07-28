@@ -39,11 +39,17 @@ body {
     linear-gradient(135deg, #05050c 0%, #090914 48%, #06060e 100%);
   color: var(--text);
   font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
 }
 
 a {
   color: inherit;
   text-decoration: none;
+}
+
+img,
+svg {
+  max-width: 100%;
 }
 
 button,
@@ -358,8 +364,12 @@ h1 em {
   font-weight: 900;
   justify-content: center;
   min-height: 42px;
+  max-width: 100%;
   padding: 12px 18px;
+  text-align: center;
   text-transform: uppercase;
+  white-space: normal;
+  word-break: break-word;
 }
 
 .btn.primary {
@@ -1076,6 +1086,7 @@ textarea.field {
   display: grid;
   grid-template-columns: 260px minmax(0, 1fr);
   min-height: 100vh;
+  overflow-x: clip;
 }
 
 .product-sidebar {
@@ -1108,6 +1119,7 @@ textarea.field {
   display: grid;
   gap: clamp(32px, 5vw, 72px);
   padding: clamp(22px, 4vw, 56px);
+  min-width: 0;
 }
 
 .product-topbar {
@@ -1142,6 +1154,7 @@ textarea.field {
   min-height: clamp(420px, 58vh, 620px);
   overflow: hidden;
   padding: clamp(32px, 6vw, 76px);
+  min-width: 0;
 }
 
 .page-hero h1 {
@@ -1239,6 +1252,7 @@ textarea.field {
 .card-grid {
   display: grid;
   gap: 18px;
+  min-width: 0;
 }
 
 .card-grid.two {
@@ -1366,6 +1380,146 @@ button:disabled {
   gap: 12px;
 }
 
+.game-portal-grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.game-portal {
+  background: rgba(17, 17, 31, 0.78);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  display: grid;
+  gap: 18px;
+  overflow: hidden;
+}
+
+.game-portal img {
+  aspect-ratio: 16 / 9;
+  height: auto;
+  object-fit: cover;
+  width: 100%;
+}
+
+.game-portal > div {
+  display: grid;
+  gap: 12px;
+  padding: 22px;
+}
+
+.game-portal h3 {
+  font-size: clamp(1.7rem, 3vw, 3.4rem);
+  line-height: 1;
+  margin: 0;
+}
+
+.game-portal ul {
+  color: var(--muted);
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding-left: 18px;
+}
+
+.game-codm {
+  border-color: rgba(250, 204, 21, 0.34);
+}
+
+.game-pubg {
+  border-color: rgba(82, 167, 255, 0.3);
+}
+
+.game-free-fire {
+  border-color: rgba(255, 106, 0, 0.38);
+}
+
+.game-config-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.mobile-create,
+.mobile-bottom-nav {
+  display: none;
+}
+
+.step-progress {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.step-progress span {
+  background: rgba(124, 58, 237, 0.16);
+  border: 1px solid rgba(168, 85, 247, 0.28);
+  color: #d8b4fe;
+  flex: 0 0 auto;
+  font-size: 0.72rem;
+  padding: 8px 10px;
+  text-transform: uppercase;
+}
+
+.form-step {
+  border: 1px solid var(--line);
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 18px;
+}
+
+.form-step legend {
+  color: var(--text);
+  font-weight: 900;
+  padding: 0 8px;
+  text-transform: uppercase;
+}
+
+.match-room-tabs {
+  display: none;
+}
+
+.match-room-layout {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: minmax(220px, 0.75fr) minmax(360px, 1.15fr) minmax(280px, 0.9fr);
+}
+
+.chat-input {
+  position: sticky;
+  bottom: 8px;
+}
+
+.clips-feed {
+  columns: 3 280px;
+  column-gap: 18px;
+}
+
+.clips-feed .clip-product-card {
+  break-inside: avoid;
+  margin-bottom: 18px;
+}
+
+.market-category-row {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+}
+
+.market-category-row a {
+  background: rgba(124, 58, 237, 0.16);
+  border: 1px solid rgba(168, 85, 247, 0.28);
+  flex: 0 0 auto;
+  padding: 12px 14px;
+}
+
+.mobile-dashboard-actions {
+  display: none;
+}
+
 .challenge-card,
 .agreement-panel,
 .wager-panel {
@@ -1442,20 +1596,126 @@ dd {
 
   .product-sidebar nav {
     display: flex;
-    overflow-x: auto;
+    flex-wrap: wrap;
+    overflow: visible;
   }
 
   .product-sidebar nav a {
-    min-width: max-content;
+    flex: 1 1 132px;
+    min-width: 0;
+    text-align: center;
+  }
+
+  .product-topbar {
+    grid-template-columns: 1fr;
+  }
+
+  .product-topbar nav {
+    flex-wrap: wrap;
+    justify-content: start;
+  }
+
+  .product-topbar nav a {
+    flex: 1 1 118px;
+    min-width: 0;
+    text-align: center;
+  }
+
+  .market-category-row {
+    flex-wrap: wrap;
+    overflow: visible;
+  }
+
+  .market-category-row a {
+    flex: 1 1 150px;
+    min-width: 0;
+    text-align: center;
   }
 
   .stat-grid-wide,
-  .filter-bar {
+  .filter-bar,
+  .game-portal-grid,
+  .game-config-grid,
+  .match-room-layout {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 680px) {
+  body {
+    padding-bottom: 74px;
+  }
+
+  .product-shell {
+    display: block;
+  }
+
+  .product-sidebar {
+    border-bottom: 1px solid var(--line);
+    border-right: 0;
+    padding: 14px 16px;
+  }
+
+  .product-sidebar nav,
+  .product-sidebar > .btn {
+    display: none;
+  }
+
+  .mobile-create {
+    display: block;
+  }
+
+  .mobile-create summary,
+  .mobile-bottom-nav summary {
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .mobile-create div,
+  .mobile-bottom-nav details div {
+    background: #11111f;
+    border: 1px solid var(--line);
+    display: grid;
+    gap: 8px;
+    padding: 12px;
+    position: absolute;
+    z-index: 30;
+  }
+
+  .mobile-bottom-nav {
+    align-items: center;
+    background: rgba(9, 9, 18, 0.96);
+    border-top: 1px solid var(--line);
+    bottom: 0;
+    display: grid;
+    gap: 4px;
+    grid-template-columns: repeat(5, 1fr);
+    left: 0;
+    min-height: 66px;
+    padding: 8px;
+    position: fixed;
+    right: 0;
+    z-index: 25;
+  }
+
+  .mobile-bottom-nav a,
+  .mobile-bottom-nav summary {
+    color: var(--muted);
+    font-size: 0.72rem;
+    text-align: center;
+  }
+
+  .mobile-bottom-nav details {
+    position: relative;
+  }
+
+  .mobile-bottom-nav details div {
+    bottom: 48px;
+    left: 50%;
+    min-width: 180px;
+    transform: translateX(-50%);
+  }
+
   .product-main {
     padding: 16px;
   }
@@ -1466,8 +1726,18 @@ dd {
   .form-grid,
   .match-row,
   .leaderboard-row,
-  .clan-card {
+  .clan-card,
+  .game-portal-grid,
+  .game-config-grid,
+  .challenge-card dl,
+  .agreement-panel dl,
+  .wager-panel dl,
+  .match-room-layout {
     grid-template-columns: 1fr;
+  }
+
+  .product-topbar nav {
+    display: none;
   }
 
   .page-hero {
@@ -1481,5 +1751,55 @@ dd {
 
   .hero-art {
     display: none;
+  }
+
+  .mobile-dashboard-actions {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .product-form,
+  .auth-card {
+    padding: 18px;
+  }
+
+  .form-step {
+    padding: 14px;
+  }
+
+  .match-room-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-bottom: 6px;
+  }
+
+  .match-room-tabs a {
+    background: rgba(124, 58, 237, 0.16);
+    border: 1px solid rgba(168, 85, 247, 0.28);
+    flex: 1 1 112px;
+    padding: 10px 12px;
+    text-align: center;
+  }
+
+  .market-category-row {
+    flex-wrap: wrap;
+    overflow: visible;
+  }
+
+  .market-category-row a {
+    flex: 1 1 130px;
+    text-align: center;
+  }
+
+  .clips-feed {
+    columns: 1;
+  }
+
+  .mobile-card-row {
+    align-items: start;
+    display: grid;
+    gap: 6px;
   }
 }

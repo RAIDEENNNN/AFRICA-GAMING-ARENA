@@ -44,6 +44,48 @@ export const adminConfig = {
   ],
 };
 
+export const games = [
+  {
+    name: "Call of Duty: Mobile",
+    slug: "codm",
+    short: "CODM",
+    art: "/images/games/codm/codm-hero.svg",
+    theme: "codm",
+    accent: "CODM yellow tactical accent",
+    stats: ["142 open challenges", "18 tournaments", "2,356 clans"],
+    weapons: ["Assault Rifle", "SMG", "Sniper", "Shotgun", "LMG", "Marksman Rifle", "Pistol", "Melee"],
+    maps: ["Nuketown", "Shipment", "Raid", "Rust", "Terminal", "Shoot House", "Firing Range", "Standoff", "Summit", "Crash"],
+    modes: ["Gunfight", "Search and Destroy", "Hardpoint", "Domination", "Team Deathmatch", "Free for All"],
+    vendor: "COD Points vendors",
+  },
+  {
+    name: "PUBG Mobile",
+    slug: "pubg-mobile",
+    short: "PUBG",
+    art: "/images/games/pubg/pubg-hero.svg",
+    theme: "pubg",
+    accent: "Battlefield, blue zone and esports accent",
+    stats: ["88 open rooms", "12 tournaments", "1,982 clans"],
+    weapons: ["Assault Rifle", "DMR", "Sniper", "SMG", "Shotgun", "Pistol", "Throwable"],
+    maps: ["Erangel", "Miramar", "Sanhok", "Livik", "Nusa", "Arena Warehouse"],
+    modes: ["Battle Royale", "1v1 Arena", "2v2 Arena", "4v4 Arena", "Team Deathmatch", "Custom Room"],
+    vendor: "UC vendors",
+  },
+  {
+    name: "Free Fire",
+    slug: "free-fire",
+    short: "Free Fire",
+    art: "/images/games/free-fire/free-fire-hero.svg",
+    theme: "free-fire",
+    accent: "Orange, red and electric-blue battle style",
+    stats: ["104 open challenges", "15 tournaments", "1,245 guilds"],
+    weapons: ["Assault Rifle", "SMG", "Sniper", "Shotgun", "Pistol", "Melee", "Any weapon"],
+    maps: ["Bermuda", "Purgatory", "Kalahari", "Alpine", "Nexterra"],
+    modes: ["Clash Squad", "Battle Royale", "Custom Room", "Guild vs Guild", "Ranked Challenge", "Friendly Challenge"],
+    vendor: "Diamond vendors",
+  },
+];
+
 export const clips = [
   { title: "Insane 1v4 Clutch", creator: "XCL Venom", game: "CODM", views: "1.2K", likes: "230" },
   { title: "Final Circle Rotation", creator: "GhostKing", game: "PUBG", views: "980", likes: "146" },
