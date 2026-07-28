@@ -1562,6 +1562,99 @@ dd {
   grid-template-columns: 300px 1fr;
 }
 
+.flow-form {
+  max-width: none;
+}
+
+.flow-grid,
+.deep-filter {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.review-panel {
+  background: rgba(124, 58, 237, 0.12);
+  border: 1px solid rgba(168, 85, 247, 0.28);
+  display: grid;
+  gap: 8px;
+  padding: 18px;
+}
+
+.live-challenge h3 {
+  font-size: clamp(1.25rem, 2vw, 1.85rem);
+}
+
+.flow-columns {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: minmax(280px, 0.95fr) minmax(280px, 1fr) minmax(260px, 0.8fr);
+}
+
+.approval-grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.presence {
+  color: var(--green);
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.message-list {
+  display: grid;
+  gap: 10px;
+  max-height: 420px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.message {
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid var(--line);
+  color: var(--text);
+  display: grid;
+  gap: 5px;
+  padding: 12px;
+  text-align: left;
+}
+
+.message.system {
+  background: rgba(250, 204, 21, 0.1);
+  border-color: rgba(250, 204, 21, 0.26);
+}
+
+.message span,
+.message small,
+.message em {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.message em {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-style: normal;
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip-row span {
+  background: rgba(124, 58, 237, 0.16);
+  border: 1px solid rgba(168, 85, 247, 0.28);
+  color: #d8b4fe;
+  font-size: 0.72rem;
+  padding: 8px 10px;
+  text-transform: uppercase;
+}
+
 .chat-window {
   min-height: 420px;
 }
@@ -1585,7 +1678,8 @@ dd {
   .card-grid.two,
   .card-grid.three,
   .card-grid.four,
-  .chat-layout {
+  .chat-layout,
+  .flow-columns {
     grid-template-columns: 1fr;
   }
 
@@ -1634,6 +1728,8 @@ dd {
 
   .stat-grid-wide,
   .filter-bar,
+  .flow-grid,
+  .deep-filter,
   .game-portal-grid,
   .game-config-grid,
   .match-room-layout {
@@ -1724,6 +1820,9 @@ dd {
   .stat-grid-wide,
   .filter-bar,
   .form-grid,
+  .flow-grid,
+  .deep-filter,
+  .approval-grid,
   .match-row,
   .leaderboard-row,
   .clan-card,

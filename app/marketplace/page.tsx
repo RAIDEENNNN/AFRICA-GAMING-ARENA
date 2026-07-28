@@ -1,3 +1,4 @@
+import { MarketplaceLive } from "../arena-client";
 import { AppShell, PageHero } from "../components";
 import { games } from "../data";
 
@@ -21,6 +22,7 @@ export default function MarketplacePage() {
           </article>
         ))}
       </section>
+      <MarketplaceLive />
     </AppShell>
   );
 }

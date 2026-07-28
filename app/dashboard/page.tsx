@@ -1,3 +1,4 @@
+import { DashboardLive } from "../arena-client";
 import { AppShell, ClanCard, ClipCard, MatchRow, PageHero, TournamentCard } from "../components";
 import { clans, clips, matches, tournaments } from "../data";
 
@@ -11,16 +12,7 @@ export default function DashboardPage() {
         primary={["Request match", "/matches/request"]}
         secondary={["Find clans", "/find-clans"]}
       />
-      <section className="card-grid four">
-        {[
-          ["Wallet", "Wagers disabled"],
-          ["Upcoming", "1 match"],
-          ["Negotiations", "2 active"],
-          ["Messages", "6 unread"],
-        ].map(([title, value]) => (
-          <article className="product-card metric-card" key={title}><span>{title}</span><strong>{value}</strong></article>
-        ))}
-      </section>
+      <DashboardLive />
       <section className="mobile-dashboard-actions">
         <a className="btn primary" href="/matches/request">Create Challenge</a>
         <a className="btn secondary" href="/matches">Find Match</a>
