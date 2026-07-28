@@ -1,7 +1,21 @@
 import { AppShell, PageHero } from "../components";
 import { adminConfig, games } from "../data";
 
-export default function AdminPage() {
+export default async function AdminPage({ searchParams }: { searchParams: Promise<{ role?: string }> }) {
+  const { role } = await searchParams;
+  if (role !== "admin") {
+    return (
+      <AppShell>
+        <PageHero
+          eyebrow="Protected"
+          title="Admin access requires an administrator session."
+          copy="This route is blocked for normal players. The next production step is replacing this development guard with role-based session middleware."
+          primary={["Back to dashboard", "/dashboard"]}
+        />
+      </AppShell>
+    );
+  }
+
   return (
     <AppShell>
       <PageHero

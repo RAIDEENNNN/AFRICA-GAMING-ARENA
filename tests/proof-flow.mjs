@@ -15,7 +15,11 @@ const browser = await chromium.launch({
 
 const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
 await page.goto("http://localhost:3002/", { waitUntil: "networkidle" });
-await page.evaluate(() => window.localStorage.removeItem("clan-arena-demo-state-v2"));
+await page.evaluate(() => fetch("/api/arena", {
+  method: "POST",
+  headers: { "content-type": "application/json" },
+  body: JSON.stringify({ action: "reset", actor: "Admin" }),
+}));
 
 async function shot(name) {
   await page.screenshot({ path: path.join(outDir, name), fullPage: true });

@@ -1,98 +1,64 @@
-# vinext-starter
+# Clan Arena
 
-A clean full-stack starter running on
-[vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
-Drizzle support.
+Clan Arena is a dark esports platform prototype for CODM, PUBG Mobile and Free Fire players. The current local build supports a playable challenge journey: create a CODM 1v1 wager challenge, accept it as another demo player, chat in the match room, approve terms, check in, submit results and update the leaderboard/demo wallet state.
 
-## Prerequisites
+## Status
+
+- UI/UX and responsive routing: working.
+- Playable local flow: working.
+- Backend boundary: `/api/arena` now owns challenge, room, chat, approval, check-in, result and demo wallet state for local development.
+- Production database: Drizzle schema exists, but Cloudflare D1 is not bound yet.
+- Real auth, payments, escrow, sockets and file storage: not production-ready.
+
+## Requirements
 
 - Node.js `>=22.13.0`
 
-## Quick Start
+## Setup
 
 ```bash
 npm install
+cp .env.example .env.local
 npm run dev
-npm run build
 ```
 
-This starter does not use `wrangler.jsonc`.
-
-## Included Shape
-
-- edit site code under `app/`
-- `.openai/hosting.json` declares optional Sites D1 and R2 bindings
-- `vite.config.ts` simulates declared bindings for local development
-- `db/schema.ts` starts intentionally empty
-- `examples/d1/` contains an optional D1 example surface
-- `drizzle.config.ts` supports local migration generation when needed
-
-## Workspace Auth Headers
-
-OpenAI workspace sites can read the current user's email from
-`oai-authenticated-user-email`.
-
-SIWC-authenticated workspace sites may also receive
-`oai-authenticated-user-full-name` when the user's SIWC profile has a non-empty
-`name` claim. The full-name value is percent-encoded UTF-8 and is accompanied by
-`oai-authenticated-user-full-name-encoding: percent-encoded-utf-8`.
-
-Treat the full name as optional and fall back to email when it is absent:
-
-```tsx
-import { headers } from "next/headers";
-
-export default async function Home() {
-  const requestHeaders = await headers();
-  const email = requestHeaders.get("oai-authenticated-user-email");
-  const encodedFullName = requestHeaders.get("oai-authenticated-user-full-name");
-  const fullName =
-    encodedFullName &&
-    requestHeaders.get("oai-authenticated-user-full-name-encoding") ===
-      "percent-encoded-utf-8"
-      ? decodeURIComponent(encodedFullName)
-      : null;
-
-  const displayName = fullName ?? email;
-  // ...
-}
-```
-
-## Optional Dispatch-Owned ChatGPT Sign-In
-
-Import the ready-to-use helpers from `app/chatgpt-auth.ts` when the site needs
-optional or required ChatGPT sign-in:
-
-- Use `getChatGPTUser()` for optional signed-in UI.
-- Use `requireChatGPTUser(returnTo)` for server-rendered pages that should send
-  anonymous visitors through Sign in with ChatGPT.
-- Use `chatGPTSignInPath(returnTo)` and `chatGPTSignOutPath(returnTo)` for
-  browser links or actions.
-- Pass a same-origin relative `returnTo` path for the destination after sign-in
-  or sign-out. The helper validates and safely encodes it.
-- Mark protected pages with `export const dynamic = "force-dynamic"` because
-  they depend on per-request identity headers.
-
-Dispatch owns `/signin-with-chatgpt`, `/signout-with-chatgpt`, `/callback`, the
-OAuth cookies, and identity header injection. Do not implement app routes for
-those reserved paths. Routes that do not import and call the helper remain
-anonymous-compatible.
-
-SIWC establishes identity only; it does not prove workspace membership. Use the
-Sites hosting platform's access policy controls for workspace-wide restrictions,
-or enforce explicit server-side membership or allowlist checks.
-
-Use SIWC for account pages, user-specific dashboards, saved records, and write
-actions tied to the current ChatGPT user. Leave public content anonymous.
+Open the local site at `http://localhost:3002/` when the dev server chooses that port.
 
 ## Useful Commands
 
-- `npm run dev`: start local development
-- `npm run build`: verify the vinext build output
-- `npm test`: build the starter and verify its rendered loading skeleton
-- `npm run db:generate`: generate Drizzle migrations after schema changes
+```bash
+npm test
+node tests/proof-flow.mjs
+node tests/responsive-check.mjs
+npm run db:generate
+```
 
-## Learn More
+## Database Direction
 
-- [vinext Documentation](https://github.com/cloudflare/vinext)
-- [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
+This project is standardized on Cloudflare D1 with Drizzle. The schema is in `db/schema.ts` and covers users, games, game options, clans, challenges, participants, match rooms, messages, agreements, approvals, check-ins, results, evidence, disputes, statistics, leaderboards, vendors, products, orders, wallet transactions and notifications.
+
+Local runtime state is currently an in-process server store behind `/api/arena`, not browser `localStorage`. This is a bridge for two-browser local testing until a D1 binding is configured in `.openai/hosting.json`.
+
+## Authentication Direction
+
+`app/chatgpt-auth.ts` includes Sign in with ChatGPT helpers. Production protected routes should use signed-in identity plus role checks for:
+
+- Player
+- Clan leader
+- Clan officer
+- Vendor
+- Tournament organiser
+- Moderator
+- Administrator
+
+The `/admin` page currently has a development guard and only renders admin content with `?role=admin`. Replace this with real session roles before deployment.
+
+## Wager Safety
+
+Real-money processing is disabled. Demo wallet values are labelled as demo data and server-calculated. Browser-submitted payout math is not trusted.
+
+Before enabling real wagers, add age verification, jurisdiction checks, KYC, payment provider approval, escrow, dispute operations, audit logging and legal review.
+
+## Cleanup Notes
+
+Duplicate root files such as `README 2.md` and `package 2.json` were archived to `.backup/duplicate-root-files/` and ignored from git.

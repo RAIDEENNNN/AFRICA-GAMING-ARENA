@@ -44,13 +44,23 @@ test("server-renders the Clan Arena homepage", async () => {
 });
 
 test("keeps starter preview code removed", async () => {
-  const [page, layout, packageJson] = await Promise.all([
+  const [page, layout, packageJson, arenaClient, arenaStore, schema, apiRoute] = await Promise.all([
     readFile(new URL("../app/components.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../package.json", import.meta.url), "utf8"),
+    readFile(new URL("../app/arena-client.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/arena-store.ts", import.meta.url), "utf8"),
+    readFile(new URL("../db/schema.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/api/arena/route.ts", import.meta.url), "utf8"),
   ]);
 
   assert.match(page, /product-shell/);
   assert.match(layout, /Clan Arena \| Competitive Clan Command Centre/);
   assert.doesNotMatch(page + layout + packageJson, /codex-preview|SkeletonPreview|react-loading-skeleton/);
+  assert.doesNotMatch(arenaClient, /localStorage|sessionStorage/);
+  assert.match(apiRoute, /acceptChallenge/);
+  assert.match(arenaStore, /demo_payout/);
+  for (const table of ["users", "challenges", "matchRooms", "messages", "agreementVersions", "walletTransactions", "notifications"]) {
+    assert.match(schema, new RegExp(`export const ${table}`));
+  }
 });
