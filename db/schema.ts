@@ -24,6 +24,18 @@ export const games = sqliteTable("games", {
   ...timestamps,
 });
 
+export const userProfiles = sqliteTable("user_profiles", {
+  id: text("id").primaryKey(),
+  userId: text("user_id").notNull().references(() => users.id),
+  inGameId: text("in_game_id"),
+  favoriteGameId: text("favorite_game_id").references(() => games.id),
+  favoriteWeapon: text("favorite_weapon"),
+  favoriteMap: text("favorite_map"),
+  lookingFor: text("looking_for"),
+  profileImageUrl: text("profile_image_url"),
+  ...timestamps,
+});
+
 export const gameOptions = sqliteTable("game_options", {
   id: text("id").primaryKey(),
   gameId: text("game_id").notNull().references(() => games.id),
@@ -108,6 +120,20 @@ export const approvals = sqliteTable("approvals", {
   userId: text("user_id").notNull().references(() => users.id),
   approvalType: text("approval_type").notNull(),
   approvedAt: text("approved_at"),
+  ...timestamps,
+});
+
+export const wagerConfirmations = sqliteTable("wager_confirmations", {
+  id: text("id").primaryKey(),
+  agreementVersionId: text("agreement_version_id").notNull().references(() => agreementVersions.id),
+  userId: text("user_id").notNull().references(() => users.id),
+  stakePerSide: real("stake_per_side").notNull(),
+  totalPrizePool: real("total_prize_pool").notNull(),
+  feePercent: real("fee_percent").notNull(),
+  feeAmount: real("fee_amount").notNull(),
+  winnerPayout: real("winner_payout").notNull(),
+  currency: text("currency").notNull(),
+  confirmedAt: text("confirmed_at"),
   ...timestamps,
 });
 
@@ -225,5 +251,22 @@ export const notifications = sqliteTable("notifications", {
   userId: text("user_id").notNull().references(() => users.id),
   body: text("body").notNull(),
   readAt: text("read_at"),
+  ...timestamps,
+});
+
+export const auditLogs = sqliteTable("audit_logs", {
+  id: text("id").primaryKey(),
+  actorUserId: text("actor_user_id").references(() => users.id),
+  action: text("action").notNull(),
+  entityType: text("entity_type").notNull(),
+  entityId: text("entity_id").notNull(),
+  metadataJson: text("metadata_json"),
+  ipAddress: text("ip_address"),
+  ...timestamps,
+});
+
+export const arenaStateSnapshots = sqliteTable("arena_state_snapshots", {
+  id: text("id").primaryKey(),
+  stateJson: text("state_json").notNull(),
   ...timestamps,
 });

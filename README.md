@@ -6,8 +6,8 @@ Clan Arena is a dark esports platform prototype for CODM, PUBG Mobile and Free F
 
 - UI/UX and responsive routing: working.
 - Playable local flow: working.
-- Backend boundary: `/api/arena` now owns challenge, room, chat, approval, check-in, result and demo wallet state for local development.
-- Production database: Drizzle schema exists, but Cloudflare D1 is not bound yet.
+- Backend boundary: `/api/arena` now owns challenge, room, chat, approval, check-in, result and demo wallet state.
+- Persistence: local development uses the Cloudflare D1 `DB` binding declared in `.openai/hosting.json`.
 - Real auth, payments, escrow, sockets and file storage: not production-ready.
 
 ## Requirements
@@ -37,7 +37,7 @@ npm run db:generate
 
 This project is standardized on Cloudflare D1 with Drizzle. The schema is in `db/schema.ts` and covers users, games, game options, clans, challenges, participants, match rooms, messages, agreements, approvals, check-ins, results, evidence, disputes, statistics, leaderboards, vendors, products, orders, wallet transactions and notifications.
 
-Local runtime state is currently an in-process server store behind `/api/arena`, not browser `localStorage`. This is a bridge for two-browser local testing until a D1 binding is configured in `.openai/hosting.json`.
+The current playable flow persists its aggregate state in the D1-backed `arena_state_snapshots` table while the normalized tables are migrated and ready for the next repository split. This is a transitional implementation, not the final production data model.
 
 ## Authentication Direction
 
@@ -58,6 +58,35 @@ The `/admin` page currently has a development guard and only renders admin conte
 Real-money processing is disabled. Demo wallet values are labelled as demo data and server-calculated. Browser-submitted payout math is not trusted.
 
 Before enabling real wagers, add age verification, jurisdiction checks, KYC, payment provider approval, escrow, dispute operations, audit logging and legal review.
+
+## D1 Commands
+
+Migration files:
+
+- `drizzle/0000_fair_la_nuit.sql`
+- `drizzle/0001_complex_iron_patriot.sql`
+- `drizzle/0002_natural_energizer.sql`
+
+Useful local commands:
+
+```bash
+npm run db:generate
+npm run db:seed
+npm run db:reset
+npm run db:inspect
+```
+
+Cloudflare D1 commands once real database IDs exist:
+
+```bash
+wrangler d1 create clan-arena-local
+wrangler d1 create clan-arena-staging
+wrangler d1 create clan-arena-production
+wrangler d1 execute clan-arena-local --local --file drizzle/0000_fair_la_nuit.sql
+wrangler d1 execute clan-arena-local --local --file drizzle/0001_complex_iron_patriot.sql
+wrangler d1 execute clan-arena-local --local --file drizzle/0002_natural_energizer.sql
+wrangler d1 execute clan-arena-local --local --command "select id, updated_at from arena_state_snapshots"
+```
 
 ## Cleanup Notes
 

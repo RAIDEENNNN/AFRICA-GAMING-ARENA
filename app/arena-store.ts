@@ -3,7 +3,7 @@ export type MatchKind = "Player vs player" | "Team vs team" | "Clan vs clan";
 export type PrizeType = "Free" | "Ranked" | "Wager";
 export type ChallengeStatus = "Open" | "Negotiating" | "Accepted" | "Complete";
 export type RoomStatus = "Terms" | "Ready" | "Result review" | "Verified" | "Dispute";
-export type Actor = "PlayerOne" | "NovaAce" | "Admin";
+export type Actor = "PlayerOne" | "NovaAce" | "RivalUser" | "Admin";
 
 export type Challenge = {
   id: string;
@@ -170,32 +170,21 @@ export const initialArenaState: ArenaState = {
   notifications: {
     PlayerOne: ["Demo balance enabled. No real money."],
     NovaAce: ["Demo balance enabled. No real money."],
+    RivalUser: ["Demo balance enabled. No real money."],
     Admin: ["Admin audit log enabled."],
   },
   wallets: {
     PlayerOne: { balance: 100, locked: 0 },
     NovaAce: { balance: 100, locked: 0 },
+    RivalUser: { balance: 100, locked: 0 },
     Admin: { balance: 0, locked: 0 },
   },
   transactions: [],
   auditLog: ["Seeded local server demo state."],
 };
 
-const globalStore = globalThis as typeof globalThis & { __arenaState?: ArenaState };
-
-export function getArenaState() {
-  if (!globalStore.__arenaState) globalStore.__arenaState = structuredClone(initialArenaState);
-  return globalStore.__arenaState;
-}
-
-export function resetArenaState() {
-  globalStore.__arenaState = structuredClone(initialArenaState);
-  return globalStore.__arenaState;
-}
-
-export function createChallenge(input: Partial<Challenge>, actor: Actor) {
-  if (actor !== "PlayerOne" && actor !== "NovaAce") throw new Error("Only players can create challenges.");
-  const state = getArenaState();
+export function createChallengeInState(state: ArenaState, input: Partial<Challenge>, actor: Actor) {
+  if (actor !== "PlayerOne" && actor !== "NovaAce" && actor !== "RivalUser") throw new Error("Only players can create challenges.");
   const challenge = makeChallenge({ ...input, creator: actor, id: `ch-${Date.now()}` });
   state.challenges.unshift(challenge);
   state.notifications[actor].unshift(`${challenge.teamSize} ${challenge.game} challenge published.`);
@@ -203,8 +192,7 @@ export function createChallenge(input: Partial<Challenge>, actor: Actor) {
   return challenge;
 }
 
-export function acceptChallenge(id: string, actor: Actor) {
-  const state = getArenaState();
+export function acceptChallengeInState(state: ArenaState, id: string, actor: Actor) {
   const challenge = state.challenges.find((item) => item.id === id);
   if (!challenge) throw new Error("Challenge not found.");
   if (challenge.creator === actor) throw new Error("Creator cannot accept their own challenge.");
@@ -235,8 +223,7 @@ export function acceptChallenge(id: string, actor: Actor) {
   return room;
 }
 
-export function counterOffer(id: string, actor: Actor, terms: Partial<Challenge>) {
-  const state = getArenaState();
+export function counterOfferInState(state: ArenaState, id: string, actor: Actor, terms: Partial<Challenge>) {
   const challenge = state.challenges.find((item) => item.id === id);
   if (!challenge) throw new Error("Challenge not found.");
   if (challenge.creator === actor && !challenge.opponent) throw new Error("No opponent to negotiate with yet.");
@@ -250,15 +237,15 @@ export function counterOffer(id: string, actor: Actor, terms: Partial<Challenge>
   return challenge;
 }
 
-export function sendRoomMessage(roomId: string, actor: Actor, body: string, attachment?: string) {
-  const { room } = requireRoom(roomId, actor);
+export function sendRoomMessageInState(state: ArenaState, roomId: string, actor: Actor, body: string, attachment?: string) {
+  const { room } = requireRoom(state, roomId, actor);
   const message: ChatMessage = { id: `msg-${Date.now()}-${room.messages.length}`, author: actor, body, attachment, at: new Date().toLocaleTimeString(), read: false };
   room.messages.push(message);
   return message;
 }
 
-export function approveTerms(roomId: string, actor: Actor, wager = false) {
-  const { room, challenge, side } = requireRoom(roomId, actor);
+export function approveTermsInState(state: ArenaState, roomId: string, actor: Actor, wager = false) {
+  const { room, challenge, side } = requireRoom(state, roomId, actor);
   if (room.status === "Verified") throw new Error("Verified match cannot be changed.");
   if (wager) challenge.approvals[side === "creator" ? "creatorWager" : "opponentWager"] = true;
   else challenge.approvals[side] = true;
@@ -273,16 +260,16 @@ export function approveTerms(roomId: string, actor: Actor, wager = false) {
   return { room, challenge };
 }
 
-export function checkIn(roomId: string, actor: Actor) {
-  const { room, challenge, side } = requireRoom(roomId, actor);
+export function checkInInState(state: ArenaState, roomId: string, actor: Actor) {
+  const { room, challenge, side } = requireRoom(state, roomId, actor);
+  if (room.status !== "Ready") throw new Error("Terms and wager must be approved before check-in.");
   challenge.checkIns[side] = true;
   room.messages.push(systemMessage(`${actor} checked in.`));
   return { room, challenge };
 }
 
-export function submitResult(roomId: string, actor: Actor, result: Omit<ResultSubmission, "submittedBy">) {
-  const state = getArenaState();
-  const { room, challenge, side } = requireRoom(roomId, actor);
+export function submitResultInState(state: ArenaState, roomId: string, actor: Actor, result: Omit<ResultSubmission, "submittedBy">) {
+  const { room, challenge, side } = requireRoom(state, roomId, actor);
   const payload = { ...result, submittedBy: actor };
   if (side === "creator") room.resultA = payload;
   else room.resultB = payload;
@@ -313,8 +300,7 @@ export function submitResult(roomId: string, actor: Actor, result: Omit<ResultSu
   return { room, challenge };
 }
 
-function requireRoom(roomId: string, actor: Actor) {
-  const state = getArenaState();
+function requireRoom(state: ArenaState, roomId: string, actor: Actor) {
   const room = state.rooms.find((item) => item.id === roomId);
   if (!room) throw new Error("Room not found.");
   const challenge = state.challenges.find((item) => item.id === room.challengeId);
