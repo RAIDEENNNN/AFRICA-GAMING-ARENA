@@ -57,7 +57,6 @@ const portals = [
     href: "/games/codm",
     image: "/images/aga/portals/codm-portal",
     modes: ["1v1", "2v2", "3v3", "5v5", "Clan War"],
-    players: "2,431",
     tone: "codm",
     extra: ["CMA Tournaments", "/tournaments/cma"],
   },
@@ -66,7 +65,6 @@ const portals = [
     href: "/games/pubg-mobile",
     image: "/images/aga/portals/pubg-mobile-portal",
     modes: ["Solo", "Duo", "Squad", "TDM", "Arena"],
-    players: "3,672",
     tone: "pubg",
   },
   {
@@ -74,56 +72,28 @@ const portals = [
     href: "/games/free-fire",
     image: "/images/aga/portals/free-fire-portal",
     modes: ["Solo", "Duo", "Squad", "Clash Squad"],
-    players: "4,298",
     tone: "freefire",
   },
 ];
 
-const liveMatches = [
-  ["Clan War", "5v5", "Night Hunters", "Royal Kings", "¢5,000", "13/20", "/matches/ca-1024"],
-  ["Ranked 2v2", "2v2", "Alpha Force", "Omega Squad", "¢2,000", "7/16", "/matches"],
-  ["Battle Royale", "Squad", "Survivors", "Warlords", "¢3,000", "9/20", "/matches"],
-  ["Clash Squad", "4v4", "Death Dealers", "Last Hope", "¢1,500", "6/16", "/matches"],
-];
-
-const topPlayers = [
-  ["FearlessYT", "4,982 RP", "/profile"],
-  ["xGodzilla", "4,756 RP", "/profile"],
-  ["NinjaX", "4,532 RP", "/profile"],
-];
-
-const featuredTournaments = [
-  ["CMA Daily MP Cup", "CODM", "Registration open", "Demo reward pool", "/tournaments/cma/register"],
-  ["PUBG Mobile Survival Cup", "PUBG", "12 squads registered", "Demo ranking points", "/tournaments"],
-  ["Free Fire Clash Night", "Free Fire", "Opens tonight", "Demo creator spotlight", "/tournaments"],
-];
-
-const topClans = [
-  ["Xclusive", "CODM", "Europe", "12,460 RP", "78%", "/clans/xclusive"],
-  ["Immortals", "PUBG", "MENA", "11,230 RP", "75%", "/find-clans"],
-  ["7DS Esports", "CODM", "Global", "10,120 RP", "72%", "/find-clans"],
-];
-
-const clips = [
-  ["1v4 Search clutch", "CODM", "NoFear", "DR-H", "1.2K views", "230 likes", "/clips"],
-  ["Final circle rotate", "PUBG", "GhostKing", "M416", "980 views", "146 likes", "/clips"],
-  ["Clash squad ace", "Free Fire", "RogueNinja", "MP40", "760 views", "119 likes", "/clips"],
-];
-
-const recentWinners = [
-  ["CMA MP Night Cup", "Xclusive", "Demo reward", "CODM", "Jul 28", "/tournaments/cma/weekly-reports"],
-  ["PUBG Survival Cup", "Immortals", "Demo reward", "PUBG", "Jul 27", "/tournaments"],
-  ["Free Fire Arena", "Unstoppable", "Demo reward", "Free Fire", "Jul 26", "/tournaments"],
+const homepageStats = [
+  ["0", "Active players"],
+  ["0", "Live matches"],
+  ["0", "Open challenges"],
+  ["0", "Registered clans"],
+  ["0", "Upcoming tournaments"],
+  ["$0", "Prize pool awarded"],
 ];
 
 export function AGAHome() {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const [guest, setGuest] = useState(true);
+  const [readyState, setReadyState] = useState<"loading" | "ready" | "error">("loading");
   const slide = slides[active];
   const next = () => setActive((index) => (index + 1) % slides.length);
   const prev = () => setActive((index) => (index + slides.length - 1) % slides.length);
-  const stats = useMemo(() => [["25,873+", "Demo active players"], ["1,247+", "Demo live matches"], ["3,458+", "Demo tournaments"], ["¢78M+", "Demo rewards pool"]], []);
+  const stats = useMemo(() => homepageStats, []);
 
   useEffect(() => {
     if (paused) return;
@@ -134,8 +104,21 @@ export function AGAHome() {
   }, [paused]);
 
   useEffect(() => {
-    setGuest(new URLSearchParams(window.location.search).get("player") !== "1");
+    const params = new URLSearchParams(window.location.search);
+    setGuest(params.get("player") !== "1");
+    const timeout = window.setTimeout(() => {
+      setReadyState(params.get("connection") === "error" ? "error" : "ready");
+    }, 250);
+    const fallback = window.setTimeout(() => setReadyState((state) => state === "loading" ? "error" : state), 4000);
+    return () => {
+      window.clearTimeout(timeout);
+      window.clearTimeout(fallback);
+    };
   }, []);
+
+  if (readyState !== "ready") {
+    return <LaunchScreen state={readyState} />;
+  }
 
   return (
     <main className="aga-home">
@@ -170,7 +153,7 @@ export function AGAHome() {
       </header>
 
       <aside className="aga-sidebar" aria-label="AGA sidebar">
-        {sideNav.map(([label, href, icon]) => <Link className={label === "Home" ? "active" : ""} href={href} key={label}><span>{icon}</span>{label}{label === "Messages" ? <b>8</b> : null}</Link>)}
+        {sideNav.map(([label, href, icon]) => <Link className={label === "Home" ? "active" : ""} href={href} key={label}><span>{icon}</span>{label}</Link>)}
       </aside>
 
       <section className={`aga-hero aga-${slide.tone}`} onPointerEnter={() => setPaused(true)} onPointerLeave={() => setPaused(false)} onPointerDown={() => setPaused(true)}>
@@ -205,7 +188,7 @@ export function AGAHome() {
             <div>
               <h2>{portal.name}</h2>
               <nav>{portal.modes.map((mode) => <span key={mode}>{mode}</span>)}</nav>
-              <strong>{portal.players}</strong><small>Players online</small>
+              <strong>0</strong><small>Players online</small>
               <Link className="aga-btn primary" href={portal.href}>Enter Arena</Link>
               {portal.extra ? <Link className="aga-link" href={portal.extra[1]}>{portal.extra[0]}</Link> : null}
             </div>
@@ -218,42 +201,33 @@ export function AGAHome() {
         <div className="aga-cma-copy">
           <span>CMA</span>
           <p>Official CODM Tournament Partner</p>
-          <h2>Daily MP and BR cups, powered by Africa Gaming Arena.</h2>
+          <h2>CMA tournament registration will appear here when events open.</h2>
           <div className="aga-cma-actions">
             <Link className="aga-btn primary" href="/tournaments/cma">View CMA Tournaments</Link>
             <Link className="aga-btn dark" href="/tournaments/cma/register">Register Now</Link>
           </div>
         </div>
         <div className="aga-cma-cards">
-          <article><small>Next MP tournament</small><h3>CMA Daily MP Cup</h3><p><b>02</b> hrs <b>34</b> mins <b>15</b> secs</p><em>Registration open · 48/64 teams · Demo rewards</em></article>
-          <article><small>Next BR tournament</small><h3>CMA Daily BR Cup</h3><p><b>05</b> hrs <b>12</b> mins <b>40</b> secs</p><em>Registration open · 72/100 players · Demo rewards</em></article>
+          <article><small>Next MP tournament</small><h3>No tournament open</h3><p><b>0</b> registered teams</p><em>CMA registration will open after organiser setup.</em></article>
+          <article><small>Next BR tournament</small><h3>No tournament open</h3><p><b>0</b> registered players</p><em>Check the schedule or create an AGA profile to get notified.</em></article>
         </div>
       </section>
 
       <section className="aga-content-rail">
-        <FeatureList title="Featured Tournaments" items={featuredTournaments} />
-        <FeatureList title="Top Clans" items={topClans} />
-        <FeatureList title="Trending Clips" items={clips} />
-        <FeatureList title="Recent Winners" items={recentWinners} />
+        <EmptyFeature title="Featured Tournaments" copy="No tournaments are currently open." href="/tournaments/cma" action="View CMA hub" />
+        <EmptyFeature title="Top Clans" copy="No clans have entered the rankings yet." href="/clans/create" action="Create clan" />
+        <EmptyFeature title="Trending Clips" copy="No clips have been uploaded yet." href="/clips/upload" action="Upload clip" />
+        <EmptyFeature title="Recent Winners" copy="No tournament winners yet." href="/register" action="Join AGA" />
       </section>
 
       <section className="aga-bottom-grid">
         <div className="aga-live">
           <header><h2>Live Now</h2><nav><Link href="/tournaments/cma">CMA Tournaments</Link><Link href="/matches">View All</Link></nav></header>
-          <div className="aga-live-row">
-            {liveMatches.map(([type, format, teamA, teamB, prize, teams, href], index) => (
-              <Link className="aga-live-card" href={href} key={`${type}-${teamA}`}>
-                <span>● Live</span><em>{type}<small>{format}</small></em>
-                <div><b>{teamA}</b><i>vs</i><b>{teamB}</b></div>
-                <footer><strong>{prize}</strong><small>{teams} Teams</small></footer>
-                <u className={`badge-${index + 1}`} />
-              </Link>
-            ))}
-          </div>
+          <EmptyState title="No live matches yet" copy="The arena is waiting for its first competitors. Create the first challenge and it will appear here." href="/matches/request" action="Create Match" />
         </div>
         <aside className="aga-top-players">
           <header><h2>Top Players</h2><Link href="/leaderboard">View All</Link></header>
-          {topPlayers.map(([name, points, href], index) => <Link href={href} key={name}><span>{index + 1}</span><picture><source srcSet="/images/aga/profile/player-avatar.avif" type="image/avif" /><img src="/images/aga/profile/player-avatar.webp" alt="" width={36} height={36} /></picture><b>{name}</b><em>{points}</em></Link>)}
+          <EmptyState title="Be the first player featured" copy="Verified rankings will appear after real matches are completed." href="/matches/request" action="Start ranking" compact />
         </aside>
       </section>
 
@@ -266,19 +240,13 @@ export function AGAHome() {
 
 function PlayerPanel() {
   return (
-    <>
-      <section className="aga-profile-head">
-        <picture><source srcSet="/images/aga/profile/player-avatar.avif" type="image/avif" /><img src="/images/aga/profile/player-avatar.webp" alt="PlayerOne avatar" width={74} height={74} /></picture>
-        <div><h2>PlayerOne <span>◆</span></h2><p>Level 42 · Xclusive Clan</p><meter min="0" max="100" value="68">68%</meter></div>
-      </section>
-      <section className="aga-rank-grid">
-        <img src="/images/aga/profile/rank-diamond.svg" alt="Diamond rank emblem" width={84} height={84} />
-        <div><small>Current Rank</small><h3>Diamond IV</h3><p>3,248 RP</p></div>
-        <div><small>Win Rate</small><strong>68.4%</strong><small>K/D Ratio</small><strong>2.45</strong></div>
-      </section>
-      <section className="aga-wallet"><small>Demo balance — no real money</small><strong>¢24,850.00</strong><Link href="/wallet">+</Link></section>
-      <section className="aga-next-match"><small>Next Match</small><h3>Ranked 2v2 Battle</h3><p>Today, 08:00 PM</p><div><b>02</b><b>34</b><b>45</b></div><Link className="aga-btn purple" href="/matches/ca-1024">View Match</Link></section>
-    </>
+    <section className="aga-join-panel">
+      <h2>Profile data unavailable</h2>
+      <p>Real Supabase authentication is not connected yet. Once a real session exists, this panel will show the signed-in player’s profile, clan, matches, notifications and demo wallet ledger.</p>
+      <small>Demo balance — no real money</small>
+      <Link className="aga-btn primary" href="/login">Log In</Link>
+      <Link className="aga-btn dark" href="/register">Create Account</Link>
+    </section>
   );
 }
 
@@ -290,6 +258,18 @@ function JoinPanel() {
       <Link className="aga-btn primary" href="/register">Create Account</Link>
       <Link className="aga-btn dark" href="/login">Login</Link>
     </section>
+  );
+}
+
+function LaunchScreen({ state }: { state: "loading" | "error" }) {
+  return (
+    <main className="aga-launch-screen" aria-live="polite">
+      <img src="/brand/aga-logo.svg" alt="Africa Gaming Arena" width={220} height={64} />
+      <div className="aga-launch-ring" aria-hidden="true" />
+      <h1>{state === "loading" ? "Entering the Arena" : "Connection error"}</h1>
+      <p>{state === "loading" ? "Checking session, player profile and platform data." : "The arena could not finish initialization. Retry when the connection is ready."}</p>
+      {state === "error" ? <button type="button" onClick={() => window.location.assign("/")}>Retry</button> : null}
+    </main>
   );
 }
 
@@ -306,17 +286,21 @@ function ResponsiveArt({ base, alt, className, priority = false }: { base: strin
   );
 }
 
-function FeatureList({ title, items }: { title: string; items: string[][] }) {
-  const href = title === "Top Clans" ? "/find-clans" : title === "Trending Clips" ? "/clips" : "/tournaments";
+function EmptyFeature({ title, copy, href, action }: { title: string; copy: string; href: string; action: string }) {
   return (
     <section className="aga-feature-list">
-      <header><h2>{title}</h2><Link href={href}>View All</Link></header>
-      {items.map((item) => (
-        <Link href={item[item.length - 1]} key={`${title}-${item[0]}`}>
-          <b>{item[0]}</b>
-          <span>{item.slice(1, -1).join(" · ")}</span>
-        </Link>
-      ))}
+      <header><h2>{title}</h2><Link href={href}>{action}</Link></header>
+      <div className="aga-empty-card"><b>{copy}</b><span>Real records from the production backend will appear here.</span></div>
     </section>
+  );
+}
+
+function EmptyState({ title, copy, href, action, compact = false }: { title: string; copy: string; href: string; action: string; compact?: boolean }) {
+  return (
+    <article className={compact ? "aga-empty-state compact" : "aga-empty-state"}>
+      <h3>{title}</h3>
+      <p>{copy}</p>
+      <Link className="aga-btn primary" href={href}>{action}</Link>
+    </article>
   );
 }

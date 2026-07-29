@@ -3155,6 +3155,64 @@ body {
   position: fixed;
 }
 
+.aga-launch-screen {
+  align-content: center;
+  background:
+    radial-gradient(circle at 50% 20%, rgba(255, 196, 0, 0.16), transparent 18rem),
+    radial-gradient(circle at 70% 70%, rgba(37, 217, 255, 0.12), transparent 22rem),
+    linear-gradient(135deg, #02050c, #050816 52%, #03040a);
+  color: white;
+  display: grid;
+  gap: 18px;
+  justify-items: center;
+  min-height: 100vh;
+  padding: 24px;
+  text-align: center;
+}
+
+.aga-launch-ring {
+  animation: aga-spin 950ms linear infinite;
+  border: 2px solid rgba(255, 255, 255, 0.14);
+  border-radius: 50%;
+  border-top-color: #ffc400;
+  height: 58px;
+  width: 58px;
+}
+
+.aga-launch-screen h1 {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: clamp(2.4rem, 7vw, 5.4rem);
+  line-height: 0.9;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.aga-launch-screen p {
+  color: #b7c1d1;
+  margin: 0;
+  max-width: 420px;
+}
+
+.aga-launch-screen button {
+  background: #ffc400;
+  border: 0;
+  color: #05070c;
+  font-weight: 950;
+  min-height: 44px;
+  padding: 0 26px;
+  text-transform: uppercase;
+}
+
+@keyframes aga-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aga-launch-ring {
+    animation: none;
+  }
+}
+
 .aga-top-nav {
   align-items: center;
   background: rgba(1, 4, 10, 0.92);
@@ -3820,12 +3878,14 @@ meter {
 }
 
 .aga-feature-list header a,
-.aga-feature-list > a span {
+.aga-feature-list > a span,
+.aga-empty-card span {
   color: var(--aga-muted);
   font-size: 0.76rem;
 }
 
-.aga-feature-list > a {
+.aga-feature-list > a,
+.aga-empty-card {
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   display: grid;
   gap: 4px;
@@ -3869,7 +3929,8 @@ meter {
 }
 
 .aga-live-card,
-.aga-top-players {
+.aga-top-players,
+.aga-empty-state {
   background: var(--aga-panel);
   border: 1px solid var(--aga-border);
 }
@@ -3881,6 +3942,28 @@ meter {
   overflow: hidden;
   padding: 16px;
   position: relative;
+}
+
+.aga-empty-state {
+  align-content: center;
+  display: grid;
+  gap: 12px;
+  min-height: 144px;
+  padding: 18px;
+}
+
+.aga-empty-state.compact {
+  min-height: 168px;
+}
+
+.aga-empty-state h3 {
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.aga-empty-state p {
+  color: var(--aga-muted);
+  margin: 0;
 }
 
 .aga-live-card > span {

@@ -9,16 +9,19 @@ test("keeps the AGA homepage focused on the approved blueprint", async () => {
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
   ]);
 
-  assert.match(layout, /Clan Arena \| Competitive Clan Command Centre/);
+  assert.match(layout, /Africa Gaming Arena \| Compete\. Dominate\. Become Legendary\./);
   assert.match(home, /AGAHome/);
   assert.match(agaHome, /Africa Gaming Arena/i);
   assert.match(agaHome, /PLAY\. COMPETE\./i);
   assert.match(agaHome, /Demo balance — no real money/i);
+  assert.match(agaHome, /No live matches yet/i);
+  assert.match(agaHome, /Prize pool awarded/i);
   assert.match(agaHome, /CMA Tournaments/i);
   assert.match(agaHome, /Call of Duty Mobile/i);
   assert.match(agaHome, /PUBG Mobile/i);
   assert.match(agaHome, /Free Fire/i);
   assert.match(agaHome, /Live Now/i);
+  assert.doesNotMatch(agaHome, /25,873|1,247|3,458|78M|FearlessYT|24,850/);
   assert.doesNotMatch(home + agaHome + layout, /Full-stack roadmap|Mobile and backend planning|codex-preview|SkeletonPreview|react-loading-skeleton/i);
 });
 
@@ -34,7 +37,7 @@ test("keeps starter preview code removed", async () => {
   ]);
 
   assert.match(page, /product-shell/);
-  assert.match(layout, /Clan Arena \| Competitive Clan Command Centre/);
+  assert.match(layout, /Africa Gaming Arena \| Compete\. Dominate\. Become Legendary\./);
   assert.doesNotMatch(page + layout + packageJson, /codex-preview|SkeletonPreview|react-loading-skeleton/);
   assert.doesNotMatch(arenaClient, /localStorage|sessionStorage/);
   assert.match(apiRoute, /acceptChallenge/);

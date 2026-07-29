@@ -5,16 +5,16 @@ export default function CMARegisterPage() {
   return (
     <main className="cma-page cma-subpage">
       <CMANav />
-      <section className="cma-subhero"><span>CMA Registration</span><h1>Register with your AGA profile.</h1><p>No separate CMA account. Submit your CODM UID, roster, rules approval and wait for organiser review.</p></section>
+      <section className="cma-subhero"><span>CMA Registration</span><h1>Join the CMA waitlist.</h1><p>No CMA tournament is open yet. This form is a non-payment waitlist preview until Supabase authentication and registration persistence are connected.</p></section>
       <form className="cma-register-form">
         <label>Registration type<select><option>Solo</option><option>Team</option><option>Clan</option></select></label>
-        <label>Tournament<select><option>CMA Daily MP Cup</option><option>CMA Daily BR Cup</option></select></label>
+        <label>Tournament<select><option>No open CMA tournament</option></select></label>
         <label>CODM player UID<input placeholder="Enter CODM UID" /></label>
-        <label>Roster or clan name<input placeholder="Team Venom" /></label>
+        <label>Roster or clan name<input placeholder="Your team or clan name" /></label>
         <label className="cma-check"><input type="checkbox" /> I accept CMA tournament rules and evidence requirements.</label>
-        <button type="button">Submit Registration</button>
+        <button type="button">Join Waitlist</button>
       </form>
-      <section className="cma-state-row">{["Registration submitted", "Under review", "Approved", "Rejected", "Waitlisted", "Checked in", "Eliminated", "Qualified", "Winner"].map((state) => <span key={state}>{state}</span>)}</section>
+      <section className="cma-state-row">{["Draft", "Submitted", "Under review", "Approved", "Rejected", "Waitlisted", "Checked in", "Qualified", "Eliminated", "Winner", "Disqualified"].map((state) => <span key={state}>{state}</span>)}</section>
       <Link className="cma-secondary" href="/dashboard">View Dashboard</Link>
     </main>
   );

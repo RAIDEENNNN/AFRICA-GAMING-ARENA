@@ -1,21 +1,5 @@
 import Link from "next/link";
 
-const awards = [
-  ["Best Player", "MVP of the Week", "CMAXGhostYT", "Kills", "248", "Matches", "12"],
-  ["Best Team", "Team of the Week", "Revenant Esports", "Points", "1,248", "Matches", "15"],
-  ["Longest Survival", "BR Survival King", "LoneWolfXD", "Survival", "32:47", "Matches", "10"],
-  ["Most Skilled", "Skill King", "SkillzMaster", "Accuracy", "78%", "K/D", "6.35"],
-  ["Most Improved", "Climb of the Week", "RogueNinja", "Improvement", "+125", "Matches", "8"],
-];
-
-const liveTournaments = [
-  ["CMA MP Night Cup", "Multiplayer", "5v5", "Registration open", "/tournaments/cma/register"],
-  ["CMA BR Solo Cup", "Battle Royale", "Solo", "Under review", "/tournaments/cma/register"],
-  ["CMA BR Squad Cup", "Battle Royale", "Squad", "Opens tonight", "/tournaments/cma/schedule"],
-];
-
-const winners = ["Team Venom", "SilentKiller", "Revenant Esports", "OverPower"];
-
 export default function CMATournamentsPage() {
   return (
     <main className="cma-page">
@@ -36,19 +20,18 @@ export default function CMATournamentsPage() {
         </div>
         <aside>
           <h2>Upcoming Tournaments</h2>
-          {["CMA Daily MP Cup", "CMA Daily BR Cup"].map((name, index) => (
-            <article key={name}><small>{index ? "Battle Royale" : "Multiplayer"}</small><h3>{name}</h3><p><b>{index ? "05" : "02"}</b> hrs <b>34</b> mins <b>15</b> secs</p><Link href="/tournaments/cma/register">Register</Link></article>
-          ))}
+          <article><small>Multiplayer</small><h3>No MP tournament open</h3><p><b>0</b> registered teams</p><Link href="/tournaments/cma/schedule">View schedule</Link></article>
+          <article><small>Battle Royale</small><h3>No BR tournament open</h3><p><b>0</b> registered players</p><Link href="/tournaments/cma/register">Join waitlist</Link></article>
         </aside>
       </section>
-      <section className="cma-stat-strip">{["Demo tournaments hosted", "Demo registered players", "Demo prize pool awarded", "Demo matches played"].map((label, index) => <article key={label}><strong>{["1,250+", "25,000+", "₦15M+", "87,000+"][index]}</strong><span>{label}</span></article>)}</section>
-      <section className="cma-weekly" id="weekly"><h2>Weekly Reports - Best of CMA</h2><div>{awards.map((award) => <article key={award[0]}><h3>{award[0]}</h3><small>{award[1]}</small><b>{award[2]}</b><dl><div><dt>{award[3]}</dt><dd>{award[4]}</dd></div><div><dt>{award[5]}</dt><dd>{award[6]}</dd></div></dl></article>)}</div><Link href="/tournaments/cma/weekly-reports">View Full Weekly Report</Link></section>
+      <section className="cma-stat-strip">{["Tournaments hosted", "Registered players", "Prize pool awarded", "Matches played"].map((label) => <article key={label}><strong>{label === "Prize pool awarded" ? "$0" : "0"}</strong><span>{label}</span></article>)}</section>
+      <section className="cma-weekly" id="weekly"><h2>Weekly Reports - Best of CMA</h2><div>{["Best Player", "Best Team", "Longest Survival", "Most Skilled", "Most Improved"].map((award) => <article key={award}><h3>{award}</h3><small>Waiting for first verified CMA event</small><b>No winner yet</b><p>Weekly award data will appear after real tournament results are approved.</p></article>)}</div><Link href="/tournaments/cma/weekly-reports">View Weekly Reports</Link></section>
       <section className="cma-info-grid">
         <article><h2>Why Join CMA?</h2>{["Daily CODM tournaments", "Demo rewards and recognition", "Weekly player reports", "Rules-first competition", "Grow your mobile skill"].map((item) => <p key={item}>{item}</p>)}</article>
-        <article><h2>Live Tournaments</h2>{liveTournaments.map((item) => <p key={item[0]}><b>{item[0]}</b><span>{item[1]} · {item[2]} · {item[3]}</span><Link href={item[4]}>Open</Link></p>)}<Link href="/tournaments/cma/schedule">View All Live Tournaments</Link></article>
-        <article><h2>Daily Schedule</h2>{["09:00 AM CMA MP Morning Cup", "02:00 PM CMA BR Afternoon Cup", "08:00 PM CMA MP Night Cup", "11:00 PM CMA BR Late Night Cup"].map((item) => <p key={item}>{item}</p>)}<Link href="/tournaments/cma/schedule">Full Tournament Schedule</Link></article>
+        <article><h2>Live Tournaments</h2><p><b>No live CMA tournaments</b><span>Events will appear here after organiser publishing.</span><Link href="/tournaments/cma/register">Join waitlist</Link></p><Link href="/tournaments/cma/schedule">View schedule</Link></article>
+        <article><h2>Daily Schedule</h2><p>No CMA schedule is published yet.</p><Link href="/tournaments/cma/schedule">Full Tournament Schedule</Link></article>
       </section>
-      <section className="cma-lower"><article><h2>Recent Tournament Winners</h2>{winners.map((name) => <span key={name}>{name} — demo prize</span>)}</article><aside><h2>Your Skill. Your Name. Your Legacy.</h2><p>Play today. Be featured tomorrow.</p><Link href="/tournaments/cma/register">Get Started</Link></aside></section>
+      <section className="cma-lower"><article><h2>Recent Tournament Winners</h2><span>No winners yet. The first verified CMA champions will appear here.</span></article><aside><h2>Your Skill. Your Name. Your Legacy.</h2><p>Create your AGA profile now and get notified when CMA opens registration.</p><Link href="/tournaments/cma/register">Join Waitlist</Link></aside></section>
       <section className="cma-rules-preview"><h2>Tournament Rules</h2><p>Call of Duty: Mobile only. No emulators unless the tournament specifically allows them. Player UID, roster lock, check-in, evidence, anti-cheat review and organiser approval are required.</p><Link href="/tournaments/cma/rules">Read CMA Rules</Link></section>
       <footer className="cma-footer"><b>CMA</b><p>CMA tournaments powered by Africa Gaming Arena.</p><p>Contact and support flows route through AGA until CMA organiser permissions go live.</p></footer>
     </main>
