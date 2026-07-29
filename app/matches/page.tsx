@@ -1,16 +1,18 @@
 import { ChallengeDiscovery } from "../arena-client";
-import { AppShell, MatchRow, PageHero } from "../components";
+import { AppShell, MatchRow } from "../components";
 import { matches } from "../data";
 
 export default function MatchesPage() {
   return (
     <AppShell>
-      <PageHero
-        eyebrow="Matches"
-        title="Find player, team and clan challenges."
-        copy="Create or accept 1v1, 2v2, small-team and clan challenges by game, weapon, map, mode, rules, region and time."
-        primary={["Request match", "/matches/request"]}
-      />
+      <section className="lobby-hero">
+        <div>
+          <span className="eyebrow">Live lobby</span>
+          <h1>Pick the fight. Lock the rules.</h1>
+          <p>Scan live player, team and clan challenges by wager, rank, weapon, map, region and start time.</p>
+        </div>
+        <a className="btn primary" href="/matches/request">Request match</a>
+      </section>
       <ChallengeDiscovery />
       <section className="page-section">
         <div className="section-heading">

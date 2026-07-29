@@ -1,14 +1,14 @@
-import { AppShell, GamePortalCard, PageHero } from "../components";
+import { AppShell, GamePortalCard } from "../components";
 import { games } from "../data";
 
 export default function GamesPage() {
   return (
     <AppShell>
-      <PageHero
-        eyebrow="Game portals"
-        title="Three gaming worlds inside one Clan Arena."
-        copy="Each supported game has its own atmosphere, challenge defaults, weapons, maps, modes, tournaments, clips and vendors."
-      />
+      <section className="portal-gateway">
+        <span className="eyebrow">Game portals</span>
+        <h1>Choose your universe.</h1>
+        <p>CODM is tactical and weapon-led. PUBG Mobile is survival pressure. Free Fire is fast guild warfare. Each portal has its own rules, texture and lobby rhythm.</p>
+      </section>
       <section className="game-portal-grid">
         {games.map((game) => <GamePortalCard game={game} key={game.slug} />)}
       </section>

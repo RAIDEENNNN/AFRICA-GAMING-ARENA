@@ -1,9 +1,13 @@
-import { AgreementPanel, AppShell, PageHero, WagerSafetyPanel } from "../../components";
+import { AgreementPanel, AppShell, WagerSafetyPanel } from "../../components";
 
 export default function MatchRoomPage() {
   return (
     <AppShell>
-      <PageHero eyebrow="Match room" title="Xclusive vs Nova" copy="Private room for terms, chat, check-in, lobby details, evidence, result submission and disputes." primary={["Submit result soon", "/matches/ca-1024"]} />
+      <section className="broadcast-room-hero">
+        <article><span className="avatar-ring">XC</span><small>XCL / Legendary / 24-6</small><h1>Xclusive</h1><p>Checked in / terms approved / evidence required</p></article>
+        <div className="vs-core"><span>Terms locked</span><strong>VS</strong><b>$40 POOL</b><em>12:00 countdown</em></div>
+        <article><span className="avatar-ring">NV</span><small>NVA / Master / 18-9</small><h1>Nova</h1><p>Waiting on final ready state</p></article>
+      </section>
       <section className="match-room-tabs">
         {["Overview", "Chat", "Agreement", "Evidence", "Results"].map((tab) => <a href={`#${tab.toLowerCase()}`} key={tab}>{tab}</a>)}
       </section>

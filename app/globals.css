@@ -2540,6 +2540,24 @@ body {
     flex: 1 1 100%;
   }
 
+  .mobile-dashboard-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .product-card .button-row .btn,
+  .page-hero .button-row .btn {
+    flex-basis: calc(100vw - 104px) !important;
+    max-width: calc(100vw - 104px) !important;
+    width: calc(100vw - 104px) !important;
+  }
+
+  .mobile-dashboard-actions .btn,
+  .page-hero .button-row .btn {
+    flex-basis: calc(100vw - 96px) !important;
+    max-width: calc(100vw - 96px) !important;
+    width: calc(100vw - 96px) !important;
+  }
+
   .tournament-arena,
   .versus-lobby,
   .player-command-banner,
@@ -2548,5 +2566,554 @@ body {
   .challenge-card dl,
   .agreement-panel dl {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Premium composition pass */
+.product-main {
+  gap: clamp(26px, 4.5vw, 58px);
+}
+
+.campaign-hero,
+.lobby-hero,
+.portal-gateway,
+.broadcast-room-hero,
+.command-deck {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+  position: relative;
+}
+
+.campaign-hero {
+  align-items: stretch;
+  background:
+    linear-gradient(100deg, rgba(2, 3, 10, 0.98) 0 35%, rgba(2, 3, 10, 0.42) 58%, rgba(2, 3, 10, 0.88)),
+    radial-gradient(circle at 66% 35%, rgba(250, 204, 21, 0.2), transparent 15rem),
+    radial-gradient(circle at 80% 50%, rgba(159, 76, 255, 0.28), transparent 24rem),
+    linear-gradient(150deg, #03040b, #0a0d19 55%, #050409);
+  clip-path: polygon(0 0, calc(100% - 34px) 0, 100% 34px, 100% 100%, 34px 100%, 0 calc(100% - 34px));
+  display: grid;
+  grid-template-columns: minmax(320px, 0.82fr) minmax(320px, 1fr) minmax(220px, 0.34fr);
+  min-height: clamp(620px, 78vh, 820px);
+  padding: clamp(28px, 5vw, 76px);
+}
+
+.campaign-hero::before {
+  background:
+    linear-gradient(120deg, transparent 0 45%, rgba(250, 204, 21, 0.22) 45.4% 45.8%, transparent 46.2%),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.055) 0 1px, transparent 1px 82px);
+  content: "";
+  inset: 0;
+  opacity: 0.55;
+  pointer-events: none;
+  position: absolute;
+}
+
+.campaign-copy {
+  align-self: center;
+  max-width: 720px;
+  position: relative;
+  transform: translateY(-78px);
+  z-index: 2;
+}
+
+.campaign-copy h1,
+.lobby-hero h1,
+.portal-gateway h1,
+.broadcast-room-hero h1 {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: clamp(4.3rem, 9vw, 10.4rem);
+  line-height: 0.82;
+  margin: 14px 0 18px;
+}
+
+.campaign-copy p,
+.lobby-hero p,
+.portal-gateway p {
+  color: #dbeafe;
+  font-size: clamp(1rem, 1.25vw, 1.22rem);
+  line-height: 1.65;
+  max-width: 640px;
+}
+
+.operator-stage {
+  align-self: end;
+  min-height: 560px;
+  position: relative;
+  z-index: 1;
+}
+
+.operator-silhouette {
+  background:
+    radial-gradient(circle at 50% 9%, #cbd5e1 0 7%, #111827 7.5% 14%, transparent 14.5%),
+    radial-gradient(ellipse at 50% 28%, #1f2937 0 17%, transparent 17.6%),
+    linear-gradient(100deg, transparent 0 31%, #0c111d 31.5% 69%, transparent 69.5%);
+  bottom: 0;
+  filter: drop-shadow(0 0 42px rgba(159, 76, 255, 0.28));
+  height: 520px;
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%);
+  width: min(440px, 82vw);
+}
+
+.operator-silhouette::before,
+.operator-silhouette::after,
+.operator-rifle,
+.drop-light {
+  content: "";
+  position: absolute;
+}
+
+.operator-silhouette::before {
+  background: linear-gradient(#111827, #030712);
+  border: 1px solid rgba(250, 204, 21, 0.2);
+  clip-path: polygon(30% 0, 70% 0, 88% 100%, 12% 100%);
+  height: 230px;
+  left: 24%;
+  top: 120px;
+  width: 52%;
+}
+
+.operator-silhouette::after {
+  background: linear-gradient(90deg, #05070d, #374151, #05070d);
+  height: 14px;
+  left: 12%;
+  top: 230px;
+  transform: rotate(-17deg);
+  width: 78%;
+}
+
+.operator-rifle {
+  background: linear-gradient(90deg, #05070d, #64748b 28%, #111827 68%, #020617);
+  height: 11px;
+  left: 12%;
+  top: 55%;
+  transform: rotate(-11deg);
+  width: 82%;
+}
+
+.drop-light {
+  background: radial-gradient(ellipse at center, rgba(250, 204, 21, 0.28), transparent 62%);
+  bottom: -90px;
+  height: 220px;
+  left: 8%;
+  width: 86%;
+}
+
+.live-command-card {
+  align-self: center;
+  background: rgba(2, 6, 23, 0.72);
+  border-left: 3px solid #facc15;
+  display: grid;
+  gap: 7px;
+  padding: 22px;
+  position: relative;
+  z-index: 2;
+}
+
+.live-command-card span,
+.live-command-card p {
+  color: #fde68a;
+  font-weight: 900;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.live-command-card strong {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: 4.8rem;
+  line-height: 0.9;
+}
+
+.hero-portal-strip {
+  bottom: clamp(20px, 4vw, 46px);
+  display: grid;
+  gap: 12px;
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  left: clamp(28px, 5vw, 76px);
+  position: absolute;
+  right: clamp(28px, 5vw, 76px);
+  z-index: 3;
+}
+
+.portal-chip {
+  background: rgba(8, 11, 22, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: grid;
+  gap: 5px;
+  padding: 16px 18px;
+}
+
+.portal-chip span {
+  color: #f8fafc;
+  font-weight: 950;
+}
+
+.portal-chip b {
+  color: var(--muted);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+}
+
+.portal-codm { box-shadow: inset 0 3px 0 #facc15; }
+.portal-pubg { box-shadow: inset 0 3px 0 #38bdf8; }
+.portal-free-fire { box-shadow: inset 0 3px 0 #fb923c; }
+
+.lobby-hero,
+.portal-gateway {
+  align-items: end;
+  background:
+    linear-gradient(90deg, rgba(2, 3, 10, 0.94), rgba(12, 16, 32, 0.66)),
+    radial-gradient(circle at 78% 34%, rgba(159, 76, 255, 0.25), transparent 18rem);
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 1fr auto;
+  min-height: 320px;
+  padding: clamp(26px, 5vw, 58px);
+}
+
+.portal-gateway {
+  grid-template-columns: 1fr;
+}
+
+.lobby-board {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.live-challenge {
+  align-content: start;
+  background:
+    linear-gradient(135deg, rgba(250, 204, 21, 0.09), rgba(34, 211, 238, 0.05)),
+    rgba(4, 7, 15, 0.96);
+  grid-template-columns: minmax(0, 1fr);
+  min-height: 380px;
+}
+
+.lobby-prize {
+  align-items: end;
+  display: grid;
+  gap: 4px;
+  grid-template-columns: 1fr auto;
+}
+
+.lobby-prize small,
+.lobby-prize span {
+  color: var(--muted);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.lobby-prize strong {
+  color: #fde68a;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: clamp(3rem, 6vw, 5.8rem);
+  grid-row: span 2;
+  line-height: 0.82;
+}
+
+.command-deck {
+  background:
+    radial-gradient(circle at 20% 24%, rgba(250, 204, 21, 0.16), transparent 18rem),
+    linear-gradient(135deg, rgba(7, 11, 29, 0.96), rgba(2, 3, 10, 0.98));
+  display: grid;
+  gap: 0;
+  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
+}
+
+.command-deck .player-command-banner {
+  background: transparent;
+  border: 0;
+  clip-path: none;
+  grid-template-columns: 1fr;
+  padding: clamp(28px, 5vw, 60px);
+}
+
+.command-deck .player-command-banner h2 {
+  font-size: clamp(3.7rem, 7vw, 8rem);
+  line-height: 0.82;
+}
+
+.command-stats {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.command-stats span,
+.active-battle-card {
+  background: rgba(2, 6, 23, 0.62);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 16px;
+}
+
+.command-stats strong {
+  display: block;
+  font-size: clamp(2rem, 4vw, 4.4rem);
+}
+
+.active-battle-card {
+  align-content: center;
+  border-width: 0 0 0 1px;
+  display: grid;
+  gap: 14px;
+  padding: clamp(24px, 4vw, 44px);
+}
+
+.active-battle-card strong {
+  color: #fde68a;
+  font-size: 2rem;
+}
+
+.dashboard-metrics .metric-card {
+  min-height: 160px;
+}
+
+.broadcast-room-hero,
+.versus-lobby {
+  background:
+    radial-gradient(circle at 50% 46%, rgba(250, 204, 21, 0.18), transparent 16rem),
+    linear-gradient(90deg, rgba(2, 3, 10, 0.96), rgba(11, 13, 26, 0.96), rgba(2, 3, 10, 0.96));
+  grid-template-columns: minmax(0, 1fr) minmax(180px, auto) minmax(0, 1fr);
+  min-height: 430px;
+}
+
+.broadcast-room-hero {
+  align-items: center;
+  display: grid;
+  gap: 24px;
+  padding: clamp(24px, 5vw, 56px);
+  text-align: center;
+}
+
+.broadcast-room-hero article,
+.versus-lobby article {
+  background: rgba(2, 6, 23, 0.54);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: grid;
+  gap: 12px;
+  justify-items: center;
+  min-width: 0;
+  overflow: hidden;
+  padding: clamp(20px, 4vw, 36px);
+}
+
+.broadcast-room-hero h1 {
+  font-size: clamp(3rem, 4.8vw, 5rem);
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.broadcast-room-hero small,
+.versus-lobby small,
+.vs-core em {
+  color: #93c5fd;
+  font-style: normal;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.vs-core {
+  align-self: center;
+  justify-items: center;
+}
+
+.vs-core em {
+  background: rgba(250, 204, 21, 0.1);
+  border: 1px solid rgba(250, 204, 21, 0.24);
+  padding: 9px 12px;
+}
+
+.game-portal-grid {
+  align-items: stretch;
+}
+
+.game-portal {
+  min-height: 560px;
+}
+
+.game-portal.game-codm {
+  grid-template-rows: 0.82fr 1fr;
+}
+
+.game-portal.game-pubg {
+  grid-template-rows: 1fr 0.92fr;
+}
+
+.game-portal.game-free-fire {
+  grid-template-rows: 0.68fr 1fr;
+}
+
+.game-portal.game-pubg > div {
+  background: linear-gradient(180deg, rgba(5, 8, 18, 0.3), rgba(2, 3, 10, 0.96) 18%);
+}
+
+.game-portal.game-free-fire > div {
+  background: linear-gradient(135deg, rgba(251, 146, 60, 0.12), rgba(2, 3, 10, 0.96) 42%);
+  margin-top: -68px;
+}
+
+@media (max-width: 1180px) {
+  .campaign-hero,
+  .command-deck,
+  .lobby-board {
+    grid-template-columns: 1fr;
+  }
+
+  .campaign-hero {
+    min-height: 760px;
+  }
+
+  .live-command-card {
+    align-self: start;
+    max-width: 320px;
+  }
+
+  .operator-stage {
+    min-height: 430px;
+  }
+}
+
+@media (max-width: 680px) {
+  .campaign-hero,
+  .lobby-hero,
+  .portal-gateway,
+  .broadcast-room-hero,
+  .versus-lobby,
+  .command-deck {
+    clip-path: none;
+    margin-left: -16px;
+    margin-right: -16px;
+  }
+
+  .campaign-hero {
+    display: block;
+    min-height: calc(100vh - 88px);
+    padding: 22px 16px 132px;
+  }
+
+  .campaign-copy h1,
+  .lobby-hero h1,
+  .portal-gateway h1,
+  .broadcast-room-hero h1 {
+    font-size: clamp(3.2rem, 18vw, 5rem);
+  }
+
+  .operator-stage {
+    min-height: 310px;
+    margin-top: 8px;
+  }
+
+  .campaign-copy {
+    transform: none;
+  }
+
+  .operator-silhouette {
+    height: 300px;
+    width: 260px;
+  }
+
+  .operator-silhouette::before {
+    height: 140px;
+    top: 74px;
+  }
+
+  .operator-silhouette::after,
+  .operator-rifle {
+    top: 138px;
+  }
+
+  .live-command-card {
+    margin-top: 10px;
+  }
+
+  .hero-portal-strip {
+    bottom: 12px;
+    grid-template-columns: 1fr;
+    left: 16px;
+    right: 16px;
+  }
+
+  .portal-chip {
+    grid-template-columns: 80px 1fr;
+    padding: 11px 13px;
+  }
+
+  .lobby-hero {
+    align-items: start;
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding: 24px 16px;
+  }
+
+  .deep-filter {
+    background: rgba(2, 6, 23, 0.72);
+    margin-left: -16px;
+    margin-right: -16px;
+    padding: 14px 16px;
+    position: sticky;
+    top: 0;
+    z-index: 15;
+  }
+
+  .live-challenge {
+    min-height: auto;
+  }
+
+  .lobby-prize {
+    grid-template-columns: 1fr;
+  }
+
+  .lobby-prize strong {
+    font-size: 4rem;
+  }
+
+  .command-deck .player-command-banner,
+  .active-battle-card,
+  .broadcast-room-hero {
+    max-width: 100vw;
+    min-width: 0;
+    overflow: hidden;
+    padding: 24px 16px;
+    width: 100%;
+  }
+
+  .command-deck .btn,
+  .active-battle-card .btn,
+  .lobby-hero .btn {
+    flex-basis: 100% !important;
+    max-width: calc(100vw - 36px) !important;
+    width: calc(100vw - 36px) !important;
+  }
+
+  .command-deck .player-command-banner > div:first-child {
+    align-items: start;
+    display: grid;
+  }
+
+  .command-stats,
+  .broadcast-room-hero,
+  .versus-lobby {
+    grid-template-columns: 1fr;
+  }
+
+  .broadcast-room-hero,
+  .versus-lobby {
+    min-height: auto;
+  }
+
+  .vs-core strong {
+    font-size: 5.2rem;
+  }
+
+  .game-portal {
+    min-height: auto;
+  }
+
+  .game-portal > div {
+    margin-top: -80px;
   }
 }

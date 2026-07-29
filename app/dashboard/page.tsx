@@ -1,17 +1,10 @@
 import { DashboardLive } from "../arena-client";
-import { AppShell, ClanCard, ClipCard, MatchRow, PageHero, TournamentCard } from "../components";
+import { AppShell, ClanCard, ClipCard, MatchRow, TournamentCard } from "../components";
 import { clans, clips, matches, tournaments } from "../data";
 
 export default function DashboardPage() {
   return (
     <AppShell>
-      <PageHero
-        eyebrow="Dashboard"
-        title="Your gaming command centre."
-        copy="Track clan status, pending match requests, tournament registrations, clips and notifications from one focused workspace."
-        primary={["Request match", "/matches/request"]}
-        secondary={["Find clans", "/find-clans"]}
-      />
       <DashboardLive />
       <section className="mobile-dashboard-actions">
         <a className="btn primary" href="/matches/request">Create Challenge</a>

@@ -134,7 +134,8 @@ export function makeChallenge(input: Partial<Challenge> = {}): Challenge {
   const game = input.game ?? "CODM";
   const cfg = gameConfig[game];
   const weaponClass = input.weaponClass ?? Object.keys(cfg.weapons)[0];
-  const amount = input.prizeType === "Wager" || input.wagerAmount ? Number(input.wagerAmount ?? 20) : 0;
+  const prizeType = input.prizeType ?? "Wager";
+  const amount = prizeType === "Wager" ? Number(input.wagerAmount ?? 20) : 0;
   return {
     id: input.id ?? `ch-${Date.now()}`,
     creator: input.creator ?? "PlayerOne",
@@ -151,7 +152,7 @@ export function makeChallenge(input: Partial<Challenge> = {}): Challenge {
     server: input.server ?? "EU-West",
     date: input.date ?? "2026-08-02",
     time: input.time ?? "20:30",
-    prizeType: input.prizeType ?? "Wager",
+    prizeType,
     wagerAmount: amount,
     ...wagerMath(amount),
     currency: "USD",

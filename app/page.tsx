@@ -1,21 +1,39 @@
-import { AppShell, ClanCard, ClipCard, GamePortalCard, MatchRow, PageHero, StatGrid, TournamentCard } from "./components";
+import { AppShell, ClanCard, ClipCard, GamePortalCard, MatchRow, TournamentCard } from "./components";
 import { clans, clips, games, matches, tournaments } from "./data";
 
 export default function Home() {
   return (
     <AppShell>
-      <PageHero
-        eyebrow="Clan Arena"
-        title="Enter the Arena. Challenge Anyone. Prove Your Rank."
-        copy="Create 1v1, 2v2, team and clan challenges across CODM, PUBG Mobile and Free Fire. Agree the rules, lock the wager and fight for the top position."
-        primary={["Join Arena", "/register"]}
-        secondary={["Create Challenge", "/matches/request"]}
-      />
-      <section className="live-ticker">
-        <span>LIVE</span>
-        <p>Xclusive accepted a CODM 1V1 / NovaAce locked $20 entry / Free Fire Arena starts in 03:12:44 / PUBG squad room opened</p>
+      <section className="campaign-hero">
+        <div className="campaign-copy">
+          <span className="eyebrow">Enter the Arena / Clan Arena</span>
+          <h1>Challenge anyone. Own the lobby.</h1>
+          <p>Create 1v1, team and clan battles across CODM, PUBG Mobile and Free Fire. Lock the rules, prove the result and climb one verified match at a time.</p>
+          <div className="button-row">
+            <a className="btn primary" href="/register">Join Arena</a>
+            <a className="btn secondary" href="/matches/request">Create Challenge</a>
+          </div>
+        </div>
+        <div className="operator-stage" aria-hidden="true">
+          <span className="operator-silhouette" />
+          <i className="operator-rifle" />
+          <b className="drop-light" />
+        </div>
+        <aside className="live-command-card">
+          <span>LIVE OPS</span>
+          <strong>128</strong>
+          <p>active rooms</p>
+          <small>Xclusive accepted CODM 1v1 / NovaAce locked $20 / PUBG squad room opened</small>
+        </aside>
+        <div className="hero-portal-strip">
+          {games.map((game) => (
+            <a href={`/games/${game.slug}`} className={`portal-chip portal-${game.theme}`} key={game.slug}>
+              <span>{game.short}</span>
+              <b>{game.stats[0]}</b>
+            </a>
+          ))}
+        </div>
       </section>
-      <StatGrid />
       <section className="page-section two-column">
         <div className="section-heading">
           <span className="eyebrow">Game portals</span>
