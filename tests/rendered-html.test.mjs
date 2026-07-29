@@ -2,20 +2,24 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-test("keeps the Clan Arena homepage focused on the product", async () => {
-  const [home, layout] = await Promise.all([
+test("keeps the AGA homepage focused on the approved blueprint", async () => {
+  const [home, agaHome, layout] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/aga-home.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
   ]);
 
   assert.match(layout, /Clan Arena \| Competitive Clan Command Centre/);
-  assert.match(home, /Enter the Arena/i);
-  assert.match(home, /Featured clans/i);
-  assert.match(home, /Recent matches/i);
-  assert.match(home, /Create account/i);
-  assert.match(home, /Game portals/i);
-  assert.match(home, /GamePortalCard/i);
-  assert.doesNotMatch(home + layout, /Full-stack roadmap|Mobile and backend planning|codex-preview|SkeletonPreview|react-loading-skeleton/i);
+  assert.match(home, /AGAHome/);
+  assert.match(agaHome, /Africa Gaming Arena/i);
+  assert.match(agaHome, /PLAY\. COMPETE\./i);
+  assert.match(agaHome, /Demo balance — no real money/i);
+  assert.match(agaHome, /CMA Tournaments/i);
+  assert.match(agaHome, /Call of Duty Mobile/i);
+  assert.match(agaHome, /PUBG Mobile/i);
+  assert.match(agaHome, /Free Fire/i);
+  assert.match(agaHome, /Live Now/i);
+  assert.doesNotMatch(home + agaHome + layout, /Full-stack roadmap|Mobile and backend planning|codex-preview|SkeletonPreview|react-loading-skeleton/i);
 });
 
 test("keeps starter preview code removed", async () => {

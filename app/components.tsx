@@ -9,6 +9,7 @@ const navItems = [
   ["GAME WORLDS", "/games"],
   ["CLANS", "/clans"],
   ["TOURNAMENTS", "/tournaments"],
+  ["CMA TOURNAMENTS", "/tournaments/cma"],
   ["CLIPS", "/clips"],
   ["LEADERBOARDS", "/leaderboard"],
   ["MARKET", "/marketplace"],
@@ -78,7 +79,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             <Link href="/tournaments">Tournament</Link>
           </div>
         </details>
-        <Link href="/clips">Clips</Link>
+        <Link href="/tournaments">Tournaments</Link>
         <Link href="/profile">Profile</Link>
       </nav>
     </main>
@@ -189,6 +190,7 @@ export function GamePortalCard({ game = games[0] }) {
           <div><dt>Wagers</dt><dd>12 live</dd></div>
         </dl>
         <Link className="btn primary small" href={`/games/${game.slug}`}>View {game.short} arena</Link>
+        {game.slug === "codm" ? <Link className="btn ghost small" href="/tournaments/cma">CMA Tournaments</Link> : null}
       </div>
     </article>
   );

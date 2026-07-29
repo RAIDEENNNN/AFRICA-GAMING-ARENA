@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="120" viewBox="0 0 420 120" role="img" aria-labelledby="title desc">
+  <title id="title">AGA Africa Gaming Arena logo</title>
+  <desc id="desc">Gold arena shield with white AGA wordmark and Africa Gaming Arena text.</desc>
+  <defs>
+    <linearGradient id="gold" x1="0" x2="1" y1="0" y2="1">
+      <stop stop-color="#ffe27a"/>
+      <stop offset=".48" stop-color="#ffc400"/>
+      <stop offset="1" stop-color="#b77900"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#gold)" d="M58 10 22 27v37c0 23 14 39 36 49 22-10 36-26 36-49V27L58 10Zm0 15 20 10-20 16-20-16 20-10Zm-24 22 17 13v31C39 83 34 73 34 62V47Zm48 0v15c0 11-5 21-17 29V60l17-13ZM58 61l13-10-13 45-13-45 13 10Z"/>
+  <path fill="#fff" d="M126 78h-16l28-61h18l28 61h-18l-5-12h-30l-5 12Zm20-47-10 24h20l-10-24Zm74 48c-21 0-34-13-34-31 0-19 14-32 34-32 13 0 23 5 29 14l-13 8c-3-5-9-8-16-8-10 0-17 7-17 18 0 10 7 18 18 18 8 0 14-3 16-9h-20V44h36v7c0 17-12 28-33 28Zm66-1h-16l28-61h18l28 61h-18l-5-12h-30l-5 12Zm20-47-10 24h20l-10-24Z"/>
+  <path fill="#f4c430" d="M112 97h229v3H112z"/>
+  <text x="112" y="112" fill="#fff" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="800" letter-spacing="3">AFRICA GAMING ARENA</text>
+</svg>
