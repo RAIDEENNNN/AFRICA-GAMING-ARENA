@@ -254,6 +254,85 @@ export const notifications = sqliteTable("notifications", {
   ...timestamps,
 });
 
+export const tournamentOrganisations = sqliteTable("tournament_organisations", {
+  id: text("id").primaryKey(),
+  name: text("name").notNull(),
+  slug: text("slug").notNull(),
+  parentOrganisationId: text("parent_organisation_id"),
+  status: text("status").notNull().default("active"),
+  ...timestamps,
+});
+
+export const partnerTournaments = sqliteTable("partner_tournaments", {
+  id: text("id").primaryKey(),
+  organisationId: text("organisation_id").notNull().references(() => tournamentOrganisations.id),
+  partnerSlug: text("partner_slug").notNull(),
+  gameId: text("game_id").notNull().references(() => games.id),
+  title: text("title").notNull(),
+  description: text("description").notNull(),
+  tournamentType: text("tournament_type").notNull(),
+  gameMode: text("game_mode").notNull(),
+  teamSize: text("team_size").notNull(),
+  mapPool: text("map_pool").notNull(),
+  region: text("region").notNull(),
+  server: text("server").notNull(),
+  entryType: text("entry_type").notNull(),
+  entryFee: real("entry_fee").notNull().default(0),
+  currency: text("currency").notNull().default("DEMO"),
+  prizePool: text("prize_pool").notNull(),
+  maximumTeams: integer("maximum_teams").notNull(),
+  registeredTeams: integer("registered_teams").notNull().default(0),
+  registrationOpenAt: text("registration_open_at").notNull(),
+  registrationCloseAt: text("registration_close_at").notNull(),
+  startsAt: text("starts_at").notNull(),
+  endsAt: text("ends_at").notNull(),
+  status: text("status").notNull(),
+  rules: text("rules").notNull(),
+  bannerUrl: text("banner_url"),
+  thumbnailUrl: text("thumbnail_url"),
+  featured: integer("featured", { mode: "boolean" }).notNull().default(false),
+  createdBy: text("created_by").notNull().references(() => users.id),
+  ...timestamps,
+});
+
+export const tournamentRegistrations = sqliteTable("tournament_registrations", {
+  id: text("id").primaryKey(),
+  tournamentId: text("tournament_id").notNull().references(() => partnerTournaments.id),
+  userId: text("user_id").notNull().references(() => users.id),
+  clanId: text("clan_id").references(() => clans.id),
+  registrationType: text("registration_type").notNull(),
+  rosterJson: text("roster_json").notNull(),
+  gameUid: text("game_uid").notNull(),
+  status: text("status").notNull().default("submitted"),
+  reviewedBy: text("reviewed_by").references(() => users.id),
+  reviewedAt: text("reviewed_at"),
+  ...timestamps,
+});
+
+export const organiserPermissions = sqliteTable("organiser_permissions", {
+  id: text("id").primaryKey(),
+  userId: text("user_id").notNull().references(() => users.id),
+  organisationId: text("organisation_id").notNull().references(() => tournamentOrganisations.id),
+  role: text("role").notNull().default("cma_organiser"),
+  permissionsJson: text("permissions_json").notNull(),
+  revokedAt: text("revoked_at"),
+  ...timestamps,
+});
+
+export const weeklyAwards = sqliteTable("weekly_awards", {
+  id: text("id").primaryKey(),
+  organisationId: text("organisation_id").notNull().references(() => tournamentOrganisations.id),
+  tournamentId: text("tournament_id").references(() => partnerTournaments.id),
+  awardType: text("award_type").notNull(),
+  winnerUserId: text("winner_user_id").references(() => users.id),
+  winnerClanId: text("winner_clan_id").references(() => clans.id),
+  metricLabel: text("metric_label").notNull(),
+  metricValue: text("metric_value").notNull(),
+  selectedBy: text("selected_by").notNull().references(() => users.id),
+  publishedAt: text("published_at"),
+  ...timestamps,
+});
+
 export const auditLogs = sqliteTable("audit_logs", {
   id: text("id").primaryKey(),
   actorUserId: text("actor_user_id").references(() => users.id),

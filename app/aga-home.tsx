@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
@@ -10,7 +9,7 @@ const slides = [
     kicker: "Call of Duty: Mobile",
     title: ["PLAY. COMPETE.", "DOMINATE.", "BECOME LEGENDARY."],
     copy: "The ultimate gaming arena for African players. Compete in tournaments, join clans, win rewards and build your legacy.",
-    image: "/images/aga/hero-main.webp",
+    image: "/images/aga/hero/codm-hero",
     primary: ["Enter CODM Arena", "/games/codm"],
     secondary: ["View CMA Tournaments", "/tournaments/cma"],
     tone: "gold",
@@ -20,7 +19,7 @@ const slides = [
     kicker: "PUBG Mobile",
     title: ["SURVIVE.", "SQUAD UP.", "OWN THE ZONE."],
     copy: "Squad battles, arena challenges, clan matches and esports competition built for mobile battleground players.",
-    image: "/images/aga/pubg-portal.webp",
+    image: "/images/aga/hero/pubg-mobile-hero",
     primary: ["Enter PUBG Arena", "/games/pubg-mobile"],
     secondary: ["Browse PUBG Matches", "/matches"],
     tone: "cyan",
@@ -30,7 +29,7 @@ const slides = [
     kicker: "Free Fire",
     title: ["FAST FIGHTS.", "GUILD WARS.", "LIVE GLORY."],
     copy: "High-energy custom-room battles, guild competition, clips and live challenges for fast mobile competitors.",
-    image: "/images/aga/free-fire-portal.webp",
+    image: "/images/aga/hero/free-fire-hero",
     primary: ["Enter Free Fire Arena", "/games/free-fire"],
     secondary: ["Browse Free Fire Matches", "/matches"],
     tone: "magenta",
@@ -56,7 +55,7 @@ const portals = [
   {
     name: "Call of Duty Mobile",
     href: "/games/codm",
-    image: "/images/aga/codm-portal.webp",
+    image: "/images/aga/portals/codm-portal",
     modes: ["1v1", "2v2", "3v3", "5v5", "Clan War"],
     players: "2,431",
     tone: "codm",
@@ -65,7 +64,7 @@ const portals = [
   {
     name: "PUBG Mobile",
     href: "/games/pubg-mobile",
-    image: "/images/aga/pubg-portal.webp",
+    image: "/images/aga/portals/pubg-mobile-portal",
     modes: ["Solo", "Duo", "Squad", "TDM", "Arena"],
     players: "3,672",
     tone: "pubg",
@@ -73,7 +72,7 @@ const portals = [
   {
     name: "Free Fire",
     href: "/games/free-fire",
-    image: "/images/aga/free-fire-portal.webp",
+    image: "/images/aga/portals/free-fire-portal",
     modes: ["Solo", "Duo", "Squad", "Clash Squad"],
     players: "4,298",
     tone: "freefire",
@@ -93,14 +92,38 @@ const topPlayers = [
   ["NinjaX", "4,532 RP", "/profile"],
 ];
 
+const featuredTournaments = [
+  ["CMA Daily MP Cup", "CODM", "Registration open", "Demo reward pool", "/tournaments/cma/register"],
+  ["PUBG Mobile Survival Cup", "PUBG", "12 squads registered", "Demo ranking points", "/tournaments"],
+  ["Free Fire Clash Night", "Free Fire", "Opens tonight", "Demo creator spotlight", "/tournaments"],
+];
+
+const topClans = [
+  ["Xclusive", "CODM", "Europe", "12,460 RP", "78%", "/clans/xclusive"],
+  ["Immortals", "PUBG", "MENA", "11,230 RP", "75%", "/find-clans"],
+  ["7DS Esports", "CODM", "Global", "10,120 RP", "72%", "/find-clans"],
+];
+
+const clips = [
+  ["1v4 Search clutch", "CODM", "NoFear", "DR-H", "1.2K views", "230 likes", "/clips"],
+  ["Final circle rotate", "PUBG", "GhostKing", "M416", "980 views", "146 likes", "/clips"],
+  ["Clash squad ace", "Free Fire", "RogueNinja", "MP40", "760 views", "119 likes", "/clips"],
+];
+
+const recentWinners = [
+  ["CMA MP Night Cup", "Xclusive", "Demo reward", "CODM", "Jul 28", "/tournaments/cma/weekly-reports"],
+  ["PUBG Survival Cup", "Immortals", "Demo reward", "PUBG", "Jul 27", "/tournaments"],
+  ["Free Fire Arena", "Unstoppable", "Demo reward", "Free Fire", "Jul 26", "/tournaments"],
+];
+
 export function AGAHome() {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
-  const [guest, setGuest] = useState(false);
+  const [guest, setGuest] = useState(true);
   const slide = slides[active];
   const next = () => setActive((index) => (index + 1) % slides.length);
   const prev = () => setActive((index) => (index + slides.length - 1) % slides.length);
-  const stats = useMemo(() => [["25,873+", "Active players"], ["1,247+", "Live matches"], ["3,458+", "Tournaments"], ["¢78M+", "Demo rewards pool"]], []);
+  const stats = useMemo(() => [["25,873+", "Demo active players"], ["1,247+", "Demo live matches"], ["3,458+", "Demo tournaments"], ["¢78M+", "Demo rewards pool"]], []);
 
   useEffect(() => {
     if (paused) return;
@@ -111,14 +134,14 @@ export function AGAHome() {
   }, [paused]);
 
   useEffect(() => {
-    setGuest(new URLSearchParams(window.location.search).get("guest") === "1");
+    setGuest(new URLSearchParams(window.location.search).get("player") !== "1");
   }, []);
 
   return (
     <main className="aga-home">
       <header className="aga-top-nav">
         <Link className="aga-logo" href="/" aria-label="Africa Gaming Arena home">
-          <Image src="/brand/aga-logo.svg" alt="AGA Africa Gaming Arena" width={210} height={60} priority unoptimized />
+          <img src="/brand/aga-logo.svg" alt="AGA Africa Gaming Arena" width={210} height={60} />
         </Link>
         <nav aria-label="AGA navigation">
           {nav.map((item) => {
@@ -150,8 +173,9 @@ export function AGAHome() {
         {sideNav.map(([label, href, icon]) => <Link className={label === "Home" ? "active" : ""} href={href} key={label}><span>{icon}</span>{label}{label === "Messages" ? <b>8</b> : null}</Link>)}
       </aside>
 
-      <section className={`aga-hero aga-${slide.tone}`} onPointerEnter={() => setPaused(true)} onPointerLeave={() => setPaused(false)}>
-        <Image className="aga-hero-art" src={slide.image} alt={`${slide.kicker} tactical arena artwork`} fill priority sizes="(max-width: 900px) 100vw, 72vw" unoptimized />
+      <section className={`aga-hero aga-${slide.tone}`} onPointerEnter={() => setPaused(true)} onPointerLeave={() => setPaused(false)} onPointerDown={() => setPaused(true)}>
+        <ResponsiveArt className="aga-hero-art" base={slide.image} alt={`${slide.kicker} tactical arena artwork`} priority={active === 0} />
+        <div className="aga-loading-sheen" aria-hidden="true" />
         <div className="aga-hero-copy">
           <span>{slide.kicker}</span>
           <h1>{slide.title.map((line, index) => <b className={index === 1 ? "gold" : ""} key={line}>{line}</b>)}</h1>
@@ -177,7 +201,7 @@ export function AGAHome() {
       <section className="aga-game-portals" aria-label="Game portals">
         {portals.map((portal) => (
           <article className={`aga-portal ${portal.tone}`} key={portal.name}>
-            <Image src={portal.image} alt={`${portal.name} arena artwork`} fill sizes="(max-width: 900px) 90vw, 30vw" unoptimized />
+            <ResponsiveArt className="aga-portal-art" base={portal.image} alt={`${portal.name} arena artwork`} />
             <div>
               <h2>{portal.name}</h2>
               <nav>{portal.modes.map((mode) => <span key={mode}>{mode}</span>)}</nav>
@@ -187,6 +211,30 @@ export function AGAHome() {
             </div>
           </article>
         ))}
+      </section>
+
+      <section className="aga-cma-feature">
+        <ResponsiveArt className="aga-cma-bg" base="/images/cma/cma-hero" alt="CMA Call of Duty Mobile tournament stage artwork" />
+        <div className="aga-cma-copy">
+          <span>CMA</span>
+          <p>Official CODM Tournament Partner</p>
+          <h2>Daily MP and BR cups, powered by Africa Gaming Arena.</h2>
+          <div className="aga-cma-actions">
+            <Link className="aga-btn primary" href="/tournaments/cma">View CMA Tournaments</Link>
+            <Link className="aga-btn dark" href="/tournaments/cma/register">Register Now</Link>
+          </div>
+        </div>
+        <div className="aga-cma-cards">
+          <article><small>Next MP tournament</small><h3>CMA Daily MP Cup</h3><p><b>02</b> hrs <b>34</b> mins <b>15</b> secs</p><em>Registration open · 48/64 teams · Demo rewards</em></article>
+          <article><small>Next BR tournament</small><h3>CMA Daily BR Cup</h3><p><b>05</b> hrs <b>12</b> mins <b>40</b> secs</p><em>Registration open · 72/100 players · Demo rewards</em></article>
+        </div>
+      </section>
+
+      <section className="aga-content-rail">
+        <FeatureList title="Featured Tournaments" items={featuredTournaments} />
+        <FeatureList title="Top Clans" items={topClans} />
+        <FeatureList title="Trending Clips" items={clips} />
+        <FeatureList title="Recent Winners" items={recentWinners} />
       </section>
 
       <section className="aga-bottom-grid">
@@ -205,7 +253,7 @@ export function AGAHome() {
         </div>
         <aside className="aga-top-players">
           <header><h2>Top Players</h2><Link href="/leaderboard">View All</Link></header>
-          {topPlayers.map(([name, points, href], index) => <Link href={href} key={name}><span>{index + 1}</span><Image src="/images/aga/player-avatar.webp" alt="" width={36} height={36} unoptimized /><b>{name}</b><em>{points}</em></Link>)}
+          {topPlayers.map(([name, points, href], index) => <Link href={href} key={name}><span>{index + 1}</span><picture><source srcSet="/images/aga/profile/player-avatar.avif" type="image/avif" /><img src="/images/aga/profile/player-avatar.webp" alt="" width={36} height={36} /></picture><b>{name}</b><em>{points}</em></Link>)}
         </aside>
       </section>
 
@@ -220,11 +268,11 @@ function PlayerPanel() {
   return (
     <>
       <section className="aga-profile-head">
-        <Image src="/images/aga/player-avatar.webp" alt="ShadowStriker avatar" width={74} height={74} unoptimized />
-        <div><h2>ShadowStriker <span>◆</span></h2><p>Level 42</p><meter min="0" max="100" value="68">68%</meter></div>
+        <picture><source srcSet="/images/aga/profile/player-avatar.avif" type="image/avif" /><img src="/images/aga/profile/player-avatar.webp" alt="PlayerOne avatar" width={74} height={74} /></picture>
+        <div><h2>PlayerOne <span>◆</span></h2><p>Level 42 · Xclusive Clan</p><meter min="0" max="100" value="68">68%</meter></div>
       </section>
       <section className="aga-rank-grid">
-        <Image src="/images/aga/rank-diamond.webp" alt="Diamond rank emblem" width={84} height={84} unoptimized />
+        <img src="/images/aga/profile/rank-diamond.svg" alt="Diamond rank emblem" width={84} height={84} />
         <div><small>Current Rank</small><h3>Diamond IV</h3><p>3,248 RP</p></div>
         <div><small>Win Rate</small><strong>68.4%</strong><small>K/D Ratio</small><strong>2.45</strong></div>
       </section>
@@ -241,6 +289,34 @@ function JoinPanel() {
       <p>Create one profile for clans, tournaments, challenges, clips and demo wallet tracking.</p>
       <Link className="aga-btn primary" href="/register">Create Account</Link>
       <Link className="aga-btn dark" href="/login">Login</Link>
+    </section>
+  );
+}
+
+function ResponsiveArt({ base, alt, className, priority = false }: { base: string; alt: string; className: string; priority?: boolean }) {
+  return (
+    <picture className={className}>
+      <source media="(max-width: 640px)" srcSet={`${base}-mobile.avif`} type="image/avif" />
+      <source media="(max-width: 1024px)" srcSet={`${base}-tablet.avif`} type="image/avif" />
+      <source srcSet={`${base}-desktop.avif`} type="image/avif" />
+      <source media="(max-width: 640px)" srcSet={`${base}-mobile.webp`} type="image/webp" />
+      <source media="(max-width: 1024px)" srcSet={`${base}-tablet.webp`} type="image/webp" />
+      <img src={`${base}-desktop.webp`} alt={alt} loading={priority ? "eager" : "lazy"} decoding="async" />
+    </picture>
+  );
+}
+
+function FeatureList({ title, items }: { title: string; items: string[][] }) {
+  const href = title === "Top Clans" ? "/find-clans" : title === "Trending Clips" ? "/clips" : "/tournaments";
+  return (
+    <section className="aga-feature-list">
+      <header><h2>{title}</h2><Link href={href}>View All</Link></header>
+      {items.map((item) => (
+        <Link href={item[item.length - 1]} key={`${title}-${item[0]}`}>
+          <b>{item[0]}</b>
+          <span>{item.slice(1, -1).join(" · ")}</span>
+        </Link>
+      ))}
     </section>
   );
 }

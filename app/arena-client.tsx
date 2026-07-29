@@ -175,10 +175,8 @@ export function MatchRoomClient({ roomId }: { roomId?: string }) {
   if (!challenge || !room) return <article className="product-card"><h2>No match room yet</h2><p>Accept a challenge from Find Match to open a private room.</p><Link className="btn primary" href="/matches">Find Match</Link></article>;
 
   async function act(actor: Actor, action: string, payload: Record<string, unknown> = {}) {
-    const response = await fetch("/api/arena", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ action, actor, roomId: room!.id, ...payload }) });
-    if (!response.ok) console.error(await response.text());
+    await mutate(action, { actor, roomId: room!.id, ...payload });
     window.dispatchEvent(new Event("arena-refresh"));
-    window.location.reload();
   }
 
   return (
