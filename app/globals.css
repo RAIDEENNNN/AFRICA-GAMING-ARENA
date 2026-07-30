@@ -5053,6 +5053,283 @@ meter {
   display: none;
 }
 
+.aga-mobile-top-actions,
+.aga-mobile-drawer,
+.aga-drawer-scrim {
+  display: none;
+}
+
+.aga-auth-shell {
+  background:
+    radial-gradient(circle at 18% 18%, rgba(255, 193, 7, 0.18), transparent 24rem),
+    radial-gradient(circle at 86% 26%, rgba(138, 43, 226, 0.2), transparent 28rem),
+    radial-gradient(circle at 58% 100%, rgba(0, 212, 255, 0.12), transparent 30rem),
+    linear-gradient(135deg, #060817 0%, #0a1020 50%, #04050a 100%);
+  color: #fff;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(420px, 0.95fr);
+  min-height: 100vh;
+  overflow-x: clip;
+}
+
+.aga-auth-visual {
+  align-content: space-between;
+  background:
+    linear-gradient(90deg, rgba(6, 8, 23, 0.78), rgba(6, 8, 23, 0.34)),
+    url("/images/aga/hero/codm-hero-desktop.avif") center / cover;
+  display: grid;
+  min-height: 100vh;
+  overflow: hidden;
+  padding: clamp(28px, 5vw, 68px);
+  position: relative;
+}
+
+.aga-auth-visual::before,
+.aga-auth-visual::after {
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.aga-auth-visual::before {
+  background:
+    linear-gradient(90deg, rgba(255, 193, 7, 0.26), transparent 30%),
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: auto, 56px 56px, 56px 56px;
+}
+
+.aga-auth-visual::after {
+  background:
+    radial-gradient(circle at 80% 34%, rgba(138, 43, 226, 0.28), transparent 18rem),
+    radial-gradient(circle at 60% 80%, rgba(0, 212, 255, 0.16), transparent 22rem);
+}
+
+.aga-auth-visual > * {
+  position: relative;
+  z-index: 1;
+}
+
+.aga-auth-visual img {
+  max-width: min(190px, 54vw);
+}
+
+.aga-auth-visual div {
+  max-width: 640px;
+}
+
+.aga-auth-visual span,
+.aga-auth-form > span {
+  color: #ffc107;
+  font-size: 0.78rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.aga-auth-visual h1,
+.aga-auth-form h2 {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.aga-auth-visual h1 {
+  font-size: clamp(3.4rem, 7vw, 8rem);
+  line-height: 0.88;
+  margin: 14px 0 18px;
+  max-width: 9ch;
+}
+
+.aga-auth-visual p,
+.aga-auth-form p,
+.aga-auth-form label,
+.aga-auth-legal a,
+.aga-auth-home {
+  color: #a0a7b4;
+}
+
+.aga-auth-visual p {
+  font-size: 1.08rem;
+  line-height: 1.75;
+  max-width: 560px;
+}
+
+.aga-auth-visual ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  list-style: none;
+  margin-top: 22px;
+  padding: 0;
+}
+
+.aga-auth-visual li {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 193, 7, 0.24);
+  color: #fff;
+  font-size: 0.74rem;
+  font-weight: 900;
+  padding: 10px 12px;
+  text-transform: uppercase;
+}
+
+.aga-auth-panel {
+  align-content: center;
+  background:
+    linear-gradient(180deg, rgba(16, 23, 34, 0.94), rgba(6, 8, 23, 0.98)),
+    linear-gradient(90deg, rgba(0, 212, 255, 0.08), transparent);
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
+  display: grid;
+  min-height: 100vh;
+  padding: clamp(24px, 5vw, 64px);
+}
+
+.aga-auth-home {
+  font-size: 0.78rem;
+  font-weight: 900;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.aga-auth-form {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.045), transparent),
+    rgba(6, 8, 23, 0.76);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+  display: grid;
+  gap: 16px;
+  max-width: 560px;
+  padding: clamp(22px, 4vw, 38px);
+  width: 100%;
+}
+
+.aga-auth-form.wide {
+  max-width: 680px;
+}
+
+.aga-auth-form h2 {
+  color: #fff;
+  font-size: clamp(2.6rem, 5vw, 4.6rem);
+  line-height: 0.95;
+  margin: 0;
+}
+
+.aga-auth-form p {
+  line-height: 1.65;
+  margin: 0;
+}
+
+.aga-auth-form label {
+  display: grid;
+  font-size: 0.76rem;
+  font-weight: 900;
+  gap: 8px;
+  text-transform: uppercase;
+}
+
+.aga-auth-form input,
+.aga-auth-form select {
+  background: rgba(16, 23, 34, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 6px;
+  color: #fff;
+  font: inherit;
+  min-height: 48px;
+  padding: 0 14px;
+  text-transform: none;
+  width: 100%;
+}
+
+.aga-auth-form input:focus,
+.aga-auth-form select:focus {
+  border-color: #ffc107;
+  outline: 2px solid rgba(255, 193, 7, 0.2);
+}
+
+.aga-password-field {
+  display: grid;
+  grid-template-columns: 1fr auto;
+}
+
+.aga-password-field input {
+  border-radius: 6px 0 0 6px;
+}
+
+.aga-password-field button {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-left: 0;
+  border-radius: 0 6px 6px 0;
+  color: #fff;
+  font-weight: 900;
+  padding: 0 14px;
+}
+
+.aga-auth-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.aga-auth-row {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.aga-check {
+  align-items: center;
+  display: flex !important;
+  flex-direction: row;
+  gap: 10px !important;
+  text-transform: none !important;
+}
+
+.aga-check input {
+  accent-color: #ffc107;
+  min-height: 18px;
+  width: 18px;
+}
+
+.aga-auth-row a,
+.aga-auth-switch a {
+  color: #ffc107;
+  font-weight: 900;
+}
+
+.aga-auth-submit {
+  align-items: center;
+  background: #ffc107;
+  border: 0;
+  border-radius: 6px;
+  color: #050609;
+  display: inline-flex;
+  font-weight: 950;
+  justify-content: center;
+  min-height: 50px;
+  padding: 0 18px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.aga-auth-legal {
+  display: flex;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.aga-auth-legal a {
+  color: #a0a7b4;
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
 @keyframes aga-skeleton {
   from { opacity: 0.45; }
   to { opacity: 1; }
@@ -5155,5 +5432,198 @@ meter {
 
   .aga-page-mobile-nav a:first-child {
     color: var(--aga-gold);
+  }
+}
+
+@media (max-width: 767px) {
+  .product-shell {
+    display: block !important;
+    padding-left: 0 !important;
+  }
+
+  .product-sidebar {
+    display: none !important;
+  }
+
+  .product-main {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+
+  .aga-site-header {
+    gap: 10px;
+    grid-template-columns: auto 1fr;
+    min-height: 68px;
+    padding: 0 10px;
+  }
+
+  .aga-site-logo img {
+    max-width: 132px;
+  }
+
+  .aga-site-nav,
+  .aga-site-actions,
+  .aga-site-menu {
+    display: none !important;
+  }
+
+  .aga-mobile-top-actions {
+    align-items: center;
+    display: flex;
+    gap: 8px;
+    justify-content: end;
+  }
+
+  .aga-mobile-top-actions a,
+  .aga-mobile-top-actions button {
+    align-items: center;
+    background: rgba(255, 255, 255, 0.055);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 6px;
+    color: #fff;
+    display: inline-flex;
+    font-size: 0.72rem;
+    font-weight: 950;
+    justify-content: center;
+    min-height: 38px;
+    min-width: 38px;
+    padding: 0 10px;
+    text-transform: uppercase;
+  }
+
+  .aga-mobile-top-actions .mobile-login {
+    min-width: 64px;
+  }
+
+  .aga-drawer-scrim {
+    background: rgba(0, 0, 0, 0.62);
+    display: block;
+    inset: 0;
+    position: fixed;
+    z-index: 38;
+  }
+
+  .aga-mobile-drawer {
+    background:
+      radial-gradient(circle at 20% 0%, rgba(255, 193, 7, 0.16), transparent 14rem),
+      linear-gradient(180deg, #101722, #060817);
+    border-left: 1px solid rgba(255, 193, 7, 0.22);
+    box-shadow: -22px 0 60px rgba(0, 0, 0, 0.52);
+    display: grid;
+    gap: 18px;
+    grid-template-rows: auto 1fr;
+    inset: 0 0 0 auto;
+    max-width: min(86vw, 340px);
+    padding: 18px;
+    position: fixed;
+    transform: translateX(104%);
+    transition: transform 180ms ease;
+    width: 100%;
+    z-index: 40;
+  }
+
+  .aga-mobile-drawer.open {
+    transform: translateX(0);
+  }
+
+  .aga-drawer-head {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .aga-drawer-head button {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 6px;
+    color: #fff;
+    font-size: 1.4rem;
+    height: 40px;
+    width: 40px;
+  }
+
+  .aga-mobile-drawer nav {
+    display: grid;
+    gap: 6px;
+    overflow-y: auto;
+  }
+
+  .aga-mobile-drawer nav a {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 0.78rem;
+    font-weight: 950;
+    padding: 13px 12px;
+    text-transform: uppercase;
+  }
+
+  .aga-mobile-drawer nav a:hover {
+    border-color: #ffc107;
+    color: #ffc107;
+  }
+
+  .aga-page-mobile-nav {
+    align-items: center;
+    grid-template-columns: 1fr 1fr 1.25fr 1fr 1fr;
+  }
+
+  .aga-page-mobile-nav a.primary {
+    background: #ffc107;
+    border-radius: 999px;
+    color: #050609;
+    margin: 7px 2px;
+    min-height: 44px;
+    padding-top: 15px;
+  }
+}
+
+@media (max-width: 940px) {
+  .aga-auth-shell {
+    display: block;
+  }
+
+  .aga-auth-visual {
+    min-height: 420px;
+  }
+
+  .aga-auth-panel {
+    border-left: 0;
+    min-height: auto;
+  }
+}
+
+@media (max-width: 620px) {
+  .aga-auth-shell {
+    background:
+      radial-gradient(circle at 20% 0%, rgba(255, 193, 7, 0.16), transparent 14rem),
+      linear-gradient(180deg, #060817, #04050a);
+  }
+
+  .aga-auth-visual {
+    background:
+      linear-gradient(0deg, rgba(6, 8, 23, 0.98) 0 50%, rgba(6, 8, 23, 0.52)),
+      url("/images/aga/hero/codm-hero-mobile.avif") center / cover;
+    min-height: 360px;
+    padding: 20px;
+  }
+
+  .aga-auth-visual h1 {
+    font-size: clamp(3rem, 16vw, 4.8rem);
+  }
+
+  .aga-auth-panel {
+    padding: 18px 12px 28px;
+  }
+
+  .aga-auth-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .aga-auth-form {
+    padding: 20px;
+  }
+
+  .aga-auth-legal {
+    justify-content: center;
   }
 }
