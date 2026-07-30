@@ -44,6 +44,8 @@ export function AGAHeader({ active }: { active: string }) {
 
   useEffect(() => {
     if (!drawerOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") setDrawerOpen(false);
@@ -58,6 +60,7 @@ export function AGAHeader({ active }: { active: string }) {
     document.addEventListener("keydown", onKeyDown);
     document.addEventListener("pointerdown", onPointerDown);
     return () => {
+      document.body.style.overflow = previousOverflow;
       document.removeEventListener("keydown", onKeyDown);
       document.removeEventListener("pointerdown", onPointerDown);
     };

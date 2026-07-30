@@ -5512,8 +5512,10 @@ meter {
     display: grid;
     gap: 18px;
     grid-template-rows: auto 1fr;
+    height: 100dvh;
     inset: 0 0 0 auto;
     max-width: min(86vw, 340px);
+    overflow: hidden;
     padding: 18px;
     position: fixed;
     transform: translateX(104%);
