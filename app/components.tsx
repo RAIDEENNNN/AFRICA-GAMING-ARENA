@@ -23,7 +23,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <aside className="product-sidebar">
         <Link className="brand" href="/">
           <span>CA</span>
-          <strong>Clan Arena</strong>
+          <strong>AGA</strong>
           <small>United. Compete. Dominate.</small>
         </Link>
         <section className="side-profile">
@@ -178,7 +178,7 @@ export function ClipCard({ clip = clips[0] }) {
 export function GamePortalCard({ game = games[0] }) {
   return (
     <article className={`game-portal game-${game.theme}`}>
-      <Image src={game.art} alt={`${game.name} inspired original Clan Arena artwork`} width={1200} height={720} />
+      <Image src={game.art} alt={`${game.name} inspired original AGA artwork`} width={1200} height={720} />
       <div>
         <span className="eyebrow">{game.short} arena</span>
         <h3>{game.name}</h3>

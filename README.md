@@ -1,6 +1,6 @@
-# Clan Arena
+# Africa Gaming Arena
 
-Clan Arena is a dark esports platform prototype for CODM, PUBG Mobile and Free Fire players. The current local build supports a playable challenge journey: create a CODM 1v1 wager challenge, accept it as another demo player, chat in the match room, approve terms, check in, submit results and update the leaderboard/demo wallet state.
+Africa Gaming Arena is a dark esports platform prototype for CODM, PUBG Mobile and Free Fire players. The current local build supports a playable challenge journey: create a CODM 1v1 wager challenge, accept it as another demo player, chat in the match room, approve terms, check in, submit results and update the leaderboard/demo wallet state.
 
 ## Status
 

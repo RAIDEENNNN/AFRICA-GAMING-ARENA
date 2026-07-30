@@ -13,7 +13,7 @@ export default function WalletPage() {
       <PageHero
         eyebrow="Wallet"
         title="Prizes, points and escrow controls stay gated until compliance is ready."
-        copy="Clan Arena can support wager-style challenge fields, but real money movement is locked behind age checks, jurisdiction rules, identity review, payment provider approval and admin moderation."
+        copy="AGA can support wager-style challenge fields, but real money movement is locked behind age checks, jurisdiction rules, identity review, payment provider approval and admin moderation."
         primary={["Create points challenge", "/matches/request"]}
         secondary={["Read support", "/support"]}
       />
