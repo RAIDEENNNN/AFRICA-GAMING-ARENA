@@ -1,28 +1,25 @@
-import { MarketplaceLive } from "../arena-client";
-import { AppShell, PageHero } from "../components";
-import { games } from "../data";
+import { AGAPageShell, EmptyState, FilterTabs, SearchBar, SupabaseNotice } from "../aga-navigation";
 
 export default function MarketplacePage() {
   return (
-    <AppShell>
-      <PageHero
-        eyebrow="Marketplace"
-        title="Verified vendors, not account selling."
-        copy="Clan Arena can list legitimate top-up vendors, services and community links. Account buying, selling or transfer is excluded."
+    <AGAPageShell
+      active="Marketplace"
+      eyebrow="Vendors"
+      title="MARKETPLACE"
+      copy="Verified vendors and gaming services only. No direct game-account sales, account transfers or unsafe escrow flows."
+      actions={[{ label: "Apply as Vendor", href: "/support" }, { label: "Order History", href: "/profile", variant: "secondary" }]}
+    >
+      <SupabaseNotice />
+      <section className="aga-tool-row">
+        <SearchBar placeholder="Search marketplace..." />
+        <FilterTabs tabs={["COD Points", "PUBG UC", "Free Fire Diamonds", "Coaching", "Graphics", "Editing", "Tournament services", "Verified vendors"]} />
+      </section>
+      <EmptyState
+        title="The marketplace will open when verified vendors are approved"
+        copy="Product cards will show image, game, price, vendor, verified badge, rating, delivery estimate and view-product actions."
+        action="Contact Support"
+        href="/support"
       />
-      <section className="market-category-row">
-        {["COD Points", "PUBG Mobile UC", "Free Fire Diamonds", "Verified vendors", "Orders", "Vendor group links"].map((item) => <a href="#" key={item}>{item}</a>)}
-      </section>
-      <section className="card-grid three">
-        {games.map((game) => (
-          <article className={`product-card vendor-card game-${game.theme}`} key={game.slug}>
-            <h2>{game.vendor}</h2>
-            <p>Verified listings only. External WhatsApp, Telegram or Discord links must show a safety warning before redirect.</p>
-            <button className="btn secondary" disabled>Checkout flow coming soon</button>
-          </article>
-        ))}
-      </section>
-      <MarketplaceLive />
-    </AppShell>
+    </AGAPageShell>
   );
 }

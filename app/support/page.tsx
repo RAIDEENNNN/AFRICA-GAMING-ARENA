@@ -1,14 +1,26 @@
-import { AppShell, PageHero } from "../components";
+import { AGAPageShell, PagePanel } from "../aga-navigation";
+
+const supportTopics = [
+  "Account support",
+  "Match dispute",
+  "Clip report",
+  "Vendor verification",
+  "Tournament organiser access",
+  "Technical support",
+  "Community guidelines",
+  "Safety review",
+];
 
 export default function SupportPage() {
   return (
-    <AppShell>
-      <PageHero eyebrow="Support" title="Help for account, payments, match disputes and reports." copy="Players and clan leaders can open tickets, report content and request moderation review." />
-      <section className="card-grid three">
-        {["Account support", "Match dispute", "Wager escrow dispute", "Clip report", "Payments", "Technical support", "Community guidelines", "Self-exclusion"].map((item) => (
-          <article className="product-card" key={item}><h2>{item}</h2><p>Support flow coming with backend ticketing.</p></article>
+    <AGAPageShell active="/support" eyebrow="Help" title="SUPPORT" copy="Support for accounts, match disputes, reports, organisers, vendors and platform access.">
+      <section className="aga-info-grid">
+        {supportTopics.map((topic) => (
+          <PagePanel title={topic} key={topic}>
+            <p>Ticket handling will connect to Supabase before public launch.</p>
+          </PagePanel>
         ))}
       </section>
-    </AppShell>
+    </AGAPageShell>
   );
 }

@@ -11,7 +11,7 @@ const navItems = [
   ["TOURNAMENTS", "/tournaments"],
   ["CMA TOURNAMENTS", "/tournaments/cma"],
   ["CLIPS", "/clips"],
-  ["LEADERBOARDS", "/leaderboard"],
+  ["LEADERBOARDS", "/leaderboards"],
   ["MARKET", "/marketplace"],
   ["WALLET", "/wallet"],
   ["MESSAGES", "/messages"],

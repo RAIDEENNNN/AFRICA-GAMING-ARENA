@@ -43,12 +43,12 @@ const sideNav = [
   ["Create Match", "/matches/request", "✦"],
   ["Clans", "/clans", "♜"],
   ["Tournaments", "/tournaments", "♕"],
-  ["Leaderboards", "/leaderboard", "▥"],
+  ["Leaderboards", "/leaderboards", "▥"],
   ["Clips", "/clips", "▶"],
   ["Marketplace", "/marketplace", "▤"],
   ["Wallet", "/wallet", "▣"],
   ["Messages", "/messages", "✉"],
-  ["More", "/settings", "•••"],
+  ["More", "/rank-system", "•••"],
 ];
 
 const portals = [
@@ -128,11 +128,16 @@ export function AGAHome() {
         </Link>
         <nav aria-label="AGA navigation">
           {nav.map((item) => {
-            const href = item === "Home" ? "/" : item === "Games" ? "/games" : item === "Tournaments" ? "/tournaments" : item === "Clans" ? "/clans" : item === "Leaderboards" ? "/leaderboard" : item === "Marketplace" ? "/marketplace" : item === "Clips" ? "/clips" : item === "News" ? "/notifications" : "/settings";
+            const href = item === "Home" ? "/" : item === "Games" ? "/games" : item === "Tournaments" ? "/tournaments" : item === "Clans" ? "/clans" : item === "Leaderboards" ? "/leaderboards" : item === "Marketplace" ? "/marketplace" : item === "Clips" ? "/clips" : item === "News" ? "/news" : "/rank-system";
             return item === "Tournaments" ? (
               <details className="aga-nav-menu" key={item}>
                 <summary>Tournaments</summary>
                 <div><Link href="/tournaments">All Tournaments</Link><Link href="/tournaments/cma">CMA Tournaments</Link></div>
+              </details>
+            ) : item === "More" ? (
+              <details className="aga-nav-menu" key={item}>
+                <summary>More</summary>
+                <div><Link href="/rank-system">Rank System</Link><Link href="/faq">FAQ</Link><Link href="/support">Support</Link><Link href="/rules">Rules</Link><Link href="/about">About</Link><Link href="/contact">Contact</Link></div>
               </details>
             ) : <Link className={item === "Home" ? "active" : ""} href={href} key={item}>{item}</Link>;
           })}
@@ -147,7 +152,7 @@ export function AGAHome() {
           <summary>Menu</summary>
           <div>
             <Link href="/games">Games</Link><Link href="/tournaments">Tournaments</Link><Link href="/tournaments/cma">CMA Tournaments</Link>
-            <Link href="/matches">Find Match</Link><Link href="/matches/request">Create Match</Link><Link href="/login">Log In</Link><Link href="/register">Register</Link>
+            <Link href="/matches">Find Match</Link><Link href="/leaderboards">Leaderboards</Link><Link href="/news">News</Link><Link href="/matches/request">Create Match</Link><Link href="/login">Log In</Link><Link href="/register">Register</Link>
           </div>
         </details>
       </header>
@@ -226,7 +231,7 @@ export function AGAHome() {
           <EmptyState title="No live matches yet" copy="The arena is waiting for its first competitors. Create the first challenge and it will appear here." href="/matches/request" action="Create Match" />
         </div>
         <aside className="aga-top-players">
-          <header><h2>Top Players</h2><Link href="/leaderboard">View All</Link></header>
+          <header><h2>Top Players</h2><Link href="/leaderboards">View All</Link></header>
           <EmptyState title="Be the first player featured" copy="Verified rankings will appear after real matches are completed." href="/matches/request" action="Start ranking" compact />
         </aside>
       </section>
