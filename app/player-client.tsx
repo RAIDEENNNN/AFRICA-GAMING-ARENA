@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import type { PlayerSummary } from "./player-summary";
 
@@ -78,6 +79,74 @@ export function TopbarPlayerLinks() {
       <Link href="/settings">Settings</Link>
       <Link href={`/profile/${user.username}`}>{user.username}</Link>
     </>
+  );
+}
+
+type NavItem = readonly [label: string, href: string, icon: string];
+
+export function SidebarNav({ primary, secondary }: { primary: readonly NavItem[]; secondary: readonly NavItem[] }) {
+  const pathname = usePathname();
+
+  function active(href: string) {
+    if (href === "/") return pathname === "/";
+    return pathname === href || pathname.startsWith(`${href}/`);
+  }
+
+  return (
+    <nav className="sidebar-nav" aria-label="Main navigation">
+      <div className="sidebar-nav-group primary">
+        {primary.map(([label, href, icon]) => (
+          <Link className={active(href) ? "active" : ""} href={href} key={href}>
+            <span className="nav-icon" aria-hidden="true">{icon}</span>
+            <b>{label}</b>
+            <em aria-hidden="true" />
+          </Link>
+        ))}
+      </div>
+      <div className="sidebar-nav-divider" />
+      <div className="sidebar-nav-group secondary">
+        {secondary.map(([label, href, icon]) => (
+          <Link className={active(href) ? "active" : ""} href={href} key={href}>
+            <span className="nav-icon" aria-hidden="true">{icon}</span>
+            <b>{label}</b>
+            <em aria-hidden="true" />
+          </Link>
+        ))}
+      </div>
+    </nav>
+  );
+}
+
+export function SidebarWallet() {
+  const { summary } = usePlayerSummary();
+  return (
+    <Link className="sidebar-wallet" href="/wallet">
+      <span>AGA WALLET</span>
+      <strong>DEMO</strong>
+      <small>{summary.user ? "Simulated platform balance only" : "Login to view demo balance"}</small>
+    </Link>
+  );
+}
+
+export function SidebarUtilities() {
+  const { summary } = usePlayerSummary();
+  const unread = summary.notifications.unread;
+  const utilities = [
+    ["Notifications", "/notifications", "NT", unread],
+    ["Messages", "/messages", "MS", 0],
+    ["Profile", summary.user ? `/profile/${summary.user.username}` : "/profile", "PR", 0],
+    ["Settings", "/settings", "ST", 0],
+  ] as const;
+
+  return (
+    <nav className="sidebar-utilities" aria-label="Utilities">
+      {utilities.map(([label, href, icon, badge]) => (
+        <Link href={href} key={label} aria-label={label} title={label}>
+          <span aria-hidden="true">{icon}</span>
+          {badge ? <b>{badge}</b> : null}
+        </Link>
+      ))}
+    </nav>
   );
 }
 

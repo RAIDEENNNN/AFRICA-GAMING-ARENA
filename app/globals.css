@@ -5490,6 +5490,387 @@ meter {
   }
 }
 
+/* Compact AGA sidebar inspired by the approved Image 2 reference. */
+@media (min-width: 1181px) {
+  .product-shell {
+    grid-template-columns: minmax(280px, 300px) minmax(0, 1fr) !important;
+    overflow-x: clip;
+  }
+
+  .product-sidebar {
+    border-right: 1px solid rgba(255, 214, 10, 0.13) !important;
+    box-shadow: 12px 0 42px rgba(0, 0, 0, 0.34) !important;
+    gap: 14px !important;
+    height: 100vh;
+    max-width: 300px;
+    min-height: 100vh;
+    min-width: 280px;
+    overflow-y: auto;
+    padding: 20px 18px !important;
+    scrollbar-width: thin;
+    width: 280px;
+  }
+
+  .product-main {
+    gap: clamp(24px, 3.2vw, 50px) !important;
+    padding: clamp(22px, 3vw, 42px) !important;
+  }
+
+  .product-sidebar .brand {
+    align-items: center;
+    gap: 10px 12px;
+    grid-template-columns: 42px minmax(0, 1fr);
+    min-height: 48px;
+  }
+
+  .product-sidebar .brand span {
+    font-size: 0.82rem;
+    height: 42px;
+    width: 42px;
+  }
+
+  .product-sidebar .brand strong {
+    font-size: 1.15rem;
+    line-height: 1;
+  }
+
+  .product-sidebar .brand small {
+    font-size: 0.64rem;
+    letter-spacing: 0.04em;
+    line-height: 1.1;
+  }
+
+  .product-sidebar .side-profile {
+    align-items: center;
+    clip-path: none;
+    gap: 7px;
+    grid-template-columns: 38px minmax(0, 1fr);
+    padding: 12px;
+  }
+
+  .product-sidebar .side-profile > .avatar-ring {
+    grid-row: span 2;
+    height: 38px;
+    padding: 0;
+    width: 38px;
+  }
+
+  .product-sidebar .side-profile b,
+  .product-sidebar .side-profile small {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .product-sidebar .side-profile b {
+    font-size: 0.88rem;
+  }
+
+  .product-sidebar .side-profile small {
+    font-size: 0.68rem;
+  }
+
+  .product-sidebar .side-profile div,
+  .product-sidebar .side-profile progress {
+    grid-column: 1 / -1;
+  }
+
+  .product-sidebar .side-profile div {
+    gap: 6px;
+  }
+
+  .product-sidebar .side-profile div span,
+  .product-sidebar .side-profile div a {
+    border-radius: 8px;
+    font-size: 0.64rem;
+    padding: 5px 7px;
+  }
+
+  .product-sidebar .side-profile progress {
+    height: 6px;
+  }
+
+  .sidebar-nav {
+    display: grid !important;
+    gap: 8px !important;
+  }
+
+  .sidebar-nav-group {
+    display: grid;
+    gap: 6px;
+  }
+
+  .sidebar-nav-divider {
+    background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.18), transparent);
+    height: 1px;
+    margin: 6px 0;
+  }
+
+  .product-sidebar nav.sidebar-nav a {
+    align-items: center;
+    background: rgba(255, 255, 255, 0.018);
+    border: 1px solid rgba(148, 163, 184, 0.1);
+    border-radius: 12px;
+    clip-path: none;
+    color: #d8dee9;
+    display: grid;
+    font-size: 0.82rem;
+    font-weight: 800;
+    gap: 12px;
+    grid-template-columns: 38px minmax(0, 1fr) 10px;
+    min-height: 54px;
+    padding: 8px 10px;
+    text-align: left;
+    text-transform: uppercase;
+  }
+
+  .product-sidebar nav.sidebar-nav a:hover {
+    background: rgba(255, 214, 10, 0.06);
+    border-color: rgba(255, 214, 10, 0.24);
+    box-shadow: 0 0 18px rgba(255, 214, 10, 0.08);
+    transform: translateX(2px);
+  }
+
+  .product-sidebar nav.sidebar-nav a.active {
+    background:
+      linear-gradient(90deg, rgba(255, 214, 10, 0.16), rgba(255, 214, 10, 0.035)),
+      rgba(255, 255, 255, 0.025);
+    border-color: rgba(255, 214, 10, 0.34);
+    box-shadow: inset 3px 0 0 #ffd60a, 0 0 20px rgba(255, 214, 10, 0.12);
+    color: #ffd60a;
+  }
+
+  .product-sidebar nav.sidebar-nav a b {
+    font-size: 0.82rem;
+    font-weight: 850;
+    letter-spacing: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .product-sidebar nav.sidebar-nav .nav-icon {
+    align-items: center;
+    background: rgba(148, 163, 184, 0.08);
+    border: 1px solid rgba(148, 163, 184, 0.14);
+    border-radius: 10px;
+    color: #93a4b8;
+    display: flex;
+    font-family: var(--font-geist-mono), monospace;
+    font-size: 0.68rem;
+    font-weight: 900;
+    height: 38px;
+    justify-content: center;
+    padding: 0;
+    width: 38px;
+  }
+
+  .product-sidebar nav.sidebar-nav a.active .nav-icon {
+    background: rgba(255, 214, 10, 0.14);
+    border-color: rgba(255, 214, 10, 0.36);
+    color: #ffd60a;
+  }
+
+  .product-sidebar nav.sidebar-nav a em {
+    background: transparent;
+    border-right: 2px solid currentColor;
+    border-top: 2px solid currentColor;
+    box-shadow: none;
+    height: 7px;
+    opacity: 0.56;
+    transform: rotate(45deg);
+    width: 7px;
+  }
+
+  .sidebar-spacer {
+    flex: 1 1 auto;
+    min-height: 8px;
+  }
+
+  .sidebar-wallet {
+    background:
+      linear-gradient(135deg, rgba(255, 214, 10, 0.11), rgba(34, 211, 238, 0.05)),
+      rgba(8, 10, 18, 0.88);
+    border: 1px solid rgba(255, 214, 10, 0.22);
+    border-radius: 14px;
+    display: grid;
+    gap: 3px;
+    min-height: 72px;
+    padding: 12px;
+  }
+
+  .sidebar-wallet span,
+  .sidebar-wallet small {
+    color: var(--muted);
+    font-size: 0.66rem;
+    font-weight: 850;
+    text-transform: uppercase;
+  }
+
+  .sidebar-wallet strong {
+    color: #ffd60a;
+    font-size: 1.1rem;
+    letter-spacing: 0;
+  }
+
+  .sidebar-utilities {
+    display: grid !important;
+    gap: 8px !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .product-sidebar nav.sidebar-utilities a {
+    align-items: center;
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(148, 163, 184, 0.12);
+    border-radius: 12px;
+    color: #cbd5e1;
+    display: flex;
+    height: 42px;
+    justify-content: center;
+    padding: 0;
+    position: relative;
+  }
+
+  .sidebar-utilities span {
+    font-family: var(--font-geist-mono), monospace;
+    font-size: 0.66rem;
+    font-weight: 900;
+  }
+
+  .sidebar-utilities b {
+    align-items: center;
+    background: #ffd60a;
+    border-radius: 999px;
+    color: #050609;
+    display: flex;
+    font-size: 0.62rem;
+    height: 18px;
+    justify-content: center;
+    min-width: 18px;
+    padding: 0 4px;
+    position: absolute;
+    right: -4px;
+    top: -5px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1180px) {
+  .product-shell {
+    display: grid !important;
+    grid-template-columns: 240px minmax(0, 1fr) !important;
+  }
+
+  .product-sidebar {
+    border-bottom: 0 !important;
+    border-right: 1px solid rgba(255, 214, 10, 0.12) !important;
+    display: flex !important;
+    gap: 12px !important;
+    height: 100vh;
+    min-height: 100vh;
+    overflow-y: auto;
+    padding: 18px 14px !important;
+    position: sticky !important;
+    top: 0;
+  }
+
+  .product-sidebar .brand {
+    align-items: center;
+    gap: 8px 10px;
+    grid-template-columns: 38px minmax(0, 1fr);
+  }
+
+  .product-sidebar .brand span {
+    font-size: 0.75rem;
+    height: 38px;
+    width: 38px;
+  }
+
+  .product-sidebar .brand strong {
+    font-size: 1rem;
+  }
+
+  .product-sidebar .brand small {
+    font-size: 0.62rem;
+  }
+
+  .product-sidebar .side-profile {
+    clip-path: none;
+    padding: 10px;
+  }
+
+  .product-sidebar .side-profile > .avatar-ring {
+    height: 34px;
+    padding: 0;
+    width: 34px;
+  }
+
+  .product-sidebar nav.sidebar-nav {
+    display: grid !important;
+    gap: 7px !important;
+    overflow: visible !important;
+  }
+
+  .sidebar-nav-group {
+    display: grid;
+    gap: 5px;
+  }
+
+  .product-sidebar nav.sidebar-nav a {
+    align-items: center;
+    border-radius: 10px;
+    clip-path: none;
+    display: grid !important;
+    flex: none !important;
+    font-size: 0.76rem;
+    gap: 9px;
+    grid-template-columns: 32px minmax(0, 1fr) 8px;
+    min-height: 46px;
+    padding: 7px 8px;
+    text-align: left;
+  }
+
+  .product-sidebar nav.sidebar-nav .nav-icon {
+    align-items: center;
+    background: rgba(148, 163, 184, 0.08);
+    border: 1px solid rgba(148, 163, 184, 0.14);
+    border-radius: 9px;
+    display: flex;
+    font-family: var(--font-geist-mono), monospace;
+    font-size: 0.62rem;
+    height: 32px;
+    justify-content: center;
+    width: 32px;
+  }
+
+  .product-sidebar nav.sidebar-nav a b {
+    font-size: 0.72rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .product-sidebar nav.sidebar-nav a em {
+    height: 6px;
+    width: 6px;
+  }
+
+  .sidebar-nav-divider {
+    background: rgba(148, 163, 184, 0.16);
+    height: 1px;
+    margin: 4px 0;
+  }
+
+  .product-main {
+    padding: 20px !important;
+  }
+
+  .sidebar-wallet,
+  .sidebar-utilities {
+    display: none;
+  }
+}
+
 @media (max-width: 767px) {
   .product-shell {
     display: block !important;

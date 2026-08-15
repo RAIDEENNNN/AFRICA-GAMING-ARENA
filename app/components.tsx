@@ -1,39 +1,38 @@
 import Link from "next/link";
 import Image from "next/image";
 import { challenges, clans, clips, games, matches, tournaments } from "./data";
-import { ShellPlayerPanel, TopbarPlayerLinks } from "./player-client";
+import { ShellPlayerPanel, SidebarNav, SidebarUtilities, SidebarWallet, TopbarPlayerLinks } from "./player-client";
 
-const navItems = [
-  ["ARENA", "/"],
-  ["FIND MATCH", "/matches"],
-  ["CREATE", "/matches/request"],
-  ["GAME WORLDS", "/games"],
-  ["CLANS", "/clans"],
-  ["TOURNAMENTS", "/tournaments"],
-  ["CMA TOURNAMENTS", "/tournaments/cma"],
-  ["CLIPS", "/clips"],
-  ["LEADERBOARDS", "/leaderboards"],
-  ["MARKET", "/marketplace"],
-  ["WALLET", "/wallet"],
-  ["MESSAGES", "/messages"],
-];
+export const primaryNavItems = [
+  ["HOME", "/", "HM"],
+  ["FIND MATCH", "/matches", "FM"],
+  ["CREATE MATCH", "/matches/request", "CM"],
+  ["CLANS", "/clans", "CL"],
+  ["TOURNAMENTS", "/tournaments", "TR"],
+  ["LEADERBOARDS", "/leaderboards", "LB"],
+  ["CLIPS", "/clips", "CP"],
+] as const;
+
+export const secondaryNavItems = [
+  ["MARKETPLACE", "/marketplace", "MK"],
+  ["NEWS & EVENTS", "/news", "NE"],
+  ["SUPPORT", "/support", "SP"],
+] as const;
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   return (
     <main className="product-shell">
       <aside className="product-sidebar">
         <Link className="brand" href="/">
-          <span>CA</span>
+          <span>AG</span>
           <strong>AGA</strong>
-          <small>United. Compete. Dominate.</small>
+          <small>Africa Gaming Arena</small>
         </Link>
         <ShellPlayerPanel />
-        <nav aria-label="Main navigation">
-          {navItems.map(([label, href], index) => (
-            <Link href={href} key={href}><span>{String(index + 1).padStart(2, "0")}</span>{label}<em /></Link>
-          ))}
-        </nav>
-        <Link className="btn primary full" href="/matches/request">Request match</Link>
+        <SidebarNav primary={primaryNavItems} secondary={secondaryNavItems} />
+        <div className="sidebar-spacer" aria-hidden="true" />
+        <SidebarWallet />
+        <SidebarUtilities />
         <details className="mobile-create">
           <summary>Create</summary>
           <div>
