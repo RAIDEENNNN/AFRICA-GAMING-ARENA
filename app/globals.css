@@ -2298,7 +2298,7 @@ dd {
   .mobile-bottom-nav details div {
     background: #11111f;
     border: 1px solid var(--line);
-    display: grid;
+    display: none;
     gap: 8px;
     padding: 12px;
     position: absolute;
@@ -3281,6 +3281,7 @@ body {
 
 .aga-nav-menu div {
   min-width: 190px;
+  right: 0;
   top: 28px;
 }
 
@@ -5509,7 +5510,7 @@ meter {
       linear-gradient(180deg, #101722, #060817);
     border-left: 1px solid rgba(255, 193, 7, 0.22);
     box-shadow: -22px 0 60px rgba(0, 0, 0, 0.52);
-    display: grid;
+    display: none;
     gap: 18px;
     grid-template-rows: auto 1fr;
     height: 100dvh;
