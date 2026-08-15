@@ -100,8 +100,52 @@ export const challengeParticipants = sqliteTable("challenge_participants", {
   challengeId: text("challenge_id").notNull().references(() => challenges.id),
   userId: text("user_id").notNull().references(() => users.id),
   side: text("side").notNull(),
+  team: text("team"),
   status: text("status").notNull(),
+  joinedAt: text("joined_at"),
   ...timestamps,
+});
+
+export const matches = sqliteTable("matches", {
+  id: text("id").primaryKey(),
+  challengeId: text("challenge_id").notNull().references(() => challenges.id),
+  game: text("game").notNull(),
+  mode: text("mode").notNull(),
+  status: text("status").notNull(),
+  startedAt: text("started_at"),
+  endedAt: text("ended_at"),
+  winnerUserId: text("winner_user_id").references(() => users.id),
+  winnerTeam: text("winner_team"),
+  ...timestamps,
+});
+
+export const matchParticipants = sqliteTable("match_participants", {
+  id: text("id").primaryKey(),
+  matchId: text("match_id").notNull().references(() => matches.id),
+  userId: text("user_id").notNull().references(() => users.id),
+  team: text("team").notNull(),
+  ready: integer("ready", { mode: "boolean" }).notNull().default(false),
+  checkedIn: integer("checked_in", { mode: "boolean" }).notNull().default(false),
+  resultClaim: text("result_claim"),
+  ...timestamps,
+});
+
+export const matchMessages = sqliteTable("match_messages", {
+  id: text("id").primaryKey(),
+  matchId: text("match_id").notNull().references(() => matches.id),
+  userId: text("user_id").references(() => users.id),
+  message: text("message").notNull(),
+  createdAt: text("created_at").notNull(),
+  editedAt: text("edited_at"),
+  deletedAt: text("deleted_at"),
+});
+
+export const matchAgreements = sqliteTable("match_agreements", {
+  id: text("id").primaryKey(),
+  matchId: text("match_id").notNull().references(() => matches.id),
+  userId: text("user_id").notNull().references(() => users.id),
+  approved: integer("approved", { mode: "boolean" }).notNull().default(false),
+  approvedAt: text("approved_at"),
 });
 
 export const matchRooms = sqliteTable("match_rooms", {

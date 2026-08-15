@@ -15,7 +15,7 @@
     "db:seed": "node scripts/seed-arena.mjs",
     "db:reset": "node scripts/reset-arena.mjs",
     "db:inspect": "node scripts/inspect-arena.mjs",
-    "test:api": "node tests/api-permissions.mjs && node tests/auth-api.mjs"
+    "test:api": "node tests/api-permissions.mjs && node tests/auth-api.mjs && node tests/relational-flow.mjs"
   },
   "dependencies": {
     "drizzle-orm": "0.45.2",

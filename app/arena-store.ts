@@ -3,7 +3,7 @@ export type MatchKind = "Player vs player" | "Team vs team" | "Clan vs clan";
 export type PrizeType = "Free" | "Ranked" | "Wager";
 export type ChallengeStatus = "Open" | "Negotiating" | "Accepted" | "Complete";
 export type RoomStatus = "Terms" | "Ready" | "Result review" | "Verified" | "Dispute";
-export type Actor = "PlayerOne" | "NovaAce" | "RivalUser" | "Admin";
+export type Actor = string;
 
 export type Challenge = {
   id: string;
@@ -185,7 +185,8 @@ export const initialArenaState: ArenaState = {
 };
 
 export function createChallengeInState(state: ArenaState, input: Partial<Challenge>, actor: Actor) {
-  if (actor !== "PlayerOne" && actor !== "NovaAce" && actor !== "RivalUser") throw new Error("Only players can create challenges.");
+  ensureArenaAccount(state, actor);
+  if (actor === "Admin") throw new Error("Only players can create challenges.");
   const challenge = makeChallenge({ ...input, creator: actor, id: `ch-${Date.now()}` });
   state.challenges.unshift(challenge);
   state.notifications[actor].unshift(`${challenge.teamSize} ${challenge.game} challenge published.`);
@@ -194,6 +195,7 @@ export function createChallengeInState(state: ArenaState, input: Partial<Challen
 }
 
 export function acceptChallengeInState(state: ArenaState, id: string, actor: Actor) {
+  ensureArenaAccount(state, actor);
   const challenge = state.challenges.find((item) => item.id === id);
   if (!challenge) throw new Error("Challenge not found.");
   if (challenge.creator === actor) throw new Error("Creator cannot accept their own challenge.");
@@ -203,6 +205,7 @@ export function acceptChallengeInState(state: ArenaState, id: string, actor: Act
   challenge.history.push(`${actor} accepted the challenge. Agreement opened.`);
   if (challenge.prizeType === "Wager") {
     for (const user of [challenge.creator, actor] as Actor[]) {
+      ensureArenaAccount(state, user);
       state.wallets[user].balance -= challenge.stakePerSide;
       state.wallets[user].locked += challenge.stakePerSide;
       state.transactions.unshift({ id: `tx-${Date.now()}-${user}`, user, amount: challenge.stakePerSide, kind: "demo_lock", status: "Locked for match", at: new Date().toISOString() });
@@ -239,6 +242,7 @@ export function counterOfferInState(state: ArenaState, id: string, actor: Actor,
 }
 
 export function sendRoomMessageInState(state: ArenaState, roomId: string, actor: Actor, body: string, attachment?: string) {
+  ensureArenaAccount(state, actor);
   const { room } = requireRoom(state, roomId, actor);
   const message: ChatMessage = { id: `msg-${Date.now()}-${room.messages.length}`, author: actor, body, attachment, at: new Date().toLocaleTimeString(), read: false };
   room.messages.push(message);
@@ -246,6 +250,7 @@ export function sendRoomMessageInState(state: ArenaState, roomId: string, actor:
 }
 
 export function approveTermsInState(state: ArenaState, roomId: string, actor: Actor, wager = false) {
+  ensureArenaAccount(state, actor);
   const { room, challenge, side } = requireRoom(state, roomId, actor);
   if (room.status === "Verified") throw new Error("Verified match cannot be changed.");
   if (wager) challenge.approvals[side === "creator" ? "creatorWager" : "opponentWager"] = true;
@@ -262,6 +267,7 @@ export function approveTermsInState(state: ArenaState, roomId: string, actor: Ac
 }
 
 export function checkInInState(state: ArenaState, roomId: string, actor: Actor) {
+  ensureArenaAccount(state, actor);
   const { room, challenge, side } = requireRoom(state, roomId, actor);
   if (room.status !== "Ready") throw new Error("Terms and wager must be approved before check-in.");
   challenge.checkIns[side] = true;
@@ -270,6 +276,7 @@ export function checkInInState(state: ArenaState, roomId: string, actor: Actor) 
 }
 
 export function submitResultInState(state: ArenaState, roomId: string, actor: Actor, result: Omit<ResultSubmission, "submittedBy">) {
+  ensureArenaAccount(state, actor);
   const { room, challenge, side } = requireRoom(state, roomId, actor);
   const payload = { ...result, submittedBy: actor };
   if (side === "creator") room.resultA = payload;
@@ -313,4 +320,9 @@ function requireRoom(state: ArenaState, roomId: string, actor: Actor) {
 
 function systemMessage(body: string, pinned = false): ChatMessage {
   return { id: `sys-${Date.now()}-${Math.random()}`, author: "System", body, at: new Date().toLocaleTimeString(), system: true, pinned, read: true };
+}
+
+function ensureArenaAccount(state: ArenaState, actor: Actor) {
+  if (!state.notifications[actor]) state.notifications[actor] = ["Demo balance enabled. No real money."];
+  if (!state.wallets[actor]) state.wallets[actor] = { balance: 100, locked: 0 };
 }
