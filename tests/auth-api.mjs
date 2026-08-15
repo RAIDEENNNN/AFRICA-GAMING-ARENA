@@ -75,6 +75,15 @@ const me = await jsonFetch("/api/auth/me", { headers: { cookie: loginCookie } })
 assert.equal(me.response.status, 200);
 assert.equal(me.body.user.username, username);
 
+const summary = await jsonFetch("/api/player/summary", { headers: { cookie: loginCookie } });
+assert.equal(summary.response.status, 200);
+assert.equal(summary.body.summary.user.username, username);
+assert.equal(summary.body.summary.stats.rating, 1000);
+
+const notifications = await jsonFetch("/api/notifications", { headers: { cookie: loginCookie } });
+assert.equal(notifications.response.status, 200);
+assert.ok(Array.isArray(notifications.body.notifications));
+
 const adminRejected = await jsonFetch("/api/admin/summary", { headers: { cookie: loginCookie } });
 assert.equal(adminRejected.response.status, 403);
 assert.match(adminRejected.body.error, /permissions/);
@@ -98,6 +107,8 @@ console.log(JSON.stringify({
     "invalid login rejected",
     "login works with username case-insensitively",
     "current-user endpoint returns the session user",
+    "player summary endpoint returns the session player",
+    "notifications endpoint is session-scoped",
     "normal player cannot access admin summary",
     "logout clears the server session",
   ],

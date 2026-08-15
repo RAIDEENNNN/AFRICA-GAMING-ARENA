@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { gameConfig, makeChallenge, wagerMath, type Actor, type ArenaState, type Challenge, type GameName, type MatchKind, type PrizeType, type ResultSubmission } from "./arena-store";
+import { LeaderboardPanel, PlayerDashboardPanel, PlayerProfilePanel } from "./player-client";
 
 const defaultChallenge = makeChallenge({ id: "draft" });
 
@@ -240,23 +241,15 @@ export function MatchRoomClient({ roomId }: { roomId?: string }) {
 }
 
 export function DashboardLive() {
-  const { state } = useArenaState();
-  const verified = state?.rooms.filter((room) => room.status === "Verified").length ?? 0;
-  const active = state?.challenges[0];
-  return <><section className="command-deck"><div className="player-command-banner"><div><span className="avatar-ring">P1</span><div><small>XCL / LEGENDARY / ONLINE</small><h2>PlayerOne</h2><p>CODM assault rifle main. Six-win streak, one active contract, demo wallet ready.</p></div></div><div className="command-stats"><span><strong>{verified ? "100%" : "0%"}</strong>Win rate</span><span><strong>$100</strong>Demo balance</span><span><strong>6W</strong>Streak</span></div></div><article className="active-battle-card"><span className="tag live">Current challenge</span><h2>{active?.game ?? "CODM"} {active?.teamSize ?? "1v1"} contract</h2><p>{active?.map ?? "Shipment"} / {active?.mode ?? "Gunfight"} / {active?.region ?? "Europe"}</p><strong>{active?.prizeType === "Wager" ? `$${active.stakePerSide} entry` : "Ranked match"}</strong><Link className="btn primary small" href="/matches">Open lobby</Link></article></section><section className="card-grid four dashboard-metrics">{[["Challenges", state?.challenges.length ?? 0], ["Open", state?.challenges.filter((item) => item.status === "Open").length ?? 0], ["Rooms", state?.rooms.length ?? 0], ["Verified", verified]].map(([label, value]) => <article className="product-card metric-card" key={label}><span>{label}</span><strong>{value}</strong></article>)}</section><ChallengeDiscovery /></>;
+  return <><PlayerDashboardPanel /><ChallengeDiscovery /></>;
 }
 
 export function LeaderboardLive() {
-  const { state } = useArenaState();
-  const verified = state?.rooms.filter((room) => room.status === "Verified").length ?? 0;
-  const rows = [{ name: "PlayerOne", game: "CODM", region: "Europe", one: verified ? "1-0" : "0-0", wins: verified, points: 10250 + verified * 120 }, { name: "NovaAce", game: "CODM", region: "Europe", one: verified ? "0-1" : "0-0", wins: 0, points: 9980 }, { name: "GhostKing", game: "PUBG Mobile", region: "MENA", one: "0-0", wins: 0, points: 9720 }];
-  return <section className="leaderboard-page podium-board"><div className="chip-row">{["Overall", "1v1", "2v2", "3v3", "CODM", "PUBG Mobile", "Free Fire", "Weapons", "Regions", "Seasons"].map((item) => <span key={item}>{item}</span>)}</div>{rows.map((row, index) => <article className={`leaderboard-row mobile-card-row podium-${index + 1}`} key={row.name}><span>#{index + 1}</span><strong>{row.name}</strong><small>XCL / {row.game} / {row.region} / DR-H / Streak {row.wins}</small><b>{row.wins} wins</b><em>{row.points}</em></article>)}</section>;
+  return <LeaderboardPanel />;
 }
 
 export function ProfileLive() {
-  const { state } = useArenaState();
-  const verified = state?.rooms.filter((room) => room.status === "Verified").length ?? 0;
-  return <section className="page-section profile-arena"><section className="profile-cover"><span className="avatar-ring">P1</span><div><h2>PlayerOne</h2><p>XCL / Legendary / CODM / Europe / DR-H main</p></div><strong>{verified ? "#1" : "#12"}</strong></section><section className="card-grid four">{[["Total matches", verified], ["Wins", verified], ["Losses", 0], ["Win rate", verified ? "100%" : "0%"], ["Current streak", verified], ["Best streak", verified], ["1v1 record", `${verified}-0`], ["Ranking", verified ? "#1" : "#12"]].map(([label, value]) => <article className="product-card metric-card" key={label}><span>{label}</span><strong>{value}</strong></article>)}</section><section className="achievement-rack">{["First Blood", "10 Win Streak", "Sniper Elite", "Clan Champion", "Undefeated", "Tournament Winner", "High Stakes Winner"].map((item) => <span key={item}>{item}</span>)}</section><section className="card-grid three"><article className="product-card"><h2>Favorites</h2><p>Game CODM / Weapon DR-H / Map Shipment / Mode Gunfight</p></article><article className="product-card"><h2>Current clan</h2><p>Xclusive officer / Europe / Legendary</p></article><article className="product-card"><h2>Demo wallet</h2><p>Demo balance - no real money. PlayerOne balance ${state?.wallets.PlayerOne.balance ?? 0}, locked ${state?.wallets.PlayerOne.locked ?? 0}.</p></article></section><ChallengeDiscovery /></section>;
+  return <><PlayerProfilePanel /><ChallengeDiscovery /></>;
 }
 
 export function GameHubLive({ game }: { game: GameName }) {

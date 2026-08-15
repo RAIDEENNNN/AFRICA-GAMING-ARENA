@@ -120,6 +120,19 @@ body {
   flex-wrap: wrap;
 }
 
+.side-profile a {
+  color: #ffd60a;
+  font-size: 0.72rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.side-profile progress {
+  accent-color: #22d3ee;
+  height: 7px;
+  width: 100%;
+}
+
 .side-profile span,
 .hero-status-rail span,
 .portal-intel div,
@@ -3965,6 +3978,31 @@ meter {
 .aga-empty-state p {
   color: var(--aga-muted);
   margin: 0;
+}
+
+.empty-arena-state {
+  border-color: rgba(34, 211, 238, 0.24);
+  display: grid;
+  gap: 12px;
+}
+
+.empty-arena-state h2,
+.empty-arena-state p {
+  margin: 0;
+}
+
+.notification-card {
+  border-left: 3px solid rgba(34, 211, 238, 0.55);
+}
+
+.notification-card.unread {
+  background:
+    linear-gradient(135deg, rgba(34, 211, 238, 0.11), rgba(159, 76, 255, 0.08)),
+    rgba(12, 14, 24, 0.92);
+}
+
+.notification-card.read {
+  opacity: 0.72;
 }
 
 .aga-live-card > span {

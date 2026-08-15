@@ -38,6 +38,9 @@ test("keeps starter preview code removed", async () => {
 
   assert.match(page, /product-shell/);
   assert.match(layout, /Africa Gaming Arena \| Compete\. Dominate\. Become Legendary\./);
+  assert.doesNotMatch(page, /Live 128|Wagers 12|2,914 online|PlayerOne<\/b>/);
+  assert.match(page, /ShellPlayerPanel/);
+  assert.match(page, /TopbarPlayerLinks/);
   assert.doesNotMatch(page + layout + packageJson, /codex-preview|SkeletonPreview|react-loading-skeleton/);
   assert.doesNotMatch(arenaClient, /localStorage|sessionStorage/);
   assert.match(apiRoute, /acceptChallenge/);
