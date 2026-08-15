@@ -38,17 +38,16 @@ const slides = [
 
 const nav = ["Home", "Games", "Tournaments", "Clans", "Leaderboards", "Marketplace", "Clips", "News", "More"];
 const sideNav = [
-  ["Home", "/", "⌂"],
-  ["Find Match", "/matches", "⌕"],
-  ["Create Match", "/matches/request", "✦"],
-  ["Clans", "/clans", "♜"],
-  ["Tournaments", "/tournaments", "♕"],
-  ["Leaderboards", "/leaderboards", "▥"],
-  ["Clips", "/clips", "▶"],
-  ["Marketplace", "/marketplace", "▤"],
-  ["Wallet", "/wallet", "▣"],
-  ["Messages", "/messages", "✉"],
-  ["More", "/rank-system", "•••"],
+  ["Home", "/", "HM"],
+  ["Find Match", "/matches", "FM"],
+  ["Create Match", "/matches/request", "CM"],
+  ["Clans", "/clans", "CL"],
+  ["Tournaments", "/tournaments", "TR"],
+  ["Leaderboards", "/leaderboards", "LB"],
+  ["Clips", "/clips", "CP"],
+  ["Marketplace", "/marketplace", "MK"],
+  ["News & Events", "/news", "NE"],
+  ["Support", "/support", "SP"],
 ];
 
 const portals = [
@@ -158,7 +157,21 @@ export function AGAHome() {
       </header>
 
       <aside className="aga-sidebar" aria-label="AGA sidebar">
-        {sideNav.map(([label, href, icon]) => <Link className={label === "Home" ? "active" : ""} href={href} key={label}><span>{icon}</span>{label}</Link>)}
+        <div className="aga-side-brand">
+          <img src="/brand/aga-icon.svg" alt="" width={38} height={38} />
+          <div><strong>AGA</strong><small>Africa Gaming Arena</small></div>
+        </div>
+        <div className="aga-side-profile">
+          <span>AG</span>
+          <div><strong>Guest player</strong><small>Login to sync stats</small></div>
+        </div>
+        <nav>
+          {sideNav.slice(0, 7).map(([label, href, icon]) => <Link className={label === "Home" ? "active" : ""} href={href} key={label}><span>{icon}</span><b>{label}</b><em /></Link>)}
+        </nav>
+        <nav className="secondary">
+          {sideNav.slice(7).map(([label, href, icon]) => <Link href={href} key={label}><span>{icon}</span><b>{label}</b><em /></Link>)}
+        </nav>
+        <Link className="aga-side-wallet" href="/wallet"><small>AGA Wallet</small><strong>Demo</strong><span>Simulated balance only</span></Link>
       </aside>
 
       <section className={`aga-hero aga-${slide.tone}`} onPointerEnter={() => setPaused(true)} onPointerLeave={() => setPaused(false)} onPointerDown={() => setPaused(true)}>
