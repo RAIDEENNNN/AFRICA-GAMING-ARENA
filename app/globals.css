@@ -5318,6 +5318,22 @@ meter {
   text-transform: uppercase;
 }
 
+.aga-auth-submit:disabled {
+  cursor: wait;
+  opacity: 0.72;
+}
+
+.aga-auth-message {
+  border: 1px solid rgba(255, 193, 7, 0.34);
+  border-radius: 8px;
+  background: rgba(255, 193, 7, 0.08);
+  color: #ffe083;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  margin: 0;
+  padding: 0.72rem 0.85rem;
+}
+
 .aga-auth-legal {
   display: flex;
   gap: 16px;

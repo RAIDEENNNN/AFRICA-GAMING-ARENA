@@ -9,11 +9,31 @@ export const users = sqliteTable("users", {
   id: text("id").primaryKey(),
   username: text("username").notNull(),
   email: text("email").notNull(),
-  role: text("role").notNull().default("player"),
+  displayName: text("display_name"),
+  passwordHash: text("password_hash"),
+  country: text("country"),
+  dateOfBirth: text("date_of_birth"),
+  primaryGame: text("primary_game"),
+  avatarUrl: text("avatar_url"),
+  bannerUrl: text("banner_url"),
+  bio: text("bio"),
+  status: text("status").notNull().default("active"),
+  role: text("role").notNull().default("PLAYER"),
   region: text("region"),
   skillLevel: text("skill_level"),
   ageVerified: integer("age_verified", { mode: "boolean" }).notNull().default(false),
+  lastSeenAt: text("last_seen_at"),
   ...timestamps,
+});
+
+export const sessions = sqliteTable("sessions", {
+  id: text("id").primaryKey(),
+  userId: text("user_id").notNull().references(() => users.id),
+  tokenHash: text("token_hash").notNull(),
+  expiresAt: text("expires_at").notNull(),
+  createdAt: text("created_at").notNull(),
+  ipHash: text("ip_hash"),
+  userAgent: text("user_agent"),
 });
 
 export const games = sqliteTable("games", {
@@ -188,6 +208,24 @@ export const playerStatistics = sqliteTable("player_statistics", {
   ...timestamps,
 });
 
+export const playerStats = sqliteTable("player_stats", {
+  id: text("id").primaryKey(),
+  userId: text("user_id").notNull().references(() => users.id),
+  game: text("game").notNull(),
+  matchesPlayed: integer("matches_played").notNull().default(0),
+  wins: integer("wins").notNull().default(0),
+  losses: integer("losses").notNull().default(0),
+  draws: integer("draws").notNull().default(0),
+  kills: integer("kills").notNull().default(0),
+  deaths: integer("deaths").notNull().default(0),
+  rating: integer("rating").notNull().default(1000),
+  xp: integer("xp").notNull().default(0),
+  level: integer("level").notNull().default(1),
+  winStreak: integer("win_streak").notNull().default(0),
+  bestWinStreak: integer("best_win_streak").notNull().default(0),
+  updatedAt: text("updated_at").notNull(),
+});
+
 export const leaderboardEntries = sqliteTable("leaderboard_entries", {
   id: text("id").primaryKey(),
   userId: text("user_id").references(() => users.id),
@@ -233,6 +271,15 @@ export const orders = sqliteTable("orders", {
   productId: text("product_id").notNull().references(() => products.id),
   status: text("status").notNull(),
   deliveryConfirmedAt: text("delivery_confirmed_at"),
+  ...timestamps,
+});
+
+export const wallets = sqliteTable("wallets", {
+  id: text("id").primaryKey(),
+  userId: text("user_id").notNull().references(() => users.id),
+  currency: text("currency").notNull(),
+  availableBalance: integer("available_balance").notNull().default(0),
+  lockedBalance: integer("locked_balance").notNull().default(0),
   ...timestamps,
 });
 

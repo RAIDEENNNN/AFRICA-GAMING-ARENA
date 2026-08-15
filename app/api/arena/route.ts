@@ -9,6 +9,7 @@ import {
   type Actor,
 } from "../../arena-store";
 import { loadArenaState, persistentStoreInfo, resetArenaStateFile, saveArenaState } from "../../arena-d1-repository";
+import { getCurrentUser } from "../../auth";
 
 export async function GET() {
   const state = await loadArenaState();
@@ -18,7 +19,8 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const actor = (body.actor ?? "PlayerOne") as Actor;
+    const currentUser = await getCurrentUser(request);
+    const actor = (currentUser?.username ?? body.actor ?? "PlayerOne") as Actor;
     const state = await loadArenaState();
     let data;
     switch (body.action) {
