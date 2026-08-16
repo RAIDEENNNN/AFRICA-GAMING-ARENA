@@ -22,6 +22,27 @@ export const secondaryNavItems = [
 export function AppShell({ children }: { children: React.ReactNode }) {
   return (
     <main className="product-shell">
+      <header className="product-mobile-header">
+        <Link className="product-mobile-brand" href="/" aria-label="Africa Gaming Arena home">
+          <img src="/brand/aga-logo.svg" alt="AGA Africa Gaming Arena" width={150} height={42} />
+        </Link>
+        <div className="product-mobile-actions">
+          <Link href="/notifications" aria-label="Notifications">♕</Link>
+          <Link href="/login">Log In</Link>
+          <details>
+            <summary aria-label="Open menu">☰</summary>
+            <nav>
+              {[...primaryNavItems, ...secondaryNavItems].map(([label, href, icon]) => (
+                <Link href={href} key={href}><span>{icon}</span>{label}</Link>
+              ))}
+              <Link href="/tournaments/cma"><span>CA</span>CMA Tournaments</Link>
+              <Link href="/rank-system"><span>RS</span>Rank System</Link>
+              <Link href="/faq"><span>FQ</span>FAQ</Link>
+              <Link href="/rules"><span>RL</span>Rules</Link>
+            </nav>
+          </details>
+        </div>
+      </header>
       <aside className="product-sidebar">
         <Link className="brand" href="/">
           <span>AG</span>

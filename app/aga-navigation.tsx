@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
 
 type Action = {
   label: string;
@@ -39,35 +38,6 @@ const moreLinks = [
 ];
 
 export function AGAHeader({ active }: { active: string }) {
-  const [drawerOpen, setDrawerOpen] = useState(false);
-  const drawerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!drawerOpen) return;
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setDrawerOpen(false);
-    };
-
-    const onPointerDown = (event: PointerEvent) => {
-      if (drawerRef.current && !drawerRef.current.contains(event.target as Node)) {
-        setDrawerOpen(false);
-      }
-    };
-
-    document.addEventListener("keydown", onKeyDown);
-    document.addEventListener("pointerdown", onPointerDown);
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      document.removeEventListener("keydown", onKeyDown);
-      document.removeEventListener("pointerdown", onPointerDown);
-    };
-  }, [drawerOpen]);
-
-  const closeDrawer = () => setDrawerOpen(false);
-
   return (
     <header className="aga-site-header">
       <Link className="aga-site-logo" href="/" aria-label="Africa Gaming Arena home">
@@ -96,21 +66,16 @@ export function AGAHeader({ active }: { active: string }) {
       <div className="aga-mobile-top-actions">
         <Link href="/notifications" aria-label="Notifications">♕</Link>
         <Link className="mobile-login" href="/login">Log In</Link>
-        <button type="button" onClick={() => setDrawerOpen(true)} aria-label="Open menu">☰</button>
-      </div>
-      {drawerOpen ? <div className="aga-drawer-scrim" aria-hidden="true" /> : null}
-      <div className={`aga-mobile-drawer ${drawerOpen ? "open" : ""}`} ref={drawerRef} aria-hidden={!drawerOpen}>
-        <div className="aga-drawer-head">
-          <img src="/brand/aga-logo.svg" alt="AGA Africa Gaming Arena" width={142} height={40} />
-          <button type="button" onClick={closeDrawer} aria-label="Close menu">×</button>
-        </div>
-        <nav aria-label="Mobile menu drawer">
-          {[...mainNav, ["CMA Tournaments", "/tournaments/cma"], ...moreLinks].map(([label, href]) => (
-            <Link href={href} key={href} onClick={closeDrawer}>{label}</Link>
-          ))}
-          <Link href="/login" onClick={closeDrawer}>Log In</Link>
-          <Link href="/register" onClick={closeDrawer}>Register</Link>
-        </nav>
+        <details className="aga-mobile-native-menu">
+          <summary aria-label="Open menu">☰</summary>
+          <nav aria-label="Mobile menu drawer">
+            {[...mainNav, ["CMA Tournaments", "/tournaments/cma"], ...moreLinks].map(([label, href]) => (
+              <Link href={href} key={href}>{label}</Link>
+            ))}
+            <Link href="/login">Log In</Link>
+            <Link href="/register">Register</Link>
+          </nav>
+        </details>
       </div>
     </header>
   );
