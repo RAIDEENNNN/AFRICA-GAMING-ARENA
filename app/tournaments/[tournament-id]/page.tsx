@@ -1,6 +1,10 @@
 import { AppShell, PageHero } from "../../components";
 import { tournaments } from "../../data";
 
+export function generateStaticParams() {
+  return tournaments.map((tournament) => ({ "tournament-id": tournament.slug }));
+}
+
 export default async function DynamicTournamentPage({ params }: { params: Promise<{ "tournament-id": string }> }) {
   const { "tournament-id": slug } = await params;
   const tournament = tournaments.find((item) => item.slug === slug) ?? tournaments[0];

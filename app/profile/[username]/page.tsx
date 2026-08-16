@@ -1,6 +1,10 @@
 import { ProfileLive } from "../../arena-client";
 import { AppShell, PageHero } from "../../components";
 
+export function generateStaticParams() {
+  return [{ username: "PlayerOne" }, { username: "NovaAce" }, { username: "RivalUser" }];
+}
+
 export default async function PlayerProfileRoute({ params }: { params: Promise<{ username: string }> }) {
   const { username } = await params;
 

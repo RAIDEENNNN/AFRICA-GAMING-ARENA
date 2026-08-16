@@ -1,5 +1,10 @@
 import { MatchRoomClient } from "../../arena-client";
 import { AppShell, PageHero } from "../../components";
+import { matches } from "../../data";
+
+export function generateStaticParams() {
+  return matches.map((match) => ({ "match-id": match.id }));
+}
 
 export default async function DynamicMatchPage({ params }: { params: Promise<{ "match-id": string }> }) {
   const { "match-id": id } = await params;

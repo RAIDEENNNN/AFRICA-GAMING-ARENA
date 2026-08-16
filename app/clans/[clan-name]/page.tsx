@@ -1,6 +1,10 @@
 import { AppShell, MatchRow, PageHero } from "../../components";
 import { clans, matches } from "../../data";
 
+export function generateStaticParams() {
+  return clans.map((clan) => ({ "clan-name": clan.slug }));
+}
+
 export default async function DynamicClanPage({ params }: { params: Promise<{ "clan-name": string }> }) {
   const { "clan-name": slug } = await params;
   const clan = clans.find((item) => item.slug === slug) ?? clans[0];
