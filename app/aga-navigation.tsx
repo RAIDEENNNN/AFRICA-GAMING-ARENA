@@ -29,6 +29,9 @@ const mainNav = [
 ];
 
 const moreLinks = [
+  ["Match History", "/matches"],
+  ["Notifications", "/notifications"],
+  ["Profile", "/profile"],
   ["Rank System", "/rank-system"],
   ["FAQ", "/faq"],
   ["Support", "/support"],
@@ -57,7 +60,7 @@ export function AGAHeader({ active }: { active: string }) {
         </details>
       </nav>
       <div className="aga-site-actions">
-        <Link href="/find-clans" aria-label="Search">⌕</Link>
+        <Link href="/search" aria-label="Search">⌕</Link>
         <Link href="/notifications" aria-label="Notifications">♕</Link>
         <Link href="/profile" aria-label="Profile">●</Link>
         <Link className="login" href="/login">Log In</Link>
@@ -184,5 +187,59 @@ export function PagePanel({ children, title }: { children: React.ReactNode; titl
       {title ? <h2>{title}</h2> : null}
       {children}
     </section>
+  );
+}
+
+export function SectionHeader({ eyebrow, title, copy }: { eyebrow?: string; title: string; copy?: string }) {
+  return (
+    <header className="aga-section-header">
+      {eyebrow ? <span>{eyebrow}</span> : null}
+      <h2>{title}</h2>
+      {copy ? <p>{copy}</p> : null}
+    </header>
+  );
+}
+
+export function StatusBadge({ children, tone = "gold" }: { children: React.ReactNode; tone?: "gold" | "purple" | "cyan" | "muted" }) {
+  return <span className={`aga-status-badge ${tone}`}>{children}</span>;
+}
+
+export function StatCard({ label, value, copy }: { label: string; value: string | number; copy?: string }) {
+  return (
+    <article className="aga-stat-card">
+      <small>{label}</small>
+      <strong>{value}</strong>
+      {copy ? <p>{copy}</p> : null}
+    </article>
+  );
+}
+
+export function DataCard({
+  eyebrow,
+  title,
+  copy,
+  href,
+  action = "View",
+  meta = [],
+  tone = "gold",
+}: {
+  eyebrow?: string;
+  title: string;
+  copy: string;
+  href?: string;
+  action?: string;
+  meta?: string[];
+  tone?: "gold" | "purple" | "cyan" | "muted";
+}) {
+  return (
+    <article className={`aga-data-card ${tone}`}>
+      <div>
+        {eyebrow ? <StatusBadge tone={tone}>{eyebrow}</StatusBadge> : null}
+        <h3>{title}</h3>
+        <p>{copy}</p>
+      </div>
+      {meta.length ? <ul>{meta.map((item) => <li key={item}>{item}</li>)}</ul> : null}
+      {href ? <Link className="aga-page-btn secondary" href={href}>{action}</Link> : null}
+    </article>
   );
 }

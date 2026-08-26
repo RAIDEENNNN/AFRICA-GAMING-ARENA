@@ -68,10 +68,10 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       </aside>
       <section className="product-main">
         <header className="product-topbar">
-          <label className="search">
+          <Link className="search product-search-link" href="/search">
             <span className="sr-only">Search</span>
-            <input placeholder="Search clans, players, tournaments..." />
-          </label>
+            <input placeholder="Search clans, players, tournaments..." readOnly />
+          </Link>
           <nav>
             <TopbarPlayerLinks />
           </nav>

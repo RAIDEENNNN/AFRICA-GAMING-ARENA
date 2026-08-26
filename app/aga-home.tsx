@@ -142,7 +142,7 @@ export function AGAHome() {
           })}
         </nav>
         <div className="aga-actions">
-          <Link href="/find-clans" aria-label="Search">⌕</Link>
+          <Link href="/search" aria-label="Search">⌕</Link>
           <Link href="/notifications" aria-label="Notifications">♕</Link>
           <Link className="login" href="/login">Log In</Link>
           <Link className="register" href="/register">Register</Link>

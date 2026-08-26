@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { AGAPageShell, EmptyState, FilterTabs, PagePanel, SupabaseNotice } from "../aga-navigation";
+import { AGAPageShell, DataCard, EmptyState, FilterTabs, PagePanel, SectionHeader, StatCard, SupabaseNotice } from "../aga-navigation";
+import { tournaments } from "../data";
 
 export default function TournamentsPage() {
   return (
@@ -11,13 +12,29 @@ export default function TournamentsPage() {
       actions={[{ label: "View CMA Tournaments", href: "/tournaments/cma" }, { label: "Create Tournament", href: "/dashboard/cma-organiser", variant: "secondary" }]}
     >
       <SupabaseNotice />
+      <section className="aga-stat-grid">
+        <StatCard label="Open registration" value="0" copy="No verified registration records yet." />
+        <StatCard label="Live events" value="0" copy="Live brackets will appear from the tournament backend." />
+        <StatCard label="Supported games" value="3" copy="CODM, PUBG Mobile and Free Fire." />
+        <StatCard label="CMA status" value="Setup" copy="CMA hub is prepared for organiser activation." />
+      </section>
       <FilterTabs tabs={["All", "CODM", "PUBG Mobile", "Free Fire", "CMA", "Upcoming", "Live", "Completed"]} />
-      <EmptyState
-        title="No tournaments are open yet"
-        copy="Be the first organiser to prepare the arena. Tournament cards will show organiser, start date, entry type, capacity, registration status and rewards once real records exist."
-        action="Open CMA Hub"
-        href="/tournaments/cma"
-      />
+      <SectionHeader eyebrow="Tournament board" title="Prepared event pages" copy="These are launch-ready tournament shells. Registration and participant counts stay clearly marked until real organiser data is connected." />
+      <section className="aga-card-grid">
+        {tournaments.map((tournament, index) => (
+          <DataCard
+            action="View Tournament"
+            copy={`${tournament.format}. Registration flow is architecture-ready and will only accept real entries when organiser controls are enabled.`}
+            eyebrow={tournament.tag}
+            href={`/tournaments/${tournament.slug}`}
+            key={tournament.slug}
+            meta={[tournament.game, tournament.date, "Participants: awaiting real registration", `Prize: ${tournament.prize} demo reference`]}
+            title={tournament.name}
+            tone={index === 1 ? "purple" : index === 2 ? "cyan" : "gold"}
+          />
+        ))}
+      </section>
+      <EmptyState title="No active tournament matches" copy="Tournament matches, standings and results will appear here only after real brackets are opened." action="View CMA Hub" href="/tournaments/cma" />
       <PagePanel title="CMA tournaments">
         <p>CMA tournament registration will appear here when CODM events are opened by an authorised organiser.</p>
         <Link className="aga-page-btn secondary" href="/tournaments/cma">View CMA Tournaments</Link>

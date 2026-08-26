@@ -49,3 +49,32 @@ test("keeps starter preview code removed", async () => {
     assert.match(schema, new RegExp(`export const ${table}`));
   }
 });
+
+test("keeps the main AGA navigation ecosystem connected", async () => {
+  const files = await Promise.all([
+    "../app/aga-navigation.tsx",
+    "../app/search/page.tsx",
+    "../app/games/page.tsx",
+    "../app/games/pubgm/page.tsx",
+    "../app/tournaments/page.tsx",
+    "../app/clans/page.tsx",
+    "../app/leaderboard/page.tsx",
+    "../app/marketplace/page.tsx",
+    "../app/clips/page.tsx",
+    "../app/news/page.tsx",
+    "../app/news/[slug]/page.tsx",
+    "../app/clips/[id]/page.tsx",
+    "../app/marketplace/[id]/page.tsx",
+  ].map((path) => readFile(new URL(path, import.meta.url), "utf8")));
+  const source = files.join("\n");
+
+  for (const route of ["/games", "/tournaments", "/clans", "/leaderboards", "/marketplace", "/clips", "/news", "/search", "/login", "/register"]) {
+    assert.match(source, new RegExp(route.replace("/", "\\/")));
+  }
+  assert.match(source, /FIND ANYTHING IN AGA/);
+  assert.match(source, /generateStaticParams/);
+  assert.match(source, /Transactions are disabled/);
+  assert.match(source, /No fake likes, views or comments/);
+  assert.match(source, /No buy-now, deposits, withdrawals or escrow/);
+  assert.match(source, /aga-mobile-native-menu/);
+});

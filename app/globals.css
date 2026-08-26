@@ -802,6 +802,14 @@ small {
   width: 100%;
 }
 
+.product-search-link {
+  display: block;
+}
+
+.product-search-link input {
+  cursor: pointer;
+}
+
 .profile-pill {
   align-items: center;
   display: grid;
@@ -5195,7 +5203,9 @@ meter {
 .aga-page-panel,
 .aga-empty-state,
 .aga-error-state,
-.aga-table-shell {
+.aga-table-shell,
+.aga-data-card,
+.aga-stat-card {
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.035), transparent),
     rgba(16, 23, 34, 0.86);
@@ -5203,6 +5213,122 @@ meter {
   border-radius: 8px;
   margin-top: 18px;
   padding: clamp(18px, 3vw, 30px);
+}
+
+.aga-section-header {
+  margin-top: 30px;
+  max-width: 760px;
+}
+
+.aga-section-header span,
+.aga-status-badge,
+.aga-stat-card small {
+  color: var(--aga-gold);
+  font-size: 0.72rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.aga-section-header h2,
+.aga-data-card h3,
+.aga-stat-card strong {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  letter-spacing: 0;
+  line-height: 0.95;
+  margin: 8px 0;
+  text-transform: uppercase;
+}
+
+.aga-section-header h2 {
+  font-size: clamp(2rem, 4.5vw, 4.4rem);
+}
+
+.aga-data-card h3 {
+  font-size: clamp(1.45rem, 2.3vw, 2.25rem);
+}
+
+.aga-section-header p,
+.aga-data-card p,
+.aga-stat-card p {
+  color: var(--aga-muted);
+  line-height: 1.65;
+}
+
+.aga-card-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 18px;
+}
+
+.aga-card-grid.two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.aga-data-card,
+.aga-stat-card {
+  display: grid;
+  gap: 14px;
+  min-height: 220px;
+}
+
+.aga-data-card {
+  align-content: space-between;
+}
+
+.aga-data-card.gold { border-color: rgba(255, 193, 7, 0.32); }
+.aga-data-card.purple { border-color: rgba(168, 85, 247, 0.32); }
+.aga-data-card.cyan { border-color: rgba(34, 211, 238, 0.32); }
+
+.aga-data-card ul {
+  color: var(--aga-muted);
+  display: grid;
+  gap: 7px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.aga-data-card li {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 7px;
+}
+
+.aga-status-badge {
+  border: 1px solid rgba(255, 193, 7, 0.24);
+  display: inline-flex;
+  padding: 6px 8px;
+}
+
+.aga-status-badge.purple {
+  border-color: rgba(168, 85, 247, 0.34);
+  color: #c084fc;
+}
+
+.aga-status-badge.cyan {
+  border-color: rgba(34, 211, 238, 0.34);
+  color: #67e8f9;
+}
+
+.aga-status-badge.muted {
+  border-color: rgba(148, 163, 184, 0.24);
+  color: var(--aga-muted);
+}
+
+.aga-stat-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 18px;
+}
+
+.aga-stat-card {
+  min-height: 150px;
+}
+
+.aga-stat-card strong {
+  color: var(--aga-white);
+  font-size: clamp(2rem, 4vw, 3.7rem);
 }
 
 .aga-supabase-notice strong {
@@ -5361,6 +5487,34 @@ meter {
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   margin-bottom: 16px;
   padding-bottom: 12px;
+}
+
+.aga-leaderboard-list {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.aga-rank-row {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--aga-white);
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 54px minmax(0, 1.2fr) minmax(80px, 0.7fr) minmax(130px, 1fr) auto;
+  min-height: 72px;
+  padding: 12px;
+}
+
+.aga-rank-row strong {
+  color: var(--aga-gold);
+}
+
+.aga-rank-row small {
+  color: var(--aga-muted);
+  display: block;
+  margin-top: 3px;
 }
 
 .aga-skeleton-grid {
@@ -5695,6 +5849,9 @@ meter {
   }
 
   .aga-game-page-grid,
+  .aga-card-grid,
+  .aga-card-grid.two,
+  .aga-stat-grid,
   .aga-info-grid {
     grid-template-columns: 1fr;
   }
@@ -5739,8 +5896,14 @@ meter {
   }
 
   .aga-game-page-card dl,
-  .aga-table-head {
+  .aga-table-head,
+  .aga-rank-row {
     grid-template-columns: 1fr;
+  }
+
+  .aga-rank-row {
+    align-items: start;
+    width: 100%;
   }
 
   .aga-tool-row {
