@@ -29,6 +29,14 @@ const routes = [
   "/clips/upload",
   "/leaderboard",
   "/marketplace",
+  "/marketplace/category/cod-points",
+  "/marketplace/category/pubg-uc",
+  "/marketplace/category/free-fire-diamonds",
+  "/marketplace/category/coaching",
+  "/marketplace/category/graphics",
+  "/marketplace/category/editing",
+  "/marketplace/category/tournament-services",
+  "/marketplace/category/verified-vendors",
   "/orders",
   "/wallet",
   "/admin",
@@ -45,7 +53,8 @@ const failures = [];
 for (const width of widths) {
   const page = await browser.newPage({ viewport: { width, height: 900 } });
   for (const route of routes) {
-    await page.goto(`${baseUrl}${route}`, { waitUntil: "networkidle" });
+    await page.goto(`${baseUrl}${route}`, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(250);
     const metrics = await page.evaluate(() => ({
       scrollWidth: document.documentElement.scrollWidth,
       clientWidth: document.documentElement.clientWidth,
@@ -80,7 +89,8 @@ const screenshots = [
 
 for (const [route, width, file] of screenshots) {
   const page = await browser.newPage({ viewport: { width, height: 1000 } });
-  await page.goto(`${baseUrl}${route}`, { waitUntil: "networkidle" });
+  await page.goto(`${baseUrl}${route}`, { waitUntil: "domcontentloaded" });
+  await page.waitForTimeout(250);
   await page.screenshot({ path: path.join(outDir, file), fullPage: true });
   await page.close();
 }

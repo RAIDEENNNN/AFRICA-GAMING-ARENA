@@ -61,7 +61,11 @@ test("keeps the main AGA navigation ecosystem connected", async () => {
     "../app/clans/page.tsx",
     "../app/leaderboard/page.tsx",
     "../app/marketplace/page.tsx",
+    "../app/marketplace/categories.ts",
+    "../app/marketplace/category/[category]/page.tsx",
     "../app/clips/page.tsx",
+    "../app/(auth)/login/page.tsx",
+    "../app/(auth)/register/page.tsx",
     "../app/find-clans/page.tsx",
     "../app/clans/create/page.tsx",
     "../app/clips/upload/page.tsx",
@@ -73,7 +77,7 @@ test("keeps the main AGA navigation ecosystem connected", async () => {
   ].map((path) => readFile(new URL(path, import.meta.url), "utf8")));
   const source = files.join("\n");
 
-  for (const route of ["/games", "/tournaments", "/clans", "/find-clans", "/clans/create", "/leaderboards", "/marketplace", "/orders", "/clips", "/clips/upload", "/news", "/search", "/login", "/register"]) {
+  for (const route of ["/games", "/tournaments", "/clans", "/find-clans", "/clans/create", "/leaderboards", "/marketplace", "/marketplace/category/", "/orders", "/clips", "/clips/upload", "/news", "/search", "/login", "/register"]) {
     assert.match(source, new RegExp(route.replace("/", "\\/")));
   }
   assert.match(source, /FIND ANYTHING IN AGA/);
@@ -83,6 +87,19 @@ test("keeps the main AGA navigation ecosystem connected", async () => {
   assert.match(source, /CREATE CLAN/);
   assert.match(source, /UPLOAD CLIP/);
   assert.match(source, /ORDER HISTORY/);
+  assert.match(source, /Champion slot/);
+  assert.match(source, /Google/);
+  assert.match(source, /Apple/);
+  assert.match(source, /Activision/);
+  assert.match(source, /Level Infinite/);
+  assert.match(source, /Garena/);
+  assert.match(source, /COD POINTS/);
+  assert.match(source, /cod-points/);
+  assert.match(source, /pubg-uc/);
+  assert.match(source, /free-fire-diamonds/);
+  assert.match(source, /PUBG UC/);
+  assert.match(source, /FREE FIRE DIAMONDS/);
+  assert.match(source, /VERIFIED VENDORS/);
   assert.match(source, /generateStaticParams/);
   assert.match(source, /Transactions are disabled/);
   assert.match(source, /No fake likes, views or comments/);

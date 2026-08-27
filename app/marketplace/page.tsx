@@ -1,4 +1,6 @@
-import { AGAPageShell, DataCard, EmptyState, FilterTabs, SearchBar, SectionHeader, StatCard, SupabaseNotice } from "../aga-navigation";
+import Link from "next/link";
+import { AGAPageShell, DataCard, EmptyState, SearchBar, SectionHeader, StatCard, SupabaseNotice } from "../aga-navigation";
+import { marketplaceCategories } from "./categories";
 
 const listingCategories = [
   ["gaming-gear", "Gaming gear", "Controllers, headsets and mobile accessories discovery listings.", "View Listing"],
@@ -18,7 +20,13 @@ export default function MarketplacePage() {
       <SupabaseNotice />
       <section className="aga-tool-row">
         <SearchBar placeholder="Search marketplace..." />
-        <FilterTabs tabs={["COD Points", "PUBG UC", "Free Fire Diamonds", "Coaching", "Graphics", "Editing", "Tournament services", "Verified vendors"]} />
+        <nav className="aga-market-category-nav" aria-label="Marketplace categories">
+          {marketplaceCategories.map((category, index) => (
+            <Link className={index === 0 ? "active" : ""} href={`/marketplace/category/${category.slug}`} key={category.slug}>
+              {category.label}
+            </Link>
+          ))}
+        </nav>
       </section>
       <section className="aga-stat-grid">
         <StatCard label="Real payments" value="Off" copy="No buy-now, deposits, withdrawals or escrow." />
@@ -39,6 +47,18 @@ export default function MarketplacePage() {
             title={title}
             tone={index === 1 ? "purple" : index === 2 ? "cyan" : "gold"}
           />
+        ))}
+      </section>
+      <SectionHeader eyebrow="Categories" title="Every marketplace category has a destination" copy="These panels match the tabs above. Click a category to open the full page for that marketplace lane." />
+      <section className="aga-market-category-grid">
+        {marketplaceCategories.map((category) => (
+          <article className={`aga-market-category-card ${category.tone}`} key={category.slug}>
+            <span>{category.label}</span>
+            <h3>{category.title}</h3>
+            <p>{category.copy}</p>
+            <ul>{category.items.map((item) => <li key={item}>{item}</li>)}</ul>
+            <Link className="aga-page-btn secondary" href={`/marketplace/category/${category.slug}`}>Open Category</Link>
+          </article>
         ))}
       </section>
       <EmptyState title="No verified marketplace listings yet" copy="Real vendor cards will appear only after approval and moderation tools are connected." action="Contact Support" href="/support" />
