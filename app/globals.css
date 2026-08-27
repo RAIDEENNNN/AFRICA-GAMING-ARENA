@@ -367,7 +367,8 @@ body {
 }
 
 .field,
-.search input {
+.search input,
+.product-search-link .search-placeholder {
   border-radius: 0;
   border-color: rgba(34, 211, 238, 0.18);
 }
@@ -793,10 +794,12 @@ small {
 }
 
 .search input,
+.product-search-link .search-placeholder,
 .field {
   background: rgba(8, 8, 16, 0.84);
   border: 1px solid var(--line);
   color: var(--text);
+  display: block;
   min-height: 42px;
   padding: 12px;
   width: 100%;
@@ -806,7 +809,7 @@ small {
   display: block;
 }
 
-.product-search-link input {
+.product-search-link .search-placeholder {
   cursor: pointer;
 }
 
@@ -2639,6 +2642,7 @@ body {
 
   .search,
   .search input,
+  .product-search-link .search-placeholder,
   .field,
   .match-row,
   .btn,
@@ -2649,6 +2653,7 @@ body {
   }
 
   .search input,
+  .product-search-link .search-placeholder,
   .field,
   .match-row {
     width: min(100%, calc(100vw - 32px));

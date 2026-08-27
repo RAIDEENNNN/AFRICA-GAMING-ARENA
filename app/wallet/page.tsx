@@ -1,9 +1,9 @@
 import { AppShell, PageHero, WagerSafetyPanel } from "../components";
 
 const ledger = [
-  ["Available balance", "$0.00", "Cash features disabled"],
-  ["Pending escrow", "$0.00", "Requires legal approval"],
-  ["Platform points", "2,450", "Active for free challenges"],
+  ["Available balance", "£0.00", "Payments unavailable"],
+  ["Pending escrow", "£0.00", "Requires legal approval"],
+  ["Platform points", "0", "Points are awarded only from verified platform activity"],
   ["Verification", "Incomplete", "Age and location required"],
 ];
 
@@ -12,8 +12,8 @@ export default function WalletPage() {
     <AppShell>
       <PageHero
         eyebrow="Wallet"
-        title="Prizes, points and escrow controls stay gated until compliance is ready."
-        copy="AGA can support wager-style challenge fields, but real money movement is locked behind age checks, jurisdiction rules, identity review, payment provider approval and admin moderation."
+        title="Wallet controls stay gated until compliance is ready."
+        copy="New users start at £0.00. Deposits, withdrawals, checkout and escrow are unavailable until age checks, jurisdiction rules, identity review, payment provider approval and admin moderation exist."
         primary={["Create points challenge", "/matches/request"]}
         secondary={["Read support", "/support"]}
       />

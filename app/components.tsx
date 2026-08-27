@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { challenges, clans, clips, games, matches, tournaments } from "./data";
+import { challenges, clans, clips, games, matches, tournaments, type PublicChallenge, type PublicClan, type PublicClip, type PublicMatch, type PublicTournament } from "./data";
 import { ShellPlayerPanel, SidebarNav, SidebarUtilities, SidebarWallet, TopbarPlayerLinks } from "./player-client";
 
 export const primaryNavItems = [
@@ -71,7 +71,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         <header className="product-topbar">
           <Link className="search product-search-link" href="/search">
             <span className="sr-only">Search</span>
-            <input placeholder="Search clans, players, tournaments..." readOnly />
+            <span className="search-placeholder">Search clans, players, tournaments...</span>
           </Link>
           <nav>
             <TopbarPlayerLinks />
@@ -121,7 +121,7 @@ export function PageHero({
         <div className="hero-status-rail">
           <span>Authenticated profiles</span>
           <span>D1-backed matches</span>
-          <span>Demo wagers labelled</span>
+          <span>Payments unavailable</span>
         </div>
         <div className="button-row">
           {primary ? <Link className="btn primary" href={primary[1]}>{primary[0]}</Link> : null}
@@ -137,7 +137,8 @@ export function PageHero({
   );
 }
 
-export function ClanCard({ clan = clans[0] }) {
+export function ClanCard({ clan }: { clan?: PublicClan }) {
+  if (!clan) return <article className="product-card clan-card"><h3>No clan record yet</h3><p>Verified clan cards will appear after players create clans.</p><Link className="btn ghost small" href="/clans/create">Create clan</Link></article>;
   return (
     <article className="product-card clan-card">
       <span className="crest">{clan.badge}</span>
@@ -151,7 +152,8 @@ export function ClanCard({ clan = clans[0] }) {
   );
 }
 
-export function TournamentCard({ tournament = tournaments[0] }) {
+export function TournamentCard({ tournament }: { tournament?: PublicTournament }) {
+  if (!tournament) return <article className="product-card tournament-card"><span className="tag">Empty</span><h3>No tournament open</h3><p>Verified tournaments will appear after organiser approval.</p><Link className="btn ghost small" href="/tournaments/create">Create tournament</Link></article>;
   return (
     <article className="product-card tournament-card">
       <span className={tournament.tag === "Live now" ? "tag live" : "tag"}>{tournament.tag}</span>
@@ -166,7 +168,8 @@ export function TournamentCard({ tournament = tournaments[0] }) {
   );
 }
 
-export function MatchRow({ match = matches[0] }) {
+export function MatchRow({ match }: { match?: PublicMatch }) {
+  if (!match) return <div className="match-row"><span>No matches</span><strong>0 - 0</strong><span>Awaiting players</span><em>Empty</em></div>;
   return (
     <Link className="match-row" href={`/matches/${match.id}`}>
       <span>{match.left}</span>
@@ -177,13 +180,14 @@ export function MatchRow({ match = matches[0] }) {
   );
 }
 
-export function ClipCard({ clip = clips[0] }) {
+export function ClipCard({ clip }: { clip?: PublicClip }) {
+  if (!clip) return <article className="product-card clip-product-card"><div className="video-thumb"><button>No clip yet</button><span>00:00</span></div><h3>No uploaded clips</h3><p>Uploads will appear after storage and moderation are connected.</p></article>;
   return (
     <article className="product-card clip-product-card">
       <div className="video-thumb"><button>Preview soon</button><span>00:45</span></div>
       <h3>{clip.title}</h3>
       <p>by {clip.creator} / {clip.game}</p>
-      <small>{clip.views} views / {clip.likes} likes</small>
+      <small>Engagement hidden until real analytics exist</small>
     </article>
   );
 }
@@ -200,7 +204,7 @@ export function GamePortalCard({ game = games[0] }) {
         <dl className="portal-intel">
           <div><dt>Top clan</dt><dd>Real ranking pending</dd></div>
           <div><dt>Modes</dt><dd>{game.modes[0]}</dd></div>
-          <div><dt>Wagers</dt><dd>Demo only</dd></div>
+          <div><dt>Payments</dt><dd>Unavailable</dd></div>
         </dl>
         <Link className="btn primary small" href={`/games/${game.slug}`}>View {game.short} arena</Link>
         {game.slug === "codm" ? <Link className="btn ghost small" href="/tournaments/cma">CMA Tournaments</Link> : null}
@@ -220,7 +224,8 @@ export function GameConfigPanel({ game = games[0] }) {
   );
 }
 
-export function ChallengeCard({ challenge = challenges[0] }) {
+export function ChallengeCard({ challenge }: { challenge?: PublicChallenge }) {
+  if (!challenge) return <article className="product-card challenge-card"><div><span className="tag">Empty</span><h3>No open challenge</h3><p>Create the first challenge to populate this board.</p></div><Link className="btn ghost small" href="/matches/request">Create challenge</Link></article>;
   return (
     <article className="product-card challenge-card">
       <div>
@@ -280,11 +285,11 @@ export function WagerSafetyPanel() {
         payment-provider approval, legal review, escrow and dispute moderation are live.
       </p>
       <dl>
-        <div><dt>Player one stake</dt><dd>$20</dd></div>
-        <div><dt>Player two stake</dt><dd>$20</dd></div>
-        <div><dt>Total prize pool</dt><dd>$40</dd></div>
-        <div><dt>Platform fee</dt><dd>$4</dd></div>
-        <div><dt>Winner payout</dt><dd>$36</dd></div>
+        <div><dt>Player one stake</dt><dd>£0.00</dd></div>
+        <div><dt>Player two stake</dt><dd>£0.00</dd></div>
+        <div><dt>Total prize pool</dt><dd>£0.00</dd></div>
+        <div><dt>Platform fee</dt><dd>£0.00</dd></div>
+        <div><dt>Winner payout</dt><dd>£0.00</dd></div>
         <div><dt>Escrow status</dt><dd>Unavailable pending approval</dd></div>
       </dl>
     </article>
@@ -295,10 +300,10 @@ export function StatGrid() {
   return (
     <section className="stat-grid-wide">
       {[
-        ["5.5K", "listed clans"],
-        ["128", "tracked matches"],
-        ["42", "active tournaments"],
-        ["18K", "clip views"],
+        ["0", "listed clans"],
+        ["0", "tracked matches"],
+        ["0", "active tournaments"],
+        ["0", "published clips"],
       ].map(([value, label]) => (
         <article key={label}>
           <strong>{value}</strong>

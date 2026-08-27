@@ -33,8 +33,8 @@ export default function CreateClanPage() {
           </div>
 
           <div className="aga-form-grid">
-            <label>Clan name<input placeholder="Example: Xclusive" /></label>
-            <label>Clan tag<input placeholder="XCL" /></label>
+            <label>Clan name<input placeholder="Example: your clan name" /></label>
+            <label>Clan tag<input placeholder="ABC" /></label>
             <label>
               Primary game
               <select defaultValue="CODM">
@@ -94,7 +94,7 @@ export default function CreateClanPage() {
           </div>
           <div className="aga-create-preview">
             <StatusBadge tone="purple">Preview card</StatusBadge>
-            <h3>XCL / Xclusive</h3>
+            <h3>ABC / Draft Clan</h3>
             <p>Draft clan profile preview. Real owner, roster, applications and match record will appear after persistence is connected.</p>
             <dl>
               <div><dt>Game</dt><dd>CODM</dd></div>

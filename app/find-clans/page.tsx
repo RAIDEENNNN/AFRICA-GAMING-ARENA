@@ -17,11 +17,11 @@ export default function FindClansPage() {
       </section>
       <section className="aga-stat-grid">
         <StatCard label="Open applications" value="0" copy="Live application records will appear after clan persistence is connected." />
-        <StatCard label="Preview clans" value={clans.length} copy="Design-system records used for layout and navigation." />
+        <StatCard label="Verified clans" value={clans.length} copy="Real clan records only. No design preview teams." />
         <StatCard label="Filters" value="Ready" copy="Game, region and recruitment states are represented in the UI." />
         <StatCard label="Join requests" value="Locked" copy="Requires login, profile and clan membership rules." />
       </section>
-      <SectionHeader eyebrow="Clan discovery" title="Choose the squad before you request access" copy="Cards are arranged as a proper directory rather than a compressed showcase board." />
+      <SectionHeader eyebrow="Clan discovery" title="Choose the squad before you request access" copy="The directory is ready, but it stays empty until real clans are created." />
       <section className="aga-card-grid">
         {clans.map((clan, index) => (
           <DataCard
@@ -36,7 +36,7 @@ export default function FindClansPage() {
           />
         ))}
       </section>
-      <EmptyState title="No submitted clan applications yet" copy="Once account identity and clan applications are connected, pending requests will appear here for the player." action="Create Clan" href="/clans/create" />
+      <EmptyState title="No clans are recruiting yet" copy="Once captains create clans and open applications, recruitment cards will appear here." action="Create Clan" href="/clans/create" />
     </AGAPageShell>
   );
 }

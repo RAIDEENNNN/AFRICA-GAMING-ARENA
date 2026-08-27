@@ -1,12 +1,6 @@
 import Link from "next/link";
-import { AGAPageShell, DataCard, EmptyState, SearchBar, SectionHeader, StatCard, SupabaseNotice } from "../aga-navigation";
+import { AGAPageShell, EmptyState, SearchBar, SectionHeader, StatCard, SupabaseNotice } from "../aga-navigation";
 import { marketplaceCategories } from "./categories";
-
-const listingCategories = [
-  ["gaming-gear", "Gaming gear", "Controllers, headsets and mobile accessories discovery listings.", "View Listing"],
-  ["creator-services", "Creator services", "Thumbnail, editing and highlight support from approved creator profiles.", "Contact"],
-  ["tournament-services", "Tournament services", "Caster, moderator and bracket support requests for organisers.", "View"],
-];
 
 export default function MarketplacePage() {
   return (
@@ -15,7 +9,7 @@ export default function MarketplacePage() {
       eyebrow="Vendors"
       title="MARKETPLACE"
       copy="Verified vendors and gaming services only. No direct game-account sales, account transfers or unsafe escrow flows."
-      actions={[{ label: "Apply as Vendor", href: "/support" }, { label: "Order History", href: "/orders", variant: "secondary" }]}
+      actions={[{ label: "Sell on AGA", href: "/marketplace/sell" }, { label: "Order History", href: "/orders", variant: "secondary" }]}
     >
       <SupabaseNotice />
       <section className="aga-tool-row">
@@ -34,22 +28,7 @@ export default function MarketplacePage() {
         <StatCard label="Unsafe categories" value="Blocked" copy="No account sales, cheats or platform-breaking boosting." />
         <StatCard label="CTA mode" value="Contact" copy="Discovery only until legal/payment systems exist." />
       </section>
-      <SectionHeader eyebrow="Discovery" title="Marketplace without unsafe payments" copy="AGA can host approved discovery listings, but transaction actions remain disabled until the proper legal and payment architecture exists." />
-      <section className="aga-card-grid">
-        {listingCategories.map(([id, title, copy, action], index) => (
-          <DataCard
-            action={action}
-            copy={copy}
-            eyebrow="Approved category"
-            href={`/marketplace/${id}`}
-            key={title}
-            meta={["Status: contact only", "Transactions: not enabled", "Review required"]}
-            title={title}
-            tone={index === 1 ? "purple" : index === 2 ? "cyan" : "gold"}
-          />
-        ))}
-      </section>
-      <SectionHeader eyebrow="Categories" title="Every marketplace category has a destination" copy="These panels match the tabs above. Click a category to open the full page for that marketplace lane." />
+      <SectionHeader eyebrow="Categories" title="Marketplace lanes" copy="These categories are navigation only. Listing cards appear after real vendor approval and persistent marketplace records exist." />
       <section className="aga-market-category-grid">
         {marketplaceCategories.map((category) => (
           <article className={`aga-market-category-card ${category.tone}`} key={category.slug}>

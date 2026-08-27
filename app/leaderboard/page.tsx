@@ -1,12 +1,4 @@
-import Link from "next/link";
 import { AGAPageShell, DataCard, EmptyState, FilterTabs, SectionHeader, StatCard, StatusBadge, SupabaseNotice } from "../aga-navigation";
-import { clans } from "../data";
-
-const playerPreview = [
-  ["#1", "First verified player", "No official player has earned RP yet", "1000 RP"],
-  ["#2", "Second verified player", "Complete matches to appear here", "1000 RP"],
-  ["#3", "Third verified player", "Rankings open after result verification", "1000 RP"],
-];
 
 const ladders = [
   ["Player ladder", "Solo records, win rate, rating points and match history.", "/profile"],
@@ -40,35 +32,25 @@ export default function LeaderboardPage() {
           <strong>#1</strong>
           <h2>Awaiting first champion</h2>
           <p>The top slot unlocks after a verified result updates player stats and match history.</p>
-          <Link className="aga-page-btn primary" href="/matches/request">Create Ranked Match</Link>
         </article>
-        {playerPreview.slice(1).map(([rank, title, copy, rp], index) => (
-          <article className="aga-podium-card" key={rank}>
-            <span>{rank}</span>
-            <h3>{title}</h3>
-            <p>{copy}</p>
-            <b>{rp}</b>
-            <StatusBadge tone={index === 0 ? "purple" : "cyan"}>Open</StatusBadge>
-          </article>
-        ))}
+        <article className="aga-podium-card"><span>#2</span><h3>Open slot</h3><p>No verified player has earned this position yet.</p><StatusBadge tone="purple">Empty</StatusBadge></article>
+        <article className="aga-podium-card"><span>#3</span><h3>Open slot</h3><p>Rankings begin after completed match results are verified.</p><StatusBadge tone="cyan">Empty</StatusBadge></article>
       </section>
 
-      <SectionHeader eyebrow="Official ladder" title="Rankings stay synced with verified matches" copy="Preview rows show the table layout. Real RP, wins, losses and win rate come from server-side match results." />
+      <SectionHeader eyebrow="Official ladder" title="Rankings stay synced with verified matches" copy="Real RP, wins, losses and win rate come from server-side match results only." />
       <section className="aga-table-shell aga-leaderboard-table" aria-label="Leaderboard table">
         <div className="aga-table-head">
           <span>Rank</span><span>Competitor</span><span>Game</span><span>Record</span><span>Win rate</span><span>RP</span>
         </div>
         <div className="aga-leaderboard-list">
-          {clans.map((clan) => (
-            <Link className="aga-rank-row" href={`/clans/${clan.slug}`} key={clan.slug}>
-              <strong>#{clan.rank}</strong>
-              <span>{clan.name}<small>{clan.badge} / clan preview</small></span>
-              <span>{clan.game}</span>
-              <span>Awaiting verified matches</span>
-              <span>{clan.rate}</span>
-              <StatusBadge tone="muted">Preview</StatusBadge>
-            </Link>
-          ))}
+          <div className="aga-rank-row">
+            <strong>-</strong>
+            <span>No verified competitors yet<small>Complete a match to create the first record.</small></span>
+            <span>All games</span>
+            <span>0W / 0L</span>
+            <span>0%</span>
+            <StatusBadge tone="muted">Empty</StatusBadge>
+          </div>
         </div>
       </section>
 
@@ -80,7 +62,7 @@ export default function LeaderboardPage() {
             eyebrow="Leaderboard type"
             href={href}
             key={title}
-            meta={["Source: verified matches", "Demo rows: clearly marked", "Status: awaiting live records"]}
+            meta={["Source: verified matches", "No fabricated ranks", "Status: awaiting live records"]}
             title={title}
             tone={index === 1 ? "purple" : index === 2 ? "cyan" : "gold"}
           />

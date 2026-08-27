@@ -126,7 +126,7 @@ export function ChallengeDiscovery({ gameFilter }: { gameFilter?: GameName }) {
     <section className="page-section">
       <div className="lobby-ticker">
         <span>LIVE LOBBY</span>
-        <p>{visible.length} open invites / 12 high stakes / 36 ranked rooms / next start in 04:22</p>
+        <p>{visible.length} open invite{visible.length === 1 ? "" : "s"} / high-stakes and ranked counts appear only from verified challenge records</p>
       </div>
       <div className="filter-bar deep-filter">
         <select className="field" value={filters.game} onChange={(e) => setFilters({ ...filters, game: e.target.value })}><option>All</option>{Object.keys(gameConfig).map((item) => <option key={item}>{item}</option>)}</select>
@@ -257,5 +257,19 @@ export function GameHubLive({ game }: { game: GameName }) {
 }
 
 export function MarketplaceLive() {
-  return <section className="content-grid two">{["COD Points", "PUBG Mobile UC", "Free Fire Diamonds"].map((name) => <article className="product-card vendor-card" key={name}><span className="tag">Approved vendor</span><h2>{name}</h2><p>Demo order flow: create order, buyer chat, vendor chat, delivery confirmation, reviews, refund requests and disputes.</p><dl><div><dt>Listing</dt><dd>{name} starter pack</dd></div><div><dt>Status</dt><dd>Vendor approved</dd></div><div><dt>External links</dt><dd>Warning shown before WhatsApp, Telegram or Discord opens</dd></div></dl><div className="button-row"><button className="btn primary small">Create demo order</button><button className="btn secondary small">Apply as vendor</button></div></article>)}</section>;
+  return (
+    <section className="content-grid two">
+      <article className="product-card vendor-card">
+        <span className="tag">Marketplace</span>
+        <h2>No verified vendors yet</h2>
+        <p>Approved marketplace listings will appear only after vendor review, moderation and persistent listing records are connected.</p>
+        <dl>
+          <div><dt>Listings</dt><dd>0</dd></div>
+          <div><dt>Payments</dt><dd>Unavailable</dd></div>
+          <div><dt>Account sales</dt><dd>Blocked</dd></div>
+        </dl>
+        <div className="button-row"><Link className="btn primary small" href="/marketplace">Browse marketplace</Link><Link className="btn secondary small" href="/marketplace/sell">Apply as vendor</Link></div>
+      </article>
+    </section>
+  );
 }

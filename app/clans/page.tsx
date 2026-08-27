@@ -21,7 +21,7 @@ export default function ClansPage() {
         <StatCard label="Games" value="3" copy="CODM, PUBG Mobile and Free Fire." />
         <StatCard label="Management" value="Roles" copy="Owner, captain and member flows are planned server-side." />
       </section>
-      <SectionHeader eyebrow="Directory preview" title="Clan cards are ready for real records" copy="The cards below are demo reference entries from the design system, not official live standings." />
+      <SectionHeader eyebrow="Directory" title="Clan cards will appear from real records" copy="No clan names, rosters, win rates or points are invented for public launch." />
       <section className="aga-card-grid">
         {clans.map((clan, index) => (
           <DataCard
@@ -36,7 +36,7 @@ export default function ClansPage() {
           />
         ))}
       </section>
-      <EmptyState title="No authenticated clan joined yet" copy="Your real clan membership will appear here after login and clan creation or approval." action="Create Clan" href="/clans/create" />
+      <EmptyState title="No verified clans yet" copy="The first created clan will appear here after authentication and clan persistence are connected." action="Create Clan" href="/clans/create" />
     </AGAPageShell>
   );
 }

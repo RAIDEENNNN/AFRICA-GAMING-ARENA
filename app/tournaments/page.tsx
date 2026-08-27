@@ -19,7 +19,7 @@ export default function TournamentsPage() {
         <StatCard label="CMA status" value="Setup" copy="CMA hub is prepared for organiser activation." />
       </section>
       <FilterTabs tabs={["All", "CODM", "PUBG Mobile", "Free Fire", "CMA", "Upcoming", "Live", "Completed"]} />
-      <SectionHeader eyebrow="Tournament board" title="Prepared event pages" copy="These are launch-ready tournament shells. Registration and participant counts stay clearly marked until real organiser data is connected." />
+      <SectionHeader eyebrow="Tournament board" title="Upcoming, live and completed events" copy="Only verified organiser records will appear here. No invented prize pools, brackets or registered team counts." />
       <section className="aga-card-grid">
         {tournaments.map((tournament, index) => (
           <DataCard
@@ -28,13 +28,13 @@ export default function TournamentsPage() {
             eyebrow={tournament.tag}
             href={`/tournaments/${tournament.slug}`}
             key={tournament.slug}
-            meta={[tournament.game, tournament.date, "Participants: awaiting real registration", `Prize: ${tournament.prize} demo reference`]}
+            meta={[tournament.game, tournament.date, "Participants: awaiting real registration", `Prize: ${tournament.prize}`]}
             title={tournament.name}
             tone={index === 1 ? "purple" : index === 2 ? "cyan" : "gold"}
           />
         ))}
       </section>
-      <EmptyState title="No active tournament matches" copy="Tournament matches, standings and results will appear here only after real brackets are opened." action="View CMA Hub" href="/tournaments/cma" />
+      <EmptyState title="No tournaments are open yet" copy="Tournament matches, standings and results will appear here only after authorised organisers create real brackets." action="View CMA Hub" href="/tournaments/cma" />
       <PagePanel title="CMA tournaments">
         <p>CMA tournament registration will appear here when CODM events are opened by an authorised organiser.</p>
         <Link className="aga-page-btn secondary" href="/tournaments/cma">View CMA Tournaments</Link>

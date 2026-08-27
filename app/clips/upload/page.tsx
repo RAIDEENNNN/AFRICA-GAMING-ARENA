@@ -38,7 +38,7 @@ export default function ClipUploadPage() {
           </div>
 
           <div className="aga-form-grid">
-            <label>Clip title<input placeholder="Example: Insane 1v4 clutch" /></label>
+            <label>Clip title<input placeholder="Example: Ranked round highlight" /></label>
             <label>
               Game
               <select defaultValue="CODM">
@@ -82,7 +82,7 @@ export default function ClipUploadPage() {
           </div>
           <div className="aga-create-preview">
             <StatusBadge tone="cyan">Feed preview</StatusBadge>
-            <h3>Insane 1v4 Clutch</h3>
+            <h3>Clip preview pending</h3>
             <p>No fake likes, views or comments. Engagement should only appear after real users interact with published clips.</p>
             <dl>
               <div><dt>Game</dt><dd>CODM</dd></div>

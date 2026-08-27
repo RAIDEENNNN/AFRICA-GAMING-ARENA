@@ -308,6 +308,22 @@ export const products = sqliteTable("products", {
   ...timestamps,
 });
 
+export const marketplaceListings = sqliteTable("marketplace_listings", {
+  id: text("id").primaryKey(),
+  vendorId: text("vendor_id").notNull().references(() => vendors.id),
+  productId: text("product_id").references(() => products.id),
+  slug: text("slug").notNull(),
+  category: text("category").notNull(),
+  title: text("title").notNull(),
+  description: text("description").notNull(),
+  priceMinor: integer("price_minor").notNull().default(0),
+  currency: text("currency").notNull().default("GBP"),
+  status: text("status").notNull().default("pending_review"),
+  moderationNotes: text("moderation_notes"),
+  publishedAt: text("published_at"),
+  ...timestamps,
+});
+
 export const orders = sqliteTable("orders", {
   id: text("id").primaryKey(),
   buyerUserId: text("buyer_user_id").notNull().references(() => users.id),
@@ -383,6 +399,23 @@ export const partnerTournaments = sqliteTable("partner_tournaments", {
   thumbnailUrl: text("thumbnail_url"),
   featured: integer("featured", { mode: "boolean" }).notNull().default(false),
   createdBy: text("created_by").notNull().references(() => users.id),
+  ...timestamps,
+});
+
+export const tournamentArchiveEntries = sqliteTable("tournament_archive_entries", {
+  id: text("id").primaryKey(),
+  organisationId: text("organisation_id").references(() => tournamentOrganisations.id),
+  gameId: text("game_id").references(() => games.id),
+  title: text("title").notNull(),
+  slug: text("slug").notNull(),
+  sourceName: text("source_name").notNull(),
+  sourceUrl: text("source_url").notNull(),
+  verifiedAt: text("verified_at").notNull(),
+  placement: text("placement"),
+  region: text("region"),
+  startedAt: text("started_at"),
+  endedAt: text("ended_at"),
+  status: text("status").notNull().default("verified_external_record"),
   ...timestamps,
 });
 

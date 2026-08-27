@@ -8,7 +8,7 @@ const slides = [
     key: "codm",
     kicker: "Call of Duty: Mobile",
     title: ["PLAY. COMPETE.", "DOMINATE.", "BECOME LEGENDARY."],
-    copy: "The ultimate gaming arena for African players. Compete in tournaments, join clans, win rewards and build your legacy.",
+    copy: "The ultimate gaming arena for African players. Compete in tournaments, join clans, create challenges and build verified match history.",
     image: "/images/aga/hero/codm-hero",
     primary: ["Enter CODM Arena", "/games/codm"],
     secondary: ["View CMA Tournaments", "/tournaments/cma"],
@@ -18,7 +18,7 @@ const slides = [
     key: "pubg",
     kicker: "PUBG Mobile",
     title: ["SURVIVE.", "SQUAD UP.", "OWN THE ZONE."],
-    copy: "Squad battles, arena challenges, clan matches and esports competition built for mobile battleground players.",
+    copy: "Squad battles, arena challenges, clan matches and verified competition built for mobile battleground players.",
     image: "/images/aga/hero/pubg-mobile-hero",
     primary: ["Enter PUBG Arena", "/games/pubg-mobile"],
     secondary: ["Browse PUBG Matches", "/matches"],
@@ -28,7 +28,7 @@ const slides = [
     key: "free-fire",
     kicker: "Free Fire",
     title: ["FAST FIGHTS.", "GUILD WARS.", "LIVE GLORY."],
-    copy: "High-energy custom-room battles, guild competition, clips and live challenges for fast mobile competitors.",
+    copy: "High-energy custom-room battles, guild competition, clips and verified challenges for fast mobile competitors.",
     image: "/images/aga/hero/free-fire-hero",
     primary: ["Enter Free Fire Arena", "/games/free-fire"],
     secondary: ["Browse Free Fire Matches", "/matches"],
@@ -80,8 +80,6 @@ const homepageStats = [
   ["0", "Live matches"],
   ["0", "Open challenges"],
   ["0", "Registered clans"],
-  ["0", "Upcoming tournaments"],
-  ["$0", "Prize pool awarded"],
 ];
 
 export function AGAHome() {
@@ -171,7 +169,7 @@ export function AGAHome() {
         <nav className="secondary">
           {sideNav.slice(7).map(([label, href, icon]) => <Link href={href} key={label}><span>{icon}</span><b>{label}</b><em /></Link>)}
         </nav>
-        <Link className="aga-side-wallet" href="/wallet"><small>AGA Wallet</small><strong>Demo</strong><span>Simulated balance only</span></Link>
+        <Link className="aga-side-wallet" href="/wallet"><small>AGA Wallet</small><strong>£0.00</strong><span>Payments unavailable</span></Link>
       </aside>
 
       <section className={`aga-hero aga-${slide.tone}`} onPointerEnter={() => setPaused(true)} onPointerLeave={() => setPaused(false)} onPointerDown={() => setPaused(true)}>
@@ -260,8 +258,8 @@ function PlayerPanel() {
   return (
     <section className="aga-join-panel">
       <h2>Profile data unavailable</h2>
-      <p>Real Supabase authentication is not connected yet. Once a real session exists, this panel will show the signed-in player’s profile, clan, matches, notifications and demo wallet ledger.</p>
-      <small>Demo balance — no real money</small>
+      <p>Once a real session exists, this panel will show the signed-in player’s profile, clan, matches, notifications and wallet ledger.</p>
+      <small>Payments unavailable</small>
       <Link className="aga-btn primary" href="/login">Log In</Link>
       <Link className="aga-btn dark" href="/register">Create Account</Link>
     </section>
@@ -272,7 +270,7 @@ function JoinPanel() {
   return (
     <section className="aga-join-panel">
       <h2>Join AGA</h2>
-      <p>Create one profile for clans, tournaments, challenges, clips and demo wallet tracking.</p>
+      <p>Create one profile for clans, tournaments, challenges, clips and launch-zero wallet tracking.</p>
       <Link className="aga-btn primary" href="/register">Create Account</Link>
       <Link className="aga-btn dark" href="/login">Login</Link>
     </section>

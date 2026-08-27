@@ -122,8 +122,8 @@ export function SidebarWallet() {
   return (
     <Link className="sidebar-wallet" href="/wallet">
       <span>AGA WALLET</span>
-      <strong>DEMO</strong>
-      <small>{summary.user ? "Simulated platform balance only" : "Login to view demo balance"}</small>
+      <strong>£0.00</strong>
+      <small>{summary.user ? "Payments unavailable" : "Login to view wallet status"}</small>
     </Link>
   );
 }

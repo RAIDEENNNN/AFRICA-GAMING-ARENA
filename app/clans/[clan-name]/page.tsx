@@ -7,7 +7,23 @@ export function generateStaticParams() {
 
 export default async function DynamicClanPage({ params }: { params: Promise<{ "clan-name": string }> }) {
   const { "clan-name": slug } = await params;
-  const clan = clans.find((item) => item.slug === slug) ?? clans[0];
+  const clan = clans.find((item) => item.slug === slug);
+  if (!clan) {
+    return (
+      <AppShell>
+        <PageHero
+          eyebrow="Clan profile"
+          title="Clan not available"
+          copy={`No verified clan record exists for “${slug}”.`}
+          primary={["Find clans", "/find-clans"]}
+          secondary={["Create clan", "/clans/create"]}
+        />
+        <section className="stack">
+          <article className="product-card"><h2>No match history</h2><p>Clan match history appears only after verified clan records and completed matches exist.</p></article>
+        </section>
+      </AppShell>
+    );
+  }
   return (
     <AppShell>
       <PageHero

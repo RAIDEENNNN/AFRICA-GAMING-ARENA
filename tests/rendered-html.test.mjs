@@ -13,9 +13,9 @@ test("keeps the AGA homepage focused on the approved blueprint", async () => {
   assert.match(home, /AGAHome/);
   assert.match(agaHome, /Africa Gaming Arena/i);
   assert.match(agaHome, /PLAY\. COMPETE\./i);
-  assert.match(agaHome, /Demo balance — no real money/i);
+  assert.match(agaHome, /Payments unavailable/i);
   assert.match(agaHome, /No live matches yet/i);
-  assert.match(agaHome, /Prize pool awarded/i);
+  assert.match(agaHome, /Registered clans/i);
   assert.match(agaHome, /CMA Tournaments/i);
   assert.match(agaHome, /Call of Duty Mobile/i);
   assert.match(agaHome, /PUBG Mobile/i);
@@ -63,6 +63,11 @@ test("keeps the main AGA navigation ecosystem connected", async () => {
     "../app/marketplace/page.tsx",
     "../app/marketplace/categories.ts",
     "../app/marketplace/category/[category]/page.tsx",
+    "../app/marketplace/cod-points/page.tsx",
+    "../app/marketplace/pubg-uc/page.tsx",
+    "../app/marketplace/free-fire-diamonds/page.tsx",
+    "../app/marketplace/sell/page.tsx",
+    "../app/marketplace/listing/[slug]/page.tsx",
     "../app/clips/page.tsx",
     "../app/(auth)/login/page.tsx",
     "../app/(auth)/register/page.tsx",
@@ -100,8 +105,10 @@ test("keeps the main AGA navigation ecosystem connected", async () => {
   assert.match(source, /PUBG UC/);
   assert.match(source, /FREE FIRE DIAMONDS/);
   assert.match(source, /VERIFIED VENDORS/);
+  assert.match(source, /SELL ON AGA/);
+  assert.match(source, /LISTING NOT AVAILABLE/);
   assert.match(source, /generateStaticParams/);
-  assert.match(source, /Transactions are disabled/);
+  assert.match(source, /No live listing/);
   assert.match(source, /No fake likes, views or comments/);
   assert.match(source, /No buy-now, deposits, withdrawals or escrow/);
   assert.match(source, /aga-mobile-native-menu/);

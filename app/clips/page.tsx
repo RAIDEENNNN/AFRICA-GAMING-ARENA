@@ -18,7 +18,7 @@ export default function ClipsPage() {
         <StatCard label="Feed mode" value="Mobile" copy="Vertical feed layout is prepared." />
         <StatCard label="Upload" value="Ready UI" copy="Persistence connects in the storage phase." />
       </section>
-      <SectionHeader eyebrow="Feed preview" title="Clip cards are ready for real uploads" copy="These entries demonstrate feed structure only. Real engagement counts will appear after clip persistence exists." />
+      <SectionHeader eyebrow="Clip feed" title="Real uploads will appear here" copy="AGA does not invent creators, views, likes or comments for the public clip feed." />
       <section className="aga-card-grid">
         {clips.map((clip, index) => (
           <DataCard
@@ -33,7 +33,7 @@ export default function ClipsPage() {
           />
         ))}
       </section>
-      <EmptyState title="No persisted clips yet" copy="Share the first legendary moment. Clip uploads will use storage for videos and thumbnails." action="Upload Clip" href="/clips/upload" />
+      <EmptyState title="No published clips yet" copy="Share the first highlight once storage and moderation are connected." action="Upload Clip" href="/clips/upload" />
     </AGAPageShell>
   );
 }
