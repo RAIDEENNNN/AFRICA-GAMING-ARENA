@@ -31,6 +31,14 @@ const pages = [
   ["/tournaments/codm-championship", 1440, "redesign-14-tournament.png"],
   ["/matches/ca-1024", 375, "redesign-15-mobile-match-room.png"],
   ["/clips", 375, "redesign-16-mobile-clips-feed.png"],
+  ["/tournaments/create", 1440, "redesign-17-create-tournament.png"],
+  ["/find-clans", 1440, "redesign-18-find-clans.png"],
+  ["/clans/create", 1440, "redesign-19-create-clan.png"],
+  ["/clips/upload", 1440, "redesign-20-upload-clip.png"],
+  ["/orders", 1440, "redesign-21-order-history.png"],
+  ["/tournaments/create", 375, "redesign-22-mobile-create-tournament.png"],
+  ["/clans/create", 375, "redesign-23-mobile-create-clan.png"],
+  ["/clips/upload", 375, "redesign-24-mobile-upload-clip.png"],
 ];
 
 for (const [route, width, file] of pages) {

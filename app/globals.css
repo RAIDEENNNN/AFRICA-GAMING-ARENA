@@ -5462,6 +5462,234 @@ meter {
   width: 100%;
 }
 
+.aga-tournament-create-layout {
+  align-items: start;
+  display: grid;
+  gap: 18px;
+  grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.75fr);
+  margin-top: 22px;
+}
+
+.aga-tournament-form,
+.aga-create-side,
+.aga-create-preview,
+.aga-requirement-list article,
+.aga-checklist-panel {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.04), transparent),
+    rgba(16, 23, 34, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+}
+
+.aga-tournament-form,
+.aga-create-side {
+  padding: clamp(18px, 3vw, 30px);
+}
+
+.aga-form-heading {
+  margin-bottom: 20px;
+  max-width: 720px;
+}
+
+.aga-form-heading h2,
+.aga-create-preview h3 {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: clamp(1.8rem, 4vw, 3.8rem);
+  line-height: 0.95;
+  margin: 12px 0;
+  text-transform: uppercase;
+}
+
+.aga-form-heading p,
+.aga-create-preview p,
+.aga-requirement-list span,
+.aga-requirement-list small {
+  color: var(--aga-muted);
+  line-height: 1.65;
+}
+
+.aga-form-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.aga-tournament-form label {
+  color: var(--aga-muted);
+  display: grid;
+  font-size: 0.72rem;
+  font-weight: 950;
+  gap: 8px;
+  text-transform: uppercase;
+}
+
+.aga-tournament-form input,
+.aga-tournament-form select,
+.aga-tournament-form textarea {
+  background: rgba(4, 7, 15, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  color: var(--aga-white);
+  min-height: 46px;
+  padding: 12px 13px;
+  text-transform: none;
+  width: 100%;
+}
+
+.aga-tournament-form textarea {
+  margin-top: 14px;
+  resize: vertical;
+}
+
+.aga-tournament-form input:focus,
+.aga-tournament-form select:focus,
+.aga-tournament-form textarea:focus {
+  border-color: rgba(255, 216, 34, 0.72);
+  box-shadow: 0 0 0 3px rgba(255, 216, 34, 0.12);
+  outline: none;
+}
+
+.aga-checklist-panel {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+  padding: 14px;
+}
+
+.aga-checklist-panel label {
+  align-items: start;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: auto minmax(0, 1fr);
+  line-height: 1.45;
+}
+
+.aga-checklist-panel input {
+  accent-color: var(--aga-gold);
+  min-height: auto;
+  width: auto;
+}
+
+.aga-upload-dropzone {
+  align-items: center;
+  background:
+    linear-gradient(135deg, rgba(30, 210, 255, 0.12), transparent),
+    rgba(4, 7, 15, 0.72);
+  border: 1px dashed rgba(30, 210, 255, 0.48);
+  border-radius: 8px;
+  color: var(--aga-white);
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+  margin-bottom: 14px;
+  min-height: 180px;
+  padding: 22px;
+  text-align: center;
+}
+
+.aga-upload-dropzone strong {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.aga-upload-dropzone span {
+  color: var(--aga-muted);
+  line-height: 1.6;
+  max-width: 420px;
+}
+
+.aga-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.aga-form-actions button:disabled {
+  cursor: not-allowed;
+  filter: grayscale(0.35);
+  opacity: 0.58;
+}
+
+.aga-create-side .aga-section-header {
+  margin-top: 0;
+}
+
+.aga-requirement-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.aga-requirement-list article {
+  display: grid;
+  gap: 4px;
+  padding: 14px;
+}
+
+.aga-requirement-list strong {
+  color: var(--aga-white);
+  text-transform: uppercase;
+}
+
+.aga-requirement-list small {
+  color: var(--aga-gold);
+  font-size: 0.68rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.aga-create-preview {
+  margin-top: 16px;
+  overflow: hidden;
+  padding: 18px;
+  position: relative;
+}
+
+.aga-create-preview::before {
+  background:
+    radial-gradient(circle at 70% 20%, rgba(255, 216, 34, 0.22), transparent 34%),
+    linear-gradient(135deg, rgba(106, 60, 255, 0.18), transparent);
+  content: "";
+  inset: 0;
+  opacity: 0.9;
+  pointer-events: none;
+  position: absolute;
+}
+
+.aga-create-preview > * {
+  position: relative;
+}
+
+.aga-create-preview dl {
+  display: grid;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.aga-create-preview dl div {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.aga-create-preview dt {
+  color: var(--aga-muted);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+}
+
+.aga-create-preview dd {
+  color: var(--aga-white);
+  font-weight: 900;
+  margin: 0;
+  text-align: right;
+}
+
 .aga-empty-state,
 .aga-error-state {
   align-items: center;
@@ -5908,6 +6136,19 @@ meter {
 
   .aga-tool-row {
     display: grid;
+  }
+
+  .aga-tournament-create-layout,
+  .aga-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .aga-form-actions {
+    display: grid;
+  }
+
+  .aga-form-actions .aga-page-btn {
+    width: 100%;
   }
 
   .aga-search-bar {

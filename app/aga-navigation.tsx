@@ -30,6 +30,7 @@ const mainNav = [
 
 const moreLinks = [
   ["Match History", "/matches"],
+  ["Order History", "/orders"],
   ["Notifications", "/notifications"],
   ["Profile", "/profile"],
   ["Rank System", "/rank-system"],

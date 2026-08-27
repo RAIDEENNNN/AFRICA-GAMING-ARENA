@@ -26,13 +26,18 @@ const routes = [
   "/matches/request",
   "/matches/ca-1024",
   "/clips",
+  "/clips/upload",
   "/leaderboard",
   "/marketplace",
+  "/orders",
   "/wallet",
   "/admin",
   "/login",
   "/register",
   "/settings",
+  "/find-clans",
+  "/clans/create",
+  "/tournaments/create",
 ];
 
 const failures = [];
@@ -66,6 +71,9 @@ const screenshots = [
   ["/", 375, "mobile-home-375.png"],
   ["/matches/request", 375, "mobile-create-challenge-375.png"],
   ["/matches/ca-1024", 375, "mobile-match-room-375.png"],
+  ["/tournaments/create", 375, "mobile-create-tournament-375.png"],
+  ["/clans/create", 375, "mobile-create-clan-375.png"],
+  ["/clips/upload", 375, "mobile-upload-clip-375.png"],
   ["/games", 768, "tablet-games-768.png"],
   ["/", 1440, "desktop-home-1440.png"],
 ];

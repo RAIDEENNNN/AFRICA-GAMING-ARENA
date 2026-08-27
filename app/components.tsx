@@ -62,7 +62,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             <Link href="/clans/create">Create Team</Link>
             <Link href="/clans/create">Create Clan</Link>
             <Link href="/clips/upload">Upload Clip</Link>
-            <Link href="/tournaments">Create Tournament</Link>
+            <Link href="/tournaments/create">Create Tournament</Link>
+            <Link href="/orders">Order History</Link>
           </div>
         </details>
       </aside>
@@ -87,7 +88,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             <Link href="/matches/request">Challenge</Link>
             <Link href="/clans/create">Clan</Link>
             <Link href="/clips/upload">Clip</Link>
-            <Link href="/tournaments">Tournament</Link>
+            <Link href="/tournaments/create">Tournament</Link>
+            <Link href="/orders">Orders</Link>
           </div>
         </details>
         <Link href="/tournaments">Tournaments</Link>

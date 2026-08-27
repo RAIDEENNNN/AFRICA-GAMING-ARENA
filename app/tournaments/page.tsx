@@ -9,7 +9,7 @@ export default function TournamentsPage() {
       eyebrow="Events"
       title="ALL TOURNAMENTS"
       copy="Browse official and partner tournaments by game, format, status and organiser. Real events will appear here from Supabase."
-      actions={[{ label: "View CMA Tournaments", href: "/tournaments/cma" }, { label: "Create Tournament", href: "/dashboard/cma-organiser", variant: "secondary" }]}
+      actions={[{ label: "View CMA Tournaments", href: "/tournaments/cma" }, { label: "Create Tournament", href: "/tournaments/create", variant: "secondary" }]}
     >
       <SupabaseNotice />
       <section className="aga-stat-grid">

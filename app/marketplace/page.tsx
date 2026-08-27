@@ -13,7 +13,7 @@ export default function MarketplacePage() {
       eyebrow="Vendors"
       title="MARKETPLACE"
       copy="Verified vendors and gaming services only. No direct game-account sales, account transfers or unsafe escrow flows."
-      actions={[{ label: "Apply as Vendor", href: "/support" }, { label: "Order History", href: "/profile", variant: "secondary" }]}
+      actions={[{ label: "Apply as Vendor", href: "/support" }, { label: "Order History", href: "/orders", variant: "secondary" }]}
     >
       <SupabaseNotice />
       <section className="aga-tool-row">
