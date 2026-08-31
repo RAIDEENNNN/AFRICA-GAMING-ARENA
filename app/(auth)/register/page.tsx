@@ -62,7 +62,7 @@ export default function RegisterPage() {
       setMessage(body.error ?? "Registration failed.");
       return;
     }
-    router.push("/dashboard");
+    router.push("/profile/loading");
   }
 
   return (

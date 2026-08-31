@@ -6315,6 +6315,139 @@ meter {
   text-transform: uppercase;
 }
 
+.aga-profile-loading {
+  --aga-bg: #060817;
+  --aga-panel: #101722;
+  --aga-panel-2: #182230;
+  --aga-gold: #ffc107;
+  --aga-purple: #8a2be2;
+  --aga-cyan: #00d4ff;
+  --aga-white: #ffffff;
+  --aga-muted: #a0a7b4;
+  align-items: center;
+  background:
+    radial-gradient(circle at 18% 0%, rgba(255, 193, 7, 0.18), transparent 18rem),
+    radial-gradient(circle at 88% 18%, rgba(138, 43, 226, 0.18), transparent 22rem),
+    linear-gradient(180deg, #060817, #04050a);
+  color: #fff;
+  display: grid;
+  min-height: 100dvh;
+  overflow: hidden;
+  padding: clamp(16px, 4vw, 42px);
+  position: relative;
+}
+
+.aga-profile-loading::before {
+  background:
+    linear-gradient(0deg, rgba(6, 8, 23, 0.94), rgba(6, 8, 23, 0.54)),
+    url("/images/aga/hero/codm-hero-mobile.avif") center / cover;
+  content: "";
+  inset: 0;
+  opacity: 0.5;
+  position: absolute;
+}
+
+.aga-profile-loading-card {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.06), transparent),
+    rgba(7, 10, 22, 0.92);
+  border: 1px solid rgba(255, 193, 7, 0.24);
+  border-radius: 12px;
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.48);
+  display: grid;
+  gap: 16px;
+  justify-self: center;
+  max-width: 620px;
+  padding: clamp(22px, 5vw, 42px);
+  position: relative;
+  width: min(100%, 620px);
+  z-index: 1;
+}
+
+.aga-profile-loading-card img {
+  height: auto;
+  width: min(178px, 62vw);
+}
+
+.aga-profile-loading-card > span {
+  color: #ffc107;
+  font-size: 0.76rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.aga-profile-loading-card h1 {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: clamp(2.7rem, 9vw, 5.4rem);
+  letter-spacing: 0;
+  line-height: 0.92;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.aga-profile-loading-card p {
+  color: #a0a7b4;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.aga-profile-loader {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.aga-profile-loader i {
+  animation: aga-profile-pulse 1.15s ease-in-out infinite;
+  background: #ffc107;
+  border-radius: 999px;
+  display: block;
+  height: 8px;
+}
+
+.aga-profile-loader i:nth-child(2) {
+  animation-delay: 120ms;
+  background: #00d4ff;
+}
+
+.aga-profile-loader i:nth-child(3) {
+  animation-delay: 240ms;
+  background: #8a2be2;
+}
+
+.aga-profile-loading-steps,
+.aga-profile-loading-actions {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.aga-profile-loading-actions .aga-page-btn.primary {
+  background: var(--aga-gold);
+  border-color: var(--aga-gold);
+  color: #050609;
+}
+
+.aga-profile-loading-actions .aga-page-btn.secondary {
+  background: rgba(255, 255, 255, 0.055);
+  color: var(--aga-white);
+}
+
+.aga-profile-loading-steps b {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 0.72rem;
+  padding: 12px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+@keyframes aga-profile-pulse {
+  0%, 100% { opacity: 0.4; transform: scaleX(0.72); }
+  50% { opacity: 1; transform: scaleX(1); }
+}
+
 @keyframes aga-skeleton {
   from { opacity: 0.45; }
   to { opacity: 1; }
@@ -6345,7 +6478,7 @@ meter {
 
 @media (max-width: 720px) {
   .aga-page {
-    padding: 0 12px 92px;
+    padding: 0 10px 102px;
   }
 
   .aga-site-header {
@@ -6364,13 +6497,18 @@ meter {
     background:
       linear-gradient(0deg, rgba(6, 8, 23, 0.96) 0 50%, rgba(6, 8, 23, 0.36)),
       url("/images/aga/hero/codm-hero-mobile.avif") center / cover;
-    min-height: 560px;
-    padding: 22px;
+    min-height: clamp(340px, 54dvh, 460px);
+    padding: 20px;
   }
 
   .aga-page-hero h1 {
-    font-size: clamp(2.2rem, 12vw, 3.6rem);
+    font-size: clamp(2rem, 10vw, 3.15rem);
     max-width: 100%;
+  }
+
+  .aga-page-hero p {
+    font-size: 0.94rem;
+    line-height: 1.55;
   }
 
   .aga-game-page-card {
@@ -6407,6 +6545,26 @@ meter {
 
   .aga-tool-row {
     display: grid;
+    gap: 12px;
+  }
+
+  .aga-stat-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .aga-stat-card {
+    gap: 8px;
+    min-height: 122px;
+    padding: 15px;
+  }
+
+  .aga-stat-card strong {
+    font-size: clamp(1.7rem, 9vw, 2.45rem);
+  }
+
+  .aga-stat-card p {
+    font-size: 0.82rem;
+    line-height: 1.45;
   }
 
   .aga-market-category-grid {
@@ -6432,16 +6590,70 @@ meter {
 
   .aga-market-category-nav {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    width: 100%;
   }
 
-  .aga-market-category-nav a,
+  .aga-market-category-nav a {
+    justify-content: center;
+    min-height: 46px;
+    min-width: 0;
+    overflow-wrap: anywhere;
+    padding: 8px 10px;
+    text-align: center;
+    white-space: normal;
+    width: 100%;
+  }
+
   .aga-market-category-card .aga-page-btn {
     width: 100%;
   }
 
   .aga-market-category-grid {
     grid-template-columns: 1fr;
+  }
+
+  .aga-market-category-card,
+  .aga-data-card,
+  .aga-page-panel,
+  .aga-empty-state {
+    margin-top: 14px;
+    padding: 16px;
+  }
+
+  .aga-market-category-card h3,
+  .aga-data-card h3,
+  .aga-section-header h2 {
+    font-size: clamp(1.65rem, 8vw, 2.55rem);
+  }
+
+  .aga-page-panel label,
+  .aga-page-panel input,
+  .aga-page-panel select,
+  .aga-page-panel textarea {
+    width: 100%;
+  }
+
+  .aga-page-panel label {
+    color: var(--aga-muted);
+    display: grid;
+    font-size: 0.75rem;
+    font-weight: 950;
+    gap: 8px;
+    margin-top: 12px;
+    text-transform: uppercase;
+  }
+
+  .aga-page-panel input,
+  .aga-page-panel select,
+  .aga-page-panel textarea {
+    background: rgba(4, 7, 15, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 8px;
+    color: var(--aga-white);
+    min-height: 46px;
+    padding: 12px;
   }
 
   .aga-page-mobile-nav {
@@ -7102,12 +7314,28 @@ meter {
     background:
       linear-gradient(0deg, rgba(6, 8, 23, 0.98) 0 50%, rgba(6, 8, 23, 0.52)),
       url("/images/aga/hero/codm-hero-mobile.avif") center / cover;
-    min-height: 360px;
-    padding: 20px;
+    min-height: 300px;
+    padding: 18px;
   }
 
   .aga-auth-visual h1 {
-    font-size: clamp(3rem, 16vw, 4.8rem);
+    font-size: clamp(2.25rem, 12vw, 3.65rem);
+    max-width: 11ch;
+  }
+
+  .aga-auth-visual p {
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  .aga-auth-visual ul {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .aga-auth-visual li {
+    font-size: 0.68rem;
+    padding: 9px;
   }
 
   .aga-auth-panel {
@@ -7138,10 +7366,45 @@ meter {
   }
 
   .aga-auth-form {
-    padding: 20px;
+    gap: 14px;
+    padding: 18px;
+  }
+
+  .aga-auth-form h2 {
+    font-size: clamp(2rem, 10vw, 3rem);
+  }
+
+  .aga-auth-row {
+    align-items: stretch;
+    display: grid;
+  }
+
+  .aga-password-field {
+    grid-template-columns: minmax(0, 1fr) auto;
   }
 
   .aga-auth-legal {
     justify-content: center;
+  }
+
+  .aga-profile-loading {
+    align-items: stretch;
+    padding: 12px;
+  }
+
+  .aga-profile-loading-card {
+    align-self: center;
+    border-radius: 10px;
+    gap: 14px;
+    padding: 20px;
+  }
+
+  .aga-profile-loading-card h1 {
+    font-size: clamp(2.25rem, 12vw, 3.7rem);
+  }
+
+  .aga-profile-loading-steps,
+  .aga-profile-loading-actions {
+    grid-template-columns: 1fr;
   }
 }

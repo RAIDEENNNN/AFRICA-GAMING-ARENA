@@ -44,6 +44,8 @@ const pages = [
   ["/register", 1440, "redesign-26-register-options.png"],
   ["/leaderboard", 375, "redesign-27-mobile-leaderboard.png"],
   ["/marketplace/category/verified-vendors", 375, "redesign-28-mobile-marketplace-category.png"],
+  ["/profile/loading", 375, "redesign-29-mobile-profile-loading.png"],
+  ["/marketplace/cod-points", 375, "redesign-30-mobile-cod-points.png"],
 ];
 
 for (const [route, width, file] of pages) {

@@ -42,7 +42,7 @@ export default function LoginPage() {
       setMessage(body.error ?? "Login failed.");
       return;
     }
-    router.push("/dashboard");
+    router.push("/profile/loading");
   }
 
   return (
