@@ -5114,6 +5114,34 @@ meter {
   display: none;
 }
 
+@media (min-width: 768px) and (max-width: 1220px) {
+  .aga-site-header {
+    gap: 12px;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+  }
+
+  .aga-site-logo img {
+    max-width: 142px;
+  }
+
+  .aga-site-nav,
+  .aga-site-actions {
+    gap: 9px;
+  }
+
+  .aga-site-nav a,
+  .aga-more-menu summary,
+  .aga-site-actions a {
+    font-size: 0.68rem;
+  }
+
+  .aga-site-actions .login,
+  .aga-site-actions .register {
+    min-width: 76px;
+    padding: 10px 11px;
+  }
+}
+
 .aga-page-hero {
   align-items: end;
   background:
@@ -5211,6 +5239,11 @@ meter {
 .aga-page-btn.secondary {
   background: rgba(255, 255, 255, 0.04);
   color: var(--aga-white);
+}
+
+.aga-page-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.52;
 }
 
 .aga-supabase-notice,
@@ -5343,6 +5376,108 @@ meter {
 .aga-stat-card strong {
   color: var(--aga-white);
   font-size: clamp(2rem, 4vw, 3.7rem);
+}
+
+.aga-wallet-hero-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+  margin-top: 18px;
+}
+
+.aga-wallet-balance-card {
+  background:
+    linear-gradient(135deg, rgba(255, 193, 7, 0.16), rgba(0, 212, 255, 0.05)),
+    rgba(16, 23, 34, 0.9);
+  border: 1px solid rgba(255, 193, 7, 0.32);
+  border-radius: 8px;
+  display: grid;
+  gap: 16px;
+  min-height: 280px;
+  padding: clamp(22px, 4vw, 38px);
+}
+
+.aga-wallet-balance-card > strong {
+  color: var(--aga-gold);
+  display: block;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: clamp(4.6rem, 13vw, 9rem);
+  letter-spacing: 0;
+  line-height: 0.82;
+}
+
+.aga-wallet-balance-card p,
+.aga-wallet-gate-card p {
+  color: var(--aga-muted);
+  line-height: 1.62;
+  margin: 0;
+}
+
+.aga-wallet-balance-card > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.aga-wallet-ledger {
+  display: grid;
+  gap: 10px;
+  margin: 18px 0 0;
+}
+
+.aga-wallet-ledger div {
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: grid;
+  gap: 10px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  padding-top: 10px;
+}
+
+.aga-wallet-ledger dt {
+  color: var(--aga-muted);
+  font-size: 0.72rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.aga-wallet-ledger dd {
+  color: var(--aga-white);
+  font-weight: 950;
+  margin: 0;
+  text-align: right;
+}
+
+.aga-wallet-gate-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 18px;
+}
+
+.aga-wallet-gate-card {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.035), transparent),
+    rgba(16, 23, 34, 0.86);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  display: grid;
+  gap: 14px;
+  padding: clamp(18px, 3vw, 26px);
+}
+
+.aga-wallet-gate-card h3 {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: clamp(1.45rem, 2vw, 2rem);
+  letter-spacing: 0;
+  line-height: 0.95;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.aga-wallet-gate-card .aga-page-btn {
+  margin-top: auto;
+  width: 100%;
 }
 
 .aga-supabase-notice strong {
@@ -6552,6 +6687,37 @@ meter {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .aga-wallet-hero-grid,
+  .aga-wallet-gate-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .aga-wallet-balance-card {
+    min-height: 0;
+    padding: 18px;
+  }
+
+  .aga-wallet-balance-card > strong {
+    font-size: clamp(3.8rem, 22vw, 5.8rem);
+  }
+
+  .aga-wallet-balance-card > div {
+    display: grid;
+  }
+
+  .aga-wallet-balance-card .aga-page-btn {
+    width: 100%;
+  }
+
+  .aga-wallet-ledger div {
+    align-items: start;
+    grid-template-columns: 1fr;
+  }
+
+  .aga-wallet-ledger dd {
+    text-align: left;
+  }
+
   .aga-stat-card {
     gap: 8px;
     min-height: 122px;
@@ -6933,7 +7099,7 @@ meter {
   .sidebar-utilities {
     display: grid !important;
     gap: 8px !important;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .product-sidebar nav.sidebar-utilities a {
@@ -6942,17 +7108,38 @@ meter {
     border: 1px solid rgba(148, 163, 184, 0.12);
     border-radius: 12px;
     color: #cbd5e1;
-    display: flex;
-    height: 42px;
-    justify-content: center;
-    padding: 0;
+    display: grid;
+    gap: 8px;
+    grid-template-columns: 30px minmax(0, 1fr);
+    min-height: 46px;
+    padding: 7px 8px;
     position: relative;
+    text-align: left;
   }
 
   .sidebar-utilities span {
+    align-items: center;
+    background: rgba(148, 163, 184, 0.08);
+    border: 1px solid rgba(148, 163, 184, 0.14);
+    border-radius: 9px;
+    display: flex;
     font-family: var(--font-geist-mono), monospace;
     font-size: 0.66rem;
     font-weight: 900;
+    height: 30px;
+    justify-content: center;
+    width: 30px;
+  }
+
+  .sidebar-utilities small {
+    color: var(--muted);
+    font-size: 0.58rem;
+    font-weight: 900;
+    line-height: 1.1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    white-space: nowrap;
   }
 
   .sidebar-utilities b {
@@ -7083,8 +7270,10 @@ meter {
   }
 
   .sidebar-wallet,
-  .sidebar-utilities {
-    display: none;
+  .sidebar-utilities,
+  .product-sidebar nav.sidebar-utilities,
+  .product-sidebar nav.sidebar-utilities a {
+    display: none !important;
   }
 }
 

@@ -143,6 +143,7 @@ export function SidebarUtilities() {
       {utilities.map(([label, href, icon, badge]) => (
         <Link href={href} key={label} aria-label={label} title={label}>
           <span aria-hidden="true">{icon}</span>
+          <small>{label}</small>
           {badge ? <b>{badge}</b> : null}
         </Link>
       ))}

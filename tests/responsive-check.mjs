@@ -90,6 +90,7 @@ const screenshots = [
   ["/clans/create", 375, "mobile-create-clan-375.png"],
   ["/clips/upload", 375, "mobile-upload-clip-375.png"],
   ["/profile/loading", 375, "mobile-profile-loading-375.png"],
+  ["/wallet", 375, "mobile-wallet-375.png"],
   ["/marketplace/category/verified-vendors", 375, "mobile-marketplace-category-375.png"],
   ["/games", 768, "tablet-games-768.png"],
   ["/", 1440, "desktop-home-1440.png"],
