@@ -29,8 +29,10 @@ const mainNav = [
 ];
 
 const moreLinks = [
+  ["Betting Arena", "/betting-arena"],
   ["Match History", "/matches"],
   ["Order History", "/orders"],
+  ["Wallet", "/wallet"],
   ["Notifications", "/notifications"],
   ["Profile", "/profile"],
   ["Rank System", "/rank-system"],

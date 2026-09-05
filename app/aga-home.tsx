@@ -41,6 +41,7 @@ const sideNav = [
   ["Home", "/", "HM"],
   ["Find Match", "/matches", "FM"],
   ["Create Match", "/matches/request", "CM"],
+  ["Betting Arena", "/betting-arena", "BT"],
   ["Clans", "/clans", "CL"],
   ["Tournaments", "/tournaments", "TR"],
   ["Leaderboards", "/leaderboards", "LB"],
@@ -134,7 +135,7 @@ export function AGAHome() {
             ) : item === "More" ? (
               <details className="aga-nav-menu" key={item}>
                 <summary>More</summary>
-                <div><Link href="/rank-system">Rank System</Link><Link href="/faq">FAQ</Link><Link href="/support">Support</Link><Link href="/rules">Rules</Link><Link href="/about">About</Link><Link href="/contact">Contact</Link></div>
+                <div><Link href="/betting-arena">Betting Arena</Link><Link href="/wallet">Wallet</Link><Link href="/rank-system">Rank System</Link><Link href="/faq">FAQ</Link><Link href="/support">Support</Link><Link href="/rules">Rules</Link><Link href="/about">About</Link><Link href="/contact">Contact</Link></div>
               </details>
             ) : <Link className={item === "Home" ? "active" : ""} href={href} key={item}>{item}</Link>;
           })}
@@ -149,7 +150,7 @@ export function AGAHome() {
           <summary>Menu</summary>
           <div>
             <Link href="/games">Games</Link><Link href="/tournaments">Tournaments</Link><Link href="/tournaments/cma">CMA Tournaments</Link>
-            <Link href="/matches">Find Match</Link><Link href="/leaderboards">Leaderboards</Link><Link href="/news">News</Link><Link href="/matches/request">Create Match</Link><Link href="/login">Log In</Link><Link href="/register">Register</Link>
+            <Link href="/matches">Find Match</Link><Link href="/betting-arena">Betting Arena</Link><Link href="/wallet">Wallet</Link><Link href="/leaderboards">Leaderboards</Link><Link href="/news">News</Link><Link href="/matches/request">Create Match</Link><Link href="/login">Log In</Link><Link href="/register">Register</Link>
           </div>
         </details>
       </header>
@@ -164,10 +165,10 @@ export function AGAHome() {
           <div><strong>Guest player</strong><small>Login to sync stats</small></div>
         </div>
         <nav>
-          {sideNav.slice(0, 7).map(([label, href, icon]) => <Link className={label === "Home" ? "active" : ""} href={href} key={label}><span>{icon}</span><b>{label}</b><em /></Link>)}
+          {sideNav.slice(0, 8).map(([label, href, icon]) => <Link className={label === "Home" ? "active" : ""} href={href} key={label}><span>{icon}</span><b>{label}</b><em /></Link>)}
         </nav>
         <nav className="secondary">
-          {sideNav.slice(7).map(([label, href, icon]) => <Link href={href} key={label}><span>{icon}</span><b>{label}</b><em /></Link>)}
+          {sideNav.slice(8).map(([label, href, icon]) => <Link href={href} key={label}><span>{icon}</span><b>{label}</b><em /></Link>)}
         </nav>
         <Link className="aga-side-wallet" href="/wallet"><small>AGA Wallet</small><strong>£0.00</strong><span>Payments unavailable</span></Link>
       </aside>

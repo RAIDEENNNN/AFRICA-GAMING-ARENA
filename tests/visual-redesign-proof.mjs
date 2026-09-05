@@ -29,6 +29,7 @@ const pages = [
   ["/clips", 1440, "redesign-12-clips-page.png"],
   ["/marketplace", 1440, "redesign-13-marketplace.png"],
   ["/marketplace/category/cod-points", 1440, "redesign-13b-marketplace-cod-points.png"],
+  ["/betting-arena", 1440, "redesign-13c-betting-arena.png"],
   ["/tournaments/codm-championship", 1440, "redesign-14-tournament.png"],
   ["/matches/ca-1024", 375, "redesign-15-mobile-match-room.png"],
   ["/clips", 375, "redesign-16-mobile-clips-feed.png"],
@@ -47,6 +48,7 @@ const pages = [
   ["/profile/loading", 375, "redesign-29-mobile-profile-loading.png"],
   ["/marketplace/cod-points", 375, "redesign-30-mobile-cod-points.png"],
   ["/wallet", 375, "redesign-31-mobile-wallet.png"],
+  ["/betting-arena", 375, "redesign-32-mobile-betting-arena.png"],
 ];
 
 for (const [route, width, file] of pages) {

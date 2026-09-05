@@ -5480,6 +5480,154 @@ meter {
   width: 100%;
 }
 
+.aga-betting-alert {
+  background:
+    linear-gradient(135deg, rgba(255, 193, 7, 0.14), rgba(138, 43, 226, 0.08)),
+    rgba(16, 23, 34, 0.9);
+  border: 1px solid rgba(255, 193, 7, 0.3);
+  border-radius: 8px;
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+  padding: clamp(20px, 3.6vw, 36px);
+}
+
+.aga-betting-alert h2,
+.aga-betting-lane h3 {
+  color: var(--aga-white);
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  letter-spacing: 0;
+  line-height: 0.95;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.aga-betting-alert h2 {
+  font-size: clamp(2.4rem, 6vw, 5.4rem);
+}
+
+.aga-betting-alert p,
+.aga-betting-lane p,
+.aga-betting-flow,
+.aga-betting-lock-list {
+  color: var(--aga-muted);
+  line-height: 1.65;
+  margin: 0;
+}
+
+.aga-betting-lane-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 18px;
+}
+
+.aga-betting-lane {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.035), transparent),
+    rgba(16, 23, 34, 0.86);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  display: grid;
+  gap: 14px;
+  min-height: 320px;
+  padding: clamp(18px, 2.4vw, 26px);
+}
+
+.aga-betting-lane.gold { border-color: rgba(255, 193, 7, 0.34); }
+.aga-betting-lane.purple { border-color: rgba(168, 85, 247, 0.34); }
+.aga-betting-lane.cyan { border-color: rgba(34, 211, 238, 0.34); }
+
+.aga-betting-lane h3 {
+  font-size: clamp(1.6rem, 2.6vw, 2.45rem);
+}
+
+.aga-betting-lane ul {
+  color: var(--aga-muted);
+  display: grid;
+  gap: 7px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.aga-betting-lane li {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 7px;
+}
+
+.aga-betting-lane .aga-page-btn {
+  margin-top: auto;
+  width: 100%;
+}
+
+.aga-betting-command-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
+  margin-top: 22px;
+}
+
+.aga-betting-flow {
+  counter-reset: betting-flow;
+  display: grid;
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+}
+
+.aga-betting-flow li {
+  align-items: start;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 8px;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 42px minmax(0, 1fr);
+  padding: 12px;
+}
+
+.aga-betting-flow span {
+  align-items: center;
+  background: rgba(255, 193, 7, 0.12);
+  border: 1px solid rgba(255, 193, 7, 0.28);
+  border-radius: 8px;
+  color: var(--aga-gold);
+  display: flex;
+  font-size: 0.74rem;
+  font-weight: 950;
+  height: 42px;
+  justify-content: center;
+  width: 42px;
+}
+
+.aga-betting-lock-list {
+  display: grid;
+  gap: 10px;
+}
+
+.aga-betting-lock-list div {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 8px;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: auto minmax(0, 1fr);
+  min-height: 56px;
+  padding: 10px;
+}
+
+.aga-betting-lock-list strong {
+  color: var(--aga-white);
+  font-size: 0.86rem;
+  text-transform: uppercase;
+}
+
+.aga-betting-game-grid .aga-data-card {
+  min-height: 260px;
+}
+
 .aga-supabase-notice strong {
   color: var(--aga-gold);
   display: block;
@@ -6606,7 +6754,11 @@ meter {
   .aga-card-grid,
   .aga-card-grid.two,
   .aga-stat-grid,
-  .aga-info-grid {
+  .aga-info-grid,
+  .aga-betting-lane-grid,
+  .aga-betting-command-grid,
+  .aga-betting-game-grid,
+  .aga-wallet-gate-grid {
     grid-template-columns: 1fr;
   }
 }
@@ -6688,8 +6840,31 @@ meter {
   }
 
   .aga-wallet-hero-grid,
+  .aga-betting-command-grid,
+  .aga-betting-lane-grid,
+  .aga-betting-game-grid,
   .aga-wallet-gate-grid {
     grid-template-columns: 1fr;
+  }
+
+  .aga-betting-alert,
+  .aga-betting-lane,
+  .aga-wallet-gate-card {
+    padding: 16px;
+  }
+
+  .aga-betting-alert h2 {
+    font-size: clamp(2rem, 10vw, 3.2rem);
+  }
+
+  .aga-betting-flow li,
+  .aga-betting-lock-list div {
+    grid-template-columns: 1fr;
+  }
+
+  .aga-betting-flow span {
+    height: 36px;
+    width: 36px;
   }
 
   .aga-wallet-balance-card {

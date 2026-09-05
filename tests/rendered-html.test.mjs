@@ -54,6 +54,7 @@ test("keeps the main AGA navigation ecosystem connected", async () => {
   const files = await Promise.all([
     "../app/aga-navigation.tsx",
     "../app/search/page.tsx",
+    "../app/betting-arena/page.tsx",
     "../app/games/page.tsx",
     "../app/games/pubgm/page.tsx",
     "../app/tournaments/page.tsx",
@@ -84,7 +85,7 @@ test("keeps the main AGA navigation ecosystem connected", async () => {
   ].map((path) => readFile(new URL(path, import.meta.url), "utf8")));
   const source = files.join("\n");
 
-  for (const route of ["/games", "/tournaments", "/clans", "/find-clans", "/clans/create", "/leaderboards", "/marketplace", "/marketplace/category/", "/orders", "/wallet", "/clips", "/clips/upload", "/news", "/search", "/login", "/register", "/profile/loading"]) {
+  for (const route of ["/games", "/betting-arena", "/tournaments", "/clans", "/find-clans", "/clans/create", "/leaderboards", "/marketplace", "/marketplace/category/", "/orders", "/wallet", "/clips", "/clips/upload", "/news", "/search", "/login", "/register", "/profile/loading"]) {
     assert.match(source, new RegExp(route.replace("/", "\\/")));
   }
   assert.match(source, /FIND ANYTHING IN AGA/);
@@ -96,6 +97,9 @@ test("keeps the main AGA navigation ecosystem connected", async () => {
   assert.match(source, /ORDER HISTORY/);
   assert.match(source, /AGA WALLET/);
   assert.match(source, /No wallet activity yet/);
+  assert.match(source, /BETTING ARENA/);
+  assert.match(source, /No real betting is enabled/);
+  assert.match(source, /Compliance lock active/);
   assert.match(source, /Champion slot/);
   assert.match(source, /Google/);
   assert.match(source, /Apple/);

@@ -7,6 +7,7 @@ export const primaryNavItems = [
   ["HOME", "/", "HM"],
   ["FIND MATCH", "/matches", "FM"],
   ["CREATE MATCH", "/matches/request", "CM"],
+  ["BETTING", "/betting-arena", "BT"],
   ["CLANS", "/clans", "CL"],
   ["TOURNAMENTS", "/tournaments", "TR"],
   ["LEADERBOARDS", "/leaderboards", "LB"],
@@ -59,6 +60,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <div>
             <Link href="/matches/request">Create Challenge</Link>
             <Link href="/matches/request">Create Wager Match</Link>
+            <Link href="/betting-arena">Betting Arena</Link>
             <Link href="/clans/create">Create Team</Link>
             <Link href="/clans/create">Create Clan</Link>
             <Link href="/clips/upload">Upload Clip</Link>
@@ -86,6 +88,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <summary>Create</summary>
           <div>
             <Link href="/matches/request">Challenge</Link>
+            <Link href="/betting-arena">Betting</Link>
             <Link href="/clans/create">Clan</Link>
             <Link href="/clips/upload">Clip</Link>
             <Link href="/tournaments/create">Tournament</Link>
