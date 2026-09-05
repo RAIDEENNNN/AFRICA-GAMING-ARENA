@@ -6726,6 +6726,318 @@ meter {
   text-transform: uppercase;
 }
 
+.command-centre-hero,
+.profile-2-cover,
+.clan-hq-cover {
+  align-items: center;
+  background:
+    linear-gradient(135deg, rgba(34, 211, 238, 0.14), rgba(159, 76, 255, 0.12)),
+    radial-gradient(circle at 88% 20%, rgba(250, 204, 21, 0.14), transparent 18rem),
+    rgba(5, 7, 15, 0.94);
+  border: 1px solid rgba(34, 211, 238, 0.22);
+  clip-path: polygon(0 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 26px 100%, 0 calc(100% - 26px));
+  display: grid;
+  gap: 22px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  margin-bottom: 18px;
+  padding: clamp(20px, 4vw, 42px);
+}
+
+.command-centre-hero h1,
+.profile-2-cover h2,
+.clan-hq-cover h2,
+.ranked-status-card > strong {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  letter-spacing: 0;
+  line-height: 0.9;
+  margin: 8px 0;
+  text-transform: uppercase;
+}
+
+.command-centre-hero h1 {
+  font-size: clamp(2.7rem, 6vw, 6rem);
+}
+
+.command-centre-hero p,
+.profile-2-cover p,
+.clan-hq-cover p,
+.compact-core-card p {
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.core-command-strip,
+.core-grid,
+.ranked-console,
+.profile-2-grid,
+.clan-hq-grid,
+.match-command-centre,
+.live-grid,
+.achievement-board,
+.scout-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.core-command-strip {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 18px 0;
+}
+
+.core-command-strip .product-card,
+.compact-core-card,
+.queue-pool-card {
+  min-height: 170px;
+}
+
+.core-command-strip strong,
+.compact-core-card h3,
+.queue-pool-card h3 {
+  color: #fff;
+  display: block;
+  font-size: clamp(1.7rem, 3vw, 3rem);
+  line-height: 0.95;
+  margin: 6px 0 8px;
+  overflow-wrap: anywhere;
+}
+
+.core-command-strip progress {
+  accent-color: var(--neon-blue);
+  width: 100%;
+}
+
+.core-grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.core-grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.core-grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.core-grid.five { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+
+.ranked-console {
+  grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+  margin: 18px 0;
+}
+
+.core-form-grid,
+.scout-filters {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.core-form-grid label,
+.scout-filters label {
+  color: #dbeafe;
+  display: grid;
+  font-size: 0.82rem;
+  font-weight: 900;
+  gap: 8px;
+  text-transform: uppercase;
+}
+
+.ranked-status-card > strong {
+  color: #fff;
+  font-size: clamp(3rem, 6vw, 6rem);
+}
+
+.ranked-status-card dl,
+.queue-pool-card dl,
+.scout-card dl,
+.profile-stat-sheet dl,
+.match-command-centre,
+.clan-hq-grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.ranked-status-card dt,
+.queue-pool-card dt,
+.scout-card dt,
+.profile-stat-sheet dt {
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.ranked-status-card dd,
+.queue-pool-card dd,
+.scout-card dd,
+.profile-stat-sheet dd {
+  color: #fff;
+  margin: 4px 0 0;
+}
+
+.ranked-status-card.state-searching {
+  border-color: rgba(34, 211, 238, 0.5);
+}
+
+.ranked-status-card.state-found,
+.ranked-status-card.state-accepted {
+  border-color: rgba(34, 197, 94, 0.5);
+}
+
+.core-tabs {
+  display: flex;
+  gap: 10px;
+  margin: 16px 0;
+  overflow-x: auto;
+  padding-bottom: 6px;
+}
+
+.core-tabs a,
+.prediction-options button,
+.notification-preferences span {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #e5e7eb;
+  flex: 0 0 auto;
+  font-size: 0.78rem;
+  font-weight: 900;
+  min-height: 38px;
+  padding: 10px 12px;
+  text-transform: uppercase;
+}
+
+.profile-banner-copy,
+.scout-card-head {
+  align-items: center;
+  display: flex;
+  gap: 16px;
+  min-width: 0;
+}
+
+.profile-rank-plate,
+.clan-hq-cover > strong {
+  border: 1px solid rgba(250, 204, 21, 0.28);
+  color: #fde68a;
+  display: grid;
+  gap: 6px;
+  min-width: 180px;
+  padding: 16px;
+  text-align: center;
+}
+
+.profile-rank-plate strong,
+.clan-hq-cover > strong {
+  font-size: clamp(2rem, 4vw, 3.8rem);
+}
+
+.profile-2-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.profile-stat-sheet {
+  grid-column: span 2;
+}
+
+.profile-stat-sheet dl {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.achievement-board {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.achievement-card {
+  align-items: start;
+  display: grid;
+  gap: 14px;
+  grid-template-columns: 58px minmax(0, 1fr);
+  min-height: 210px;
+}
+
+.achievement-card > span {
+  align-items: center;
+  background: linear-gradient(135deg, rgba(250, 204, 21, 0.9), rgba(159, 76, 255, 0.85));
+  color: #050609;
+  display: inline-flex;
+  font-weight: 950;
+  height: 58px;
+  justify-content: center;
+  width: 58px;
+}
+
+.achievement-card.locked {
+  opacity: 0.62;
+}
+
+.achievement-card.rarity-mythic,
+.achievement-card.rarity-legendary {
+  border-color: rgba(250, 204, 21, 0.42);
+}
+
+.scout-filters {
+  margin-bottom: 18px;
+}
+
+.scout-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.scout-card-head {
+  justify-content: space-between;
+}
+
+.scout-card-head > div {
+  flex: 1;
+  min-width: 0;
+}
+
+.scout-card-head strong {
+  color: #fde68a;
+  text-align: right;
+}
+
+.clan-hq-cover {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+}
+
+.clan-hq-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-bottom: 18px;
+}
+
+.match-command-centre {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-bottom: 18px;
+}
+
+.match-room-wide {
+  grid-column: span 4;
+}
+
+.live-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.live-card .video-thumb button:disabled,
+.scout-card button:disabled {
+  cursor: not-allowed;
+  opacity: 0.72;
+}
+
+.prediction-options {
+  display: grid;
+  gap: 8px;
+}
+
+.prediction-options button.active {
+  background: linear-gradient(135deg, var(--neon-purple), var(--neon-blue));
+  border-color: transparent;
+  color: #fff;
+}
+
+.notification-preferences div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.core-standings .aga-rank-row {
+  grid-template-columns: 0.4fr 1.3fr 1fr 1fr 0.8fr auto;
+}
+
 @keyframes aga-profile-pulse {
   0%, 100% { opacity: 0.4; transform: scaleX(0.72); }
   50% { opacity: 1; transform: scaleX(1); }
@@ -6755,6 +7067,19 @@ meter {
   .aga-card-grid.two,
   .aga-stat-grid,
   .aga-info-grid,
+  .core-command-strip,
+  .core-grid.two,
+  .core-grid.three,
+  .core-grid.four,
+  .core-grid.five,
+  .ranked-console,
+  .profile-2-grid,
+  .profile-stat-sheet dl,
+  .achievement-board,
+  .scout-grid,
+  .clan-hq-grid,
+  .match-command-centre,
+  .live-grid,
   .aga-betting-lane-grid,
   .aga-betting-command-grid,
   .aga-betting-game-grid,
@@ -6840,6 +7165,16 @@ meter {
   }
 
   .aga-wallet-hero-grid,
+  .command-centre-hero,
+  .profile-2-cover,
+  .clan-hq-cover,
+  .core-form-grid,
+  .scout-filters,
+  .ranked-status-card dl,
+  .queue-pool-card dl,
+  .scout-card dl,
+  .profile-stat-sheet dl,
+  .match-command-centre,
   .aga-betting-command-grid,
   .aga-betting-lane-grid,
   .aga-betting-game-grid,
@@ -6855,6 +7190,43 @@ meter {
 
   .aga-betting-alert h2 {
     font-size: clamp(2rem, 10vw, 3.2rem);
+  }
+
+  .command-centre-hero,
+  .profile-2-cover,
+  .clan-hq-cover {
+    clip-path: none;
+    padding: 18px;
+  }
+
+  .profile-banner-copy,
+  .scout-card-head {
+    align-items: flex-start;
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .profile-rank-plate,
+  .clan-hq-cover > strong,
+  .scout-card-head strong {
+    min-width: 0;
+    text-align: left;
+    width: 100%;
+  }
+
+  .achievement-card {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .match-room-wide,
+  .profile-stat-sheet {
+    grid-column: auto;
+  }
+
+  .core-tabs {
+    margin-inline: -10px;
+    padding-inline: 10px;
   }
 
   .aga-betting-flow li,

@@ -19,6 +19,8 @@ const pages = [
   ["/", 375, "redesign-02-home-mobile.png"],
   ["/games", 1440, "redesign-03-game-portals.png"],
   ["/dashboard", 1440, "redesign-04-dashboard.png"],
+  ["/ranked", 1440, "redesign-04b-ranked.png"],
+  ["/achievements", 1440, "redesign-04c-achievements.png"],
   ["/matches", 1440, "redesign-05-find-match.png"],
   ["/matches/request", 1440, "redesign-06-create-flow.png"],
   ["/matches/ca-1024", 1440, "redesign-07-match-room.png"],
@@ -30,6 +32,10 @@ const pages = [
   ["/marketplace", 1440, "redesign-13-marketplace.png"],
   ["/marketplace/category/cod-points", 1440, "redesign-13b-marketplace-cod-points.png"],
   ["/betting-arena", 1440, "redesign-13c-betting-arena.png"],
+  ["/scout", 1440, "redesign-13d-scout.png"],
+  ["/championships", 1440, "redesign-13e-championships.png"],
+  ["/predictions", 1440, "redesign-13f-predictions.png"],
+  ["/live", 1440, "redesign-13g-live.png"],
   ["/tournaments/codm-championship", 1440, "redesign-14-tournament.png"],
   ["/matches/ca-1024", 375, "redesign-15-mobile-match-room.png"],
   ["/clips", 375, "redesign-16-mobile-clips-feed.png"],
@@ -49,6 +55,12 @@ const pages = [
   ["/marketplace/cod-points", 375, "redesign-30-mobile-cod-points.png"],
   ["/wallet", 375, "redesign-31-mobile-wallet.png"],
   ["/betting-arena", 375, "redesign-32-mobile-betting-arena.png"],
+  ["/ranked", 375, "redesign-33-mobile-ranked.png"],
+  ["/achievements", 375, "redesign-34-mobile-achievements.png"],
+  ["/scout", 375, "redesign-35-mobile-scout.png"],
+  ["/championships", 375, "redesign-36-mobile-championships.png"],
+  ["/predictions", 375, "redesign-37-mobile-predictions.png"],
+  ["/live", 375, "redesign-38-mobile-live.png"],
 ];
 
 for (const [route, width, file] of pages) {

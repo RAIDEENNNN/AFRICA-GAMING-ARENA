@@ -20,17 +20,23 @@ type PageShellProps = {
 const mainNav = [
   ["Home", "/"],
   ["Games", "/games"],
+  ["Ranked", "/ranked"],
   ["Tournaments", "/tournaments"],
+  ["Championships", "/championships"],
   ["Clans", "/clans"],
   ["Leaderboards", "/leaderboards"],
-  ["Marketplace", "/marketplace"],
   ["Clips", "/clips"],
-  ["News", "/news"],
 ];
 
 const moreLinks = [
+  ["Live", "/live"],
+  ["Scout", "/scout"],
+  ["Predictions", "/predictions"],
+  ["Achievements", "/achievements"],
   ["Betting Arena", "/betting-arena"],
+  ["Marketplace", "/marketplace"],
   ["Match History", "/matches"],
+  ["Create Match", "/matches/request"],
   ["Order History", "/orders"],
   ["Wallet", "/wallet"],
   ["Notifications", "/notifications"],
@@ -110,9 +116,9 @@ export function AGAPageShell({ active, eyebrow, title, copy, actions = [], child
       {children}
       <nav className="aga-page-mobile-nav" aria-label="Mobile navigation">
         <Link href="/">Home</Link>
-        <Link href="/games">Games</Link>
-        <Link className="primary" href="/matches">Find Match</Link>
-        <Link href="/tournaments">Tourneys</Link>
+        <Link href="/ranked">Ranked</Link>
+        <Link className="primary" href="/matches">Matches</Link>
+        <Link href="/live">Live</Link>
         <Link href="/profile">Profile</Link>
       </nav>
     </main>

@@ -53,8 +53,18 @@ test("keeps starter preview code removed", async () => {
 test("keeps the main AGA navigation ecosystem connected", async () => {
   const files = await Promise.all([
     "../app/aga-navigation.tsx",
+    "../app/competitive-core.ts",
     "../app/search/page.tsx",
     "../app/betting-arena/page.tsx",
+    "../app/ranked/page.tsx",
+    "../app/ranked/ranked-client.tsx",
+    "../app/achievements/page.tsx",
+    "../app/scout/page.tsx",
+    "../app/championships/page.tsx",
+    "../app/predictions/page.tsx",
+    "../app/predictions/predictions-client.tsx",
+    "../app/live/page.tsx",
+    "../app/notifications/page.tsx",
     "../app/games/page.tsx",
     "../app/games/pubgm/page.tsx",
     "../app/tournaments/page.tsx",
@@ -85,9 +95,23 @@ test("keeps the main AGA navigation ecosystem connected", async () => {
   ].map((path) => readFile(new URL(path, import.meta.url), "utf8")));
   const source = files.join("\n");
 
-  for (const route of ["/games", "/betting-arena", "/tournaments", "/clans", "/find-clans", "/clans/create", "/leaderboards", "/marketplace", "/marketplace/category/", "/orders", "/wallet", "/clips", "/clips/upload", "/news", "/search", "/login", "/register", "/profile/loading"]) {
+  for (const route of ["/games", "/ranked", "/achievements", "/scout", "/championships", "/predictions", "/live", "/betting-arena", "/tournaments", "/clans", "/find-clans", "/clans/create", "/leaderboards", "/marketplace", "/marketplace/category/", "/orders", "/wallet", "/clips", "/clips/upload", "/news", "/search", "/login", "/register", "/profile/loading"]) {
     assert.match(source, new RegExp(route.replace("/", "\\/")));
   }
+  assert.match(source, /AGA Ranked/);
+  assert.match(source, /Simulated matchmaking engine/);
+  assert.match(source, /Accept Match/);
+  assert.match(source, /Achievements/);
+  assert.match(source, /First Blood/);
+  assert.match(source, /AGA Scout/);
+  assert.match(source, /Invite to Trial/);
+  assert.match(source, /AGA Championships/);
+  assert.match(source, /Open Qualifier/);
+  assert.match(source, /AGA Predictions/);
+  assert.match(source, /No cash betting is connected to predictions/);
+  assert.match(source, /AGA Live/);
+  assert.match(source, /Embed pending/);
+  assert.match(source, /Notification Centre 2\.0/);
   assert.match(source, /FIND ANYTHING IN AGA/);
   assert.match(source, /CREATE TOURNAMENT/);
   assert.match(source, /Publish Locked/);

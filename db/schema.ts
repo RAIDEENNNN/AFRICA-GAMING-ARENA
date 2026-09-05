@@ -69,9 +69,38 @@ export const gameOptions = sqliteTable("game_options", {
 export const clans = sqliteTable("clans", {
   id: text("id").primaryKey(),
   name: text("name").notNull(),
+  slug: text("slug").notNull().default(""),
+  tag: text("tag").notNull().default("AGA"),
+  description: text("description"),
   ownerUserId: text("owner_user_id").notNull().references(() => users.id),
   gameId: text("game_id").notNull().references(() => games.id),
+  country: text("country"),
   region: text("region").notNull(),
+  logoUrl: text("logo_url"),
+  bannerUrl: text("banner_url"),
+  recruitmentStatus: text("recruitment_status").notNull().default("closed"),
+  foundedAt: text("founded_at"),
+  ...timestamps,
+});
+
+export const clanMembers = sqliteTable("clan_members", {
+  id: text("id").primaryKey(),
+  clanId: text("clan_id").notNull().references(() => clans.id),
+  userId: text("user_id").notNull().references(() => users.id),
+  role: text("role").notNull().default("Player"),
+  status: text("status").notNull().default("active"),
+  joinedAt: text("joined_at"),
+  ...timestamps,
+});
+
+export const clanApplications = sqliteTable("clan_applications", {
+  id: text("id").primaryKey(),
+  clanId: text("clan_id").notNull().references(() => clans.id),
+  userId: text("user_id").notNull().references(() => users.id),
+  message: text("message"),
+  status: text("status").notNull().default("pending"),
+  reviewedByUserId: text("reviewed_by_user_id").references(() => users.id),
+  reviewedAt: text("reviewed_at"),
   ...timestamps,
 });
 
@@ -270,6 +299,64 @@ export const playerStats = sqliteTable("player_stats", {
   updatedAt: text("updated_at").notNull(),
 });
 
+export const rankSeasons = sqliteTable("rank_seasons", {
+  id: text("id").primaryKey(),
+  name: text("name").notNull(),
+  startsAt: text("starts_at").notNull(),
+  endsAt: text("ends_at").notNull(),
+  resetModel: text("reset_model").notNull(),
+  status: text("status").notNull().default("active"),
+  ...timestamps,
+});
+
+export const rankedRatings = sqliteTable("ranked_ratings", {
+  id: text("id").primaryKey(),
+  userId: text("user_id").notNull().references(() => users.id),
+  gameId: text("game_id").notNull().references(() => games.id),
+  seasonId: text("season_id").notNull().references(() => rankSeasons.id),
+  teamSize: text("team_size").notNull(),
+  mmr: integer("mmr").notNull().default(1000),
+  rankTier: text("rank_tier").notNull().default("Unranked"),
+  rankPoints: integer("rank_points").notNull().default(0),
+  placementMatches: integer("placement_matches").notNull().default(10),
+  wins: integer("wins").notNull().default(0),
+  losses: integer("losses").notNull().default(0),
+  currentStreak: integer("current_streak").notNull().default(0),
+  bestStreak: integer("best_streak").notNull().default(0),
+  rankMovement: integer("rank_movement").notNull().default(0),
+  ...timestamps,
+});
+
+export const xpTransactions = sqliteTable("xp_transactions", {
+  id: text("id").primaryKey(),
+  userId: text("user_id").notNull().references(() => users.id),
+  sourceType: text("source_type").notNull(),
+  sourceId: text("source_id"),
+  amount: integer("amount").notNull(),
+  reason: text("reason").notNull(),
+  createdAt: text("created_at").notNull(),
+});
+
+export const achievementsCatalog = sqliteTable("achievements_catalog", {
+  id: text("id").primaryKey(),
+  icon: text("icon").notNull(),
+  title: text("title").notNull(),
+  description: text("description").notNull(),
+  rarity: text("rarity").notNull(),
+  xpReward: integer("xp_reward").notNull().default(0),
+  ...timestamps,
+});
+
+export const playerAchievements = sqliteTable("player_achievements", {
+  id: text("id").primaryKey(),
+  userId: text("user_id").notNull().references(() => users.id),
+  achievementId: text("achievement_id").notNull().references(() => achievementsCatalog.id),
+  unlockedAt: text("unlocked_at").notNull(),
+  matchId: text("match_id").references(() => matches.id),
+  tournamentId: text("tournament_id"),
+  ...timestamps,
+});
+
 export const leaderboardEntries = sqliteTable("leaderboard_entries", {
   id: text("id").primaryKey(),
   userId: text("user_id").references(() => users.id),
@@ -278,6 +365,57 @@ export const leaderboardEntries = sqliteTable("leaderboard_entries", {
   rank: integer("rank").notNull(),
   points: integer("points").notNull(),
   season: text("season").notNull(),
+  ...timestamps,
+});
+
+export const scoutingProfiles = sqliteTable("scouting_profiles", {
+  id: text("id").primaryKey(),
+  userId: text("user_id").notNull().references(() => users.id),
+  gameId: text("game_id").notNull().references(() => games.id),
+  role: text("role").notNull(),
+  region: text("region").notNull(),
+  availability: text("availability").notNull(),
+  language: text("language").notNull(),
+  experience: text("experience"),
+  lookingForTeam: integer("looking_for_team", { mode: "boolean" }).notNull().default(false),
+  savedByCount: integer("saved_by_count").notNull().default(0),
+  ...timestamps,
+});
+
+export const predictions = sqliteTable("predictions", {
+  id: text("id").primaryKey(),
+  userId: text("user_id").notNull().references(() => users.id),
+  targetType: text("target_type").notNull(),
+  targetId: text("target_id").notNull(),
+  pick: text("pick").notNull(),
+  status: text("status").notNull().default("pending"),
+  xpReward: integer("xp_reward").notNull().default(0),
+  resolvedAt: text("resolved_at"),
+  ...timestamps,
+});
+
+export const championships = sqliteTable("championships", {
+  id: text("id").primaryKey(),
+  name: text("name").notNull(),
+  seasonId: text("season_id").notNull().references(() => rankSeasons.id),
+  gameId: text("game_id").references(() => games.id),
+  stage: text("stage").notNull(),
+  country: text("country"),
+  status: text("status").notNull().default("scheduled"),
+  startsAt: text("starts_at"),
+  endsAt: text("ends_at"),
+  ...timestamps,
+});
+
+export const championshipStandings = sqliteTable("championship_standings", {
+  id: text("id").primaryKey(),
+  championshipId: text("championship_id").notNull().references(() => championships.id),
+  userId: text("user_id").references(() => users.id),
+  clanId: text("clan_id").references(() => clans.id),
+  country: text("country"),
+  points: integer("points").notNull().default(0),
+  rank: integer("rank").notNull(),
+  qualificationStatus: text("qualification_status").notNull().default("open"),
   ...timestamps,
 });
 
@@ -430,6 +568,19 @@ export const tournamentRegistrations = sqliteTable("tournament_registrations", {
   status: text("status").notNull().default("submitted"),
   reviewedBy: text("reviewed_by").references(() => users.id),
   reviewedAt: text("reviewed_at"),
+  ...timestamps,
+});
+
+export const tournamentMatches = sqliteTable("tournament_matches", {
+  id: text("id").primaryKey(),
+  tournamentId: text("tournament_id").notNull().references(() => partnerTournaments.id),
+  matchId: text("match_id").references(() => matches.id),
+  roundLabel: text("round_label").notNull(),
+  bracketPath: text("bracket_path").notNull(),
+  seedA: integer("seed_a"),
+  seedB: integer("seed_b"),
+  status: text("status").notNull().default("scheduled"),
+  scheduledAt: text("scheduled_at"),
   ...timestamps,
 });
 

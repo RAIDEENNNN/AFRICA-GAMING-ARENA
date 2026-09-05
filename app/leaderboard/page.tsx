@@ -1,4 +1,5 @@
 import { AGAPageShell, DataCard, EmptyState, FilterTabs, SectionHeader, StatCard, StatusBadge, SupabaseNotice } from "../aga-navigation";
+import { currentSeason, leaderboardRows, rankForMmr, winRate } from "../competitive-core";
 
 const ladders = [
   ["Player ladder", "Solo records, win rate, rating points and match history.", "/profile"],
@@ -20,9 +21,9 @@ export default function LeaderboardPage() {
         <FilterTabs tabs={["Overall", "Players", "Clans", "CODM", "PUBG Mobile", "Free Fire", "Weekly", "Seasonal", "Tournaments"]} />
       </section>
       <section className="aga-stat-grid">
-        <StatCard label="Official ranked players" value="0" copy="Live ratings come from verified result records only." />
-        <StatCard label="Official ranked clans" value="0" copy="Clan rankings need real clan match history." />
-        <StatCard label="Current season" value="Launch" copy="Season windows and resets are ready for backend activation." />
+        <StatCard label="Ranked players" value={String(leaderboardRows.length)} copy="Deterministic demo ladder mirrors the normalized player model." />
+        <StatCard label="Official ranked clans" value="7" copy="Clan rankings connect to roster and match history." />
+        <StatCard label="Current season" value={currentSeason.name} copy="Season windows and resets are ready for backend activation." />
         <StatCard label="Anti-fake stats" value="Server" copy="Client UI never decides authoritative RP." />
       </section>
 
@@ -30,11 +31,11 @@ export default function LeaderboardPage() {
         <article className="aga-podium-card champion">
           <StatusBadge>Champion slot</StatusBadge>
           <strong>#1</strong>
-          <h2>Awaiting first champion</h2>
-          <p>The top slot unlocks after a verified result updates player stats and match history.</p>
+          <h2>{leaderboardRows[0].gamerTag}</h2>
+          <p>{rankForMmr(leaderboardRows[0].mmr)} / {leaderboardRows[0].mmr} MMR / {leaderboardRows[0].clanName}.</p>
         </article>
-        <article className="aga-podium-card"><span>#2</span><h3>Open slot</h3><p>No verified player has earned this position yet.</p><StatusBadge tone="purple">Empty</StatusBadge></article>
-        <article className="aga-podium-card"><span>#3</span><h3>Open slot</h3><p>Rankings begin after completed match results are verified.</p><StatusBadge tone="cyan">Empty</StatusBadge></article>
+        <article className="aga-podium-card"><span>#2</span><h3>{leaderboardRows[1].gamerTag}</h3><p>{leaderboardRows[1].clanName} / {leaderboardRows[1].rankPoints} RP.</p><StatusBadge tone="purple">{rankForMmr(leaderboardRows[1].mmr)}</StatusBadge></article>
+        <article className="aga-podium-card"><span>#3</span><h3>{leaderboardRows[2].gamerTag}</h3><p>{leaderboardRows[2].clanName} / {leaderboardRows[2].rankPoints} RP.</p><StatusBadge tone="cyan">{rankForMmr(leaderboardRows[2].mmr)}</StatusBadge></article>
       </section>
 
       <SectionHeader eyebrow="Official ladder" title="Rankings stay synced with verified matches" copy="Real RP, wins, losses and win rate come from server-side match results only." />
@@ -43,14 +44,16 @@ export default function LeaderboardPage() {
           <span>Rank</span><span>Competitor</span><span>Game</span><span>Record</span><span>Win rate</span><span>RP</span>
         </div>
         <div className="aga-leaderboard-list">
-          <div className="aga-rank-row">
-            <strong>-</strong>
-            <span>No verified competitors yet<small>Complete a match to create the first record.</small></span>
-            <span>All games</span>
-            <span>0W / 0L</span>
-            <span>0%</span>
-            <StatusBadge tone="muted">Empty</StatusBadge>
-          </div>
+          {leaderboardRows.slice(0, 12).map((player) => (
+            <div className="aga-rank-row" key={player.id}>
+              <strong>#{player.leaderboardPosition}</strong>
+              <span>{player.gamerTag}<small>@{player.username} / {player.clanName}</small></span>
+              <span>{player.mainGame}</span>
+              <span>{player.wins}W / {player.losses}L</span>
+              <span>{winRate(player)}%</span>
+              <StatusBadge tone={player.leaderboardPosition < 4 ? "gold" : "purple"}>{player.rankPoints} RP</StatusBadge>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -69,12 +72,7 @@ export default function LeaderboardPage() {
         ))}
       </section>
 
-      <EmptyState
-        title="No official leaderboard records yet"
-        copy="Once players complete verified matches, this page will update from persistent stats instead of design preview data."
-        action="Start First Match"
-        href="/matches/request"
-      />
+      <EmptyState title="Official live leaderboard sync is still gated" copy="This demo board shows shared competitive data. Production rankings should update only from verified match results." action="Start First Match" href="/matches/request" />
     </AGAPageShell>
   );
 }

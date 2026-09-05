@@ -18,6 +18,12 @@ const widths = [320, 375, 430, 640, 768, 1024, 1280, 1440, 1920];
 const routes = [
   "/",
   "/dashboard",
+  "/ranked",
+  "/achievements",
+  "/championships",
+  "/scout",
+  "/predictions",
+  "/live",
   "/games",
   "/games/codm",
   "/games/pubg-mobile",
@@ -85,6 +91,12 @@ for (const width of widths) {
 
 const screenshots = [
   ["/", 375, "mobile-home-375.png"],
+  ["/ranked", 375, "mobile-ranked-375.png"],
+  ["/achievements", 375, "mobile-achievements-375.png"],
+  ["/scout", 375, "mobile-scout-375.png"],
+  ["/championships", 375, "mobile-championships-375.png"],
+  ["/predictions", 375, "mobile-predictions-375.png"],
+  ["/live", 375, "mobile-live-375.png"],
   ["/matches/request", 375, "mobile-create-challenge-375.png"],
   ["/matches/ca-1024", 375, "mobile-match-room-375.png"],
   ["/tournaments/create", 375, "mobile-create-tournament-375.png"],

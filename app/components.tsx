@@ -5,9 +5,9 @@ import { ShellPlayerPanel, SidebarNav, SidebarUtilities, SidebarWallet, TopbarPl
 
 export const primaryNavItems = [
   ["HOME", "/", "HM"],
-  ["FIND MATCH", "/matches", "FM"],
-  ["CREATE MATCH", "/matches/request", "CM"],
-  ["BETTING", "/betting-arena", "BT"],
+  ["COMMAND", "/dashboard", "CC"],
+  ["RANKED", "/ranked", "RK"],
+  ["MATCHES", "/matches", "MT"],
   ["CLANS", "/clans", "CL"],
   ["TOURNAMENTS", "/tournaments", "TR"],
   ["LEADERBOARDS", "/leaderboards", "LB"],
@@ -15,7 +15,13 @@ export const primaryNavItems = [
 ] as const;
 
 export const secondaryNavItems = [
+  ["CHAMPIONSHIPS", "/championships", "CH"],
+  ["SCOUT", "/scout", "SC"],
+  ["LIVE", "/live", "LV"],
+  ["PREDICTIONS", "/predictions", "PR"],
+  ["ACHIEVEMENTS", "/achievements", "AC"],
   ["MARKETPLACE", "/marketplace", "MK"],
+  ["BETTING ARENA", "/betting-arena", "BT"],
   ["NEWS & EVENTS", "/news", "NE"],
   ["SUPPORT", "/support", "SP"],
 ] as const;
@@ -58,9 +64,14 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         <details className="mobile-create">
           <summary>Create</summary>
           <div>
-            <Link href="/matches/request">Create Challenge</Link>
-            <Link href="/matches/request">Create Wager Match</Link>
-            <Link href="/betting-arena">Betting Arena</Link>
+              <Link href="/matches/request">Create Challenge</Link>
+              <Link href="/matches/request">Create Wager Match</Link>
+              <Link href="/ranked">Join Ranked Queue</Link>
+              <Link href="/championships">AGA Championships</Link>
+              <Link href="/scout">AGA Scout</Link>
+              <Link href="/predictions">Predictions</Link>
+              <Link href="/achievements">Achievements</Link>
+              <Link href="/betting-arena">Betting Arena</Link>
             <Link href="/clans/create">Create Team</Link>
             <Link href="/clans/create">Create Clan</Link>
             <Link href="/clips/upload">Upload Clip</Link>
@@ -83,11 +94,15 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       </section>
       <nav className="mobile-bottom-nav" aria-label="Mobile navigation">
         <Link href="/">Home</Link>
-        <Link href="/matches">Find Match</Link>
+        <Link href="/ranked">Ranked</Link>
         <details>
           <summary>Create</summary>
           <div>
             <Link href="/matches/request">Challenge</Link>
+            <Link href="/championships">Championships</Link>
+            <Link href="/scout">Scout</Link>
+            <Link href="/predictions">Predictions</Link>
+            <Link href="/achievements">Achievements</Link>
             <Link href="/betting-arena">Betting</Link>
             <Link href="/clans/create">Clan</Link>
             <Link href="/clips/upload">Clip</Link>
@@ -95,7 +110,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             <Link href="/orders">Orders</Link>
           </div>
         </details>
-        <Link href="/tournaments">Tournaments</Link>
+        <Link href="/matches">Matches</Link>
         <Link href="/profile">Profile</Link>
       </nav>
     </main>

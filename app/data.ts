@@ -1,3 +1,5 @@
+import { coreClans, coreClips, coreMatches, coreTournaments } from "./competitive-core";
+
 export type PublicClan = {
   rank: number;
   name: string;
@@ -115,8 +117,87 @@ export type PublicClip = {
   game: string;
 };
 
-export const clans: PublicClan[] = [];
-export const tournaments: PublicTournament[] = [];
-export const matches: PublicMatch[] = [];
-export const challenges: PublicChallenge[] = [];
-export const clips: PublicClip[] = [];
+export const clans: PublicClan[] = coreClans.map((clan) => ({
+  rank: clan.ranking,
+  name: clan.name,
+  slug: clan.slug,
+  game: clan.game,
+  region: clan.region,
+  members: String(clan.members),
+  rate: `${clan.winRate}%`,
+  points: String(Math.max(0, 5000 - clan.ranking * 340)),
+  badge: clan.tag,
+  status: clan.status,
+}));
+
+export const tournaments: PublicTournament[] = coreTournaments.map((tournament) => ({
+  name: tournament.name,
+  slug: tournament.slug,
+  tag: tournament.status,
+  prize: tournament.prize,
+  date: tournament.startsAt,
+  teams: tournament.entrants.split("/")[0] ?? "0",
+  game: tournament.game,
+  format: tournament.format,
+}));
+
+export const matches: PublicMatch[] = coreMatches.map((match) => ({
+  id: match.id,
+  left: match.teamA,
+  score: match.score,
+  right: match.teamB,
+  state: match.lifecycle,
+  game: match.game,
+  status: match.lifecycle,
+}));
+
+export const challenges: PublicChallenge[] = [
+  {
+    id: "queue-codm-master-1v1",
+    challenger: "Raiden",
+    game: "CODM",
+    type: "Ranked",
+    size: "1v1",
+    weaponClass: "Assault Rifle",
+    weapon: "DR-H",
+    map: "Raid",
+    mode: "Gunfight",
+    region: "EU West",
+    status: "Open",
+    prize: "Rank points and XP",
+  },
+  {
+    id: "queue-pubg-arena-4v4",
+    challenger: "Accra Wolves",
+    game: "PUBG Mobile",
+    type: "Team vs team",
+    size: "4v4",
+    weaponClass: "Assault Rifle",
+    weapon: "M416",
+    map: "Arena Warehouse",
+    mode: "4v4 Arena",
+    region: "Africa West",
+    status: "Open",
+    prize: "Scrim rating",
+  },
+  {
+    id: "queue-free-fire-clash",
+    challenger: "Cape Valkyries",
+    game: "Free Fire",
+    type: "Clan vs clan",
+    size: "4v4",
+    weaponClass: "Any weapon",
+    weapon: "Team rules",
+    map: "Bermuda",
+    mode: "Clash Squad",
+    region: "Africa South",
+    status: "Open",
+    prize: "XP and badge progress",
+  },
+];
+
+export const clips: PublicClip[] = coreClips.map((clip) => ({
+  title: clip.title,
+  creator: clip.creator,
+  game: clip.game,
+}));

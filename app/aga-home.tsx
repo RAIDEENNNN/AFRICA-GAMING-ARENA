@@ -36,17 +36,24 @@ const slides = [
   },
 ];
 
-const nav = ["Home", "Games", "Tournaments", "Clans", "Leaderboards", "Marketplace", "Clips", "News", "More"];
+const nav = ["Home", "Games", "Ranked", "Tournaments", "Championships", "Clans", "Leaderboards", "More"];
 const sideNav = [
   ["Home", "/", "HM"],
+  ["Command Centre", "/dashboard", "CC"],
+  ["Ranked", "/ranked", "RK"],
   ["Find Match", "/matches", "FM"],
   ["Create Match", "/matches/request", "CM"],
-  ["Betting Arena", "/betting-arena", "BT"],
   ["Clans", "/clans", "CL"],
   ["Tournaments", "/tournaments", "TR"],
+  ["Championships", "/championships", "CH"],
   ["Leaderboards", "/leaderboards", "LB"],
   ["Clips", "/clips", "CP"],
   ["Marketplace", "/marketplace", "MK"],
+  ["Scout", "/scout", "SC"],
+  ["Live", "/live", "LV"],
+  ["Predictions", "/predictions", "PR"],
+  ["Achievements", "/achievements", "AC"],
+  ["Betting Arena", "/betting-arena", "BT"],
   ["News & Events", "/news", "NE"],
   ["Support", "/support", "SP"],
 ];
@@ -126,7 +133,7 @@ export function AGAHome() {
         </Link>
         <nav aria-label="AGA navigation">
           {nav.map((item) => {
-            const href = item === "Home" ? "/" : item === "Games" ? "/games" : item === "Tournaments" ? "/tournaments" : item === "Clans" ? "/clans" : item === "Leaderboards" ? "/leaderboards" : item === "Marketplace" ? "/marketplace" : item === "Clips" ? "/clips" : item === "News" ? "/news" : "/rank-system";
+            const href = item === "Home" ? "/" : item === "Games" ? "/games" : item === "Ranked" ? "/ranked" : item === "Tournaments" ? "/tournaments" : item === "Championships" ? "/championships" : item === "Clans" ? "/clans" : item === "Leaderboards" ? "/leaderboards" : "/rank-system";
             return item === "Tournaments" ? (
               <details className="aga-nav-menu" key={item}>
                 <summary>Tournaments</summary>
@@ -135,7 +142,7 @@ export function AGAHome() {
             ) : item === "More" ? (
               <details className="aga-nav-menu" key={item}>
                 <summary>More</summary>
-                <div><Link href="/betting-arena">Betting Arena</Link><Link href="/wallet">Wallet</Link><Link href="/rank-system">Rank System</Link><Link href="/faq">FAQ</Link><Link href="/support">Support</Link><Link href="/rules">Rules</Link><Link href="/about">About</Link><Link href="/contact">Contact</Link></div>
+                <div><Link href="/live">AGA Live</Link><Link href="/scout">AGA Scout</Link><Link href="/predictions">Predictions</Link><Link href="/achievements">Achievements</Link><Link href="/betting-arena">Betting Arena</Link><Link href="/marketplace">Marketplace</Link><Link href="/wallet">Wallet</Link><Link href="/rank-system">Rank System</Link><Link href="/faq">FAQ</Link><Link href="/support">Support</Link><Link href="/rules">Rules</Link><Link href="/about">About</Link><Link href="/contact">Contact</Link></div>
               </details>
             ) : <Link className={item === "Home" ? "active" : ""} href={href} key={item}>{item}</Link>;
           })}
@@ -149,8 +156,8 @@ export function AGAHome() {
         <details className="aga-mobile-menu">
           <summary>Menu</summary>
           <div>
-            <Link href="/games">Games</Link><Link href="/tournaments">Tournaments</Link><Link href="/tournaments/cma">CMA Tournaments</Link>
-            <Link href="/matches">Find Match</Link><Link href="/betting-arena">Betting Arena</Link><Link href="/wallet">Wallet</Link><Link href="/leaderboards">Leaderboards</Link><Link href="/news">News</Link><Link href="/matches/request">Create Match</Link><Link href="/login">Log In</Link><Link href="/register">Register</Link>
+            <Link href="/games">Games</Link><Link href="/ranked">Ranked</Link><Link href="/tournaments">Tournaments</Link><Link href="/championships">Championships</Link><Link href="/tournaments/cma">CMA Tournaments</Link>
+            <Link href="/matches">Find Match</Link><Link href="/live">AGA Live</Link><Link href="/scout">AGA Scout</Link><Link href="/predictions">Predictions</Link><Link href="/achievements">Achievements</Link><Link href="/betting-arena">Betting Arena</Link><Link href="/wallet">Wallet</Link><Link href="/leaderboards">Leaderboards</Link><Link href="/news">News</Link><Link href="/matches/request">Create Match</Link><Link href="/login">Log In</Link><Link href="/register">Register</Link>
           </div>
         </details>
       </header>
@@ -165,10 +172,10 @@ export function AGAHome() {
           <div><strong>Guest player</strong><small>Login to sync stats</small></div>
         </div>
         <nav>
-          {sideNav.slice(0, 8).map(([label, href, icon]) => <Link className={label === "Home" ? "active" : ""} href={href} key={label}><span>{icon}</span><b>{label}</b><em /></Link>)}
+          {sideNav.slice(0, 9).map(([label, href, icon]) => <Link className={label === "Home" ? "active" : ""} href={href} key={label}><span>{icon}</span><b>{label}</b><em /></Link>)}
         </nav>
         <nav className="secondary">
-          {sideNav.slice(8).map(([label, href, icon]) => <Link href={href} key={label}><span>{icon}</span><b>{label}</b><em /></Link>)}
+          {sideNav.slice(9).map(([label, href, icon]) => <Link href={href} key={label}><span>{icon}</span><b>{label}</b><em /></Link>)}
         </nav>
         <Link className="aga-side-wallet" href="/wallet"><small>AGA Wallet</small><strong>£0.00</strong><span>Payments unavailable</span></Link>
       </aside>
@@ -249,7 +256,7 @@ export function AGAHome() {
       </section>
 
       <nav className="aga-mobile-bottom" aria-label="Mobile navigation">
-        <Link href="/">Home</Link><Link href="/matches">Find Match</Link><Link href="/matches/request">Create</Link><Link href="/tournaments">Tournaments</Link><Link href="/profile">Profile</Link>
+        <Link href="/">Home</Link><Link href="/ranked">Ranked</Link><Link href="/matches/request">Create</Link><Link href="/live">Live</Link><Link href="/profile">Profile</Link>
       </nav>
     </main>
   );

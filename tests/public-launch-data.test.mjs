@@ -2,14 +2,17 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-test("public launch data starts from truthful empty records", async () => {
+test("competitive core data is deterministic and connected", async () => {
   const data = await readFile(new URL("../app/data.ts", import.meta.url), "utf8");
+  const core = await readFile(new URL("../app/competitive-core.ts", import.meta.url), "utf8");
 
   for (const exportName of ["clans", "tournaments", "matches", "challenges", "clips"]) {
-    assert.match(data, new RegExp(`export const ${exportName}: .*\\[\\] = \\[\\];`));
+    assert.match(data, new RegExp(`export const ${exportName}: .*\\[\\] =`));
   }
-
-  assert.doesNotMatch(data, /Xclusive|Immortals|CODM Championship|Insane 1v4|1\.2K|12,460|\$5,000/);
+  assert.match(core, /AGA COMPETITIVE CORE|AGA Season 2|rankedQueues|championshipStandings|predictionCards|scoutProfiles/s);
+  assert.match(core, /First Blood|1000 Matches|Clip Creator|Rising Star/s);
+  assert.doesNotMatch(core, /Lorem Ipsum/i);
+  assert.doesNotMatch(core, /\$5,000|cash payout|real-money stake/i);
   assert.match(data, /Challenges supported/);
 });
 
@@ -42,11 +45,12 @@ test("wallet and public leaderboard do not show invented balances or ranks", asy
 
   assert.match(source, /£0\.00/);
   assert.match(source, /Payments unavailable/);
-  assert.match(source, /No official leaderboard records yet/);
-  assert.doesNotMatch(source, /2,450|1000 RP|5\.5K|18K|Simulated balance|Demo balance/);
+  assert.match(source, /Official live leaderboard sync is still gated/);
+  assert.match(source, /Deterministic demo ladder mirrors the normalized player model/);
+  assert.doesNotMatch(source, /5\.5K|18K|Simulated balance|Demo balance/);
 });
 
-test("tournament archive schema exists without unverified historical inserts", async () => {
+test("tournament and competitive schemas cover the next platform core", async () => {
   const [schema, tournaments, legacyTournament] = await Promise.all([
     readFile(new URL("../db/schema.ts", import.meta.url), "utf8"),
     readFile(new URL("../app/tournaments/page.tsx", import.meta.url), "utf8"),
@@ -54,7 +58,11 @@ test("tournament archive schema exists without unverified historical inserts", a
   ]);
 
   assert.match(schema, /export const tournamentArchiveEntries/);
-  assert.match(tournaments, /No tournaments are open yet/);
+  for (const model of ["rankSeasons", "rankedRatings", "achievementsCatalog", "playerAchievements", "xpTransactions", "scoutingProfiles", "predictions", "championships", "championshipStandings", "tournamentMatches"]) {
+    assert.match(schema, new RegExp(`export const ${model}`));
+  }
+  assert.match(tournaments, /Tournament Engine 2\.0/);
+  assert.match(tournaments, /Groups \+ Knockout/);
   assert.match(legacyTournament, /No verified tournament record exists/);
-  assert.doesNotMatch(`${tournaments}\n${legacyTournament}`, /\$5,000|32\/64|XCL|NOVA/);
+  assert.doesNotMatch(`${tournaments}\n${legacyTournament}`, /\$5,000/);
 });

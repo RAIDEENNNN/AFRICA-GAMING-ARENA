@@ -268,6 +268,43 @@ async function ensureAuthTables(db: D1Database) {
 
   await db
     .prepare(
+      `create table if not exists clans (
+        id text primary key not null,
+        name text not null,
+        owner_user_id text not null,
+        game_id text not null,
+        region text not null,
+        created_at text not null,
+        updated_at text not null
+      )`,
+    )
+    .run();
+  await addColumn(db, "clans", "slug text not null default ''");
+  await addColumn(db, "clans", "tag text not null default 'AGA'");
+  await addColumn(db, "clans", "description text");
+  await addColumn(db, "clans", "country text");
+  await addColumn(db, "clans", "logo_url text");
+  await addColumn(db, "clans", "banner_url text");
+  await addColumn(db, "clans", "recruitment_status text not null default 'closed'");
+  await addColumn(db, "clans", "founded_at text");
+
+  await db
+    .prepare(
+      `create table if not exists clan_members (
+        id text primary key not null,
+        clan_id text not null,
+        user_id text not null,
+        role text not null default 'Player',
+        status text not null default 'active',
+        joined_at text,
+        created_at text not null,
+        updated_at text not null
+      )`,
+    )
+    .run();
+
+  await db
+    .prepare(
       `create table if not exists audit_logs (
         id text primary key not null,
         actor_user_id text references users(id),
